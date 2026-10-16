@@ -1,0 +1,320 @@
+{
+  "dataset": "wn18rr",
+  "views": {
+    "A_triples": 60891,
+    "B_triples": 60835,
+    "gold_pairs": 34782
+  },
+  "results": {
+    "seed=0.0": {
+      "n_seed": 0,
+      "independent+cosine": {
+        "Hits@1": 2.8750503133804843e-05,
+        "Hits@10": 0.0002012535219366339,
+        "MRR": 0.0003000551021831289,
+        "n": 34782
+      },
+      "random_expectation_Hits@1": 2.8750503133804843e-05
+    },
+    "seed=0.01": {
+      "n_seed": 348,
+      "independent+Procrustes": {
+        "Hits@1": 0.00999012603821804,
+        "Hits@10": 0.06374513562176919,
+        "MRR": 0.028812211356446484,
+        "n": 34434
+      },
+      "seed_fit_Hits@1": 0.9913793103448276,
+      "anchor-neighbourhood (no embedding)": {
+        "Hits@1": 0.005169309403496544,
+        "Hits@10": 0.04974734274263809,
+        "MRR": 0.018076977195500336,
+        "n": 34434
+      },
+      "joint (shared anchors)": {
+        "Hits@1": 0.00630191090201545,
+        "Hits@10": 0.03194517047104606,
+        "MRR": 0.015011917748005187,
+        "n": 34434
+      },
+      "relation_alignment_Hits@1(joint)": 0.09090909090909091,
+      "relations_total": 11
+    },
+    "seed=0.05": {
+      "n_seed": 1739,
+      "independent+Procrustes": {
+        "Hits@1": 0.04460854038676876,
+        "Hits@10": 0.1812486759676785,
+        "MRR": 0.09021736559067274,
+        "n": 33043
+      },
+      "seed_fit_Hits@1": 0.8188614146060954,
+      "anchor-neighbourhood (no embedding)": {
+        "Hits@1": 0.0486335986441909,
+        "Hits@10": 0.233937596465212,
+        "MRR": 0.10814547576901817,
+        "n": 33043
+      },
+      "joint (shared anchors)": {
+        "Hits@1": 0.03613473352903792,
+        "Hits@10": 0.16206155615410223,
+        "MRR": 0.07752855051877622,
+        "n": 33043
+      },
+      "relation_alignment_Hits@1(joint)": 0.36363636363636365,
+      "relations_total": 11
+    },
+    "seed=0.1": {
+      "n_seed": 3478,
+      "independent+Procrustes": {
+        "Hits@1": 0.06679657551750574,
+        "Hits@10": 0.24766802964477383,
+        "MRR": 0.12689057687829358,
+        "n": 31304
+      },
+      "seed_fit_Hits@1": 0.672225416906268,
+      "anchor-neighbourhood (no embedding)": {
+        "Hits@1": 0.11551239458216202,
+        "Hits@10": 0.4022808586762075,
+        "MRR": 0.21503961922210124,
+        "n": 31304
+      },
+      "joint (shared anchors)": {
+        "Hits@1": 0.11072067467416305,
+        "Hits@10": 0.3750319447993867,
+        "MRR": 0.19679428975143787,
+        "n": 31304
+      },
+      "relation_alignment_Hits@1(joint)": 0.45454545454545453,
+      "relations_total": 11
+    },
+    "seed=0.2": {
+      "n_seed": 6956,
+      "independent+Procrustes": {
+        "Hits@1": 0.09178466182706821,
+        "Hits@10": 0.3162869258966434,
+        "MRR": 0.165410425285895,
+        "n": 27826
+      },
+      "seed_fit_Hits@1": 0.4619033927544566,
+      "anchor-neighbourhood (no embedding)": {
+        "Hits@1": 0.24937109178466182,
+        "Hits@10": 0.5849565154891109,
+        "MRR": 0.3790826335747631,
+        "n": 27826
+      },
+      "joint (shared anchors)": {
+        "Hits@1": 0.30820096312800976,
+        "Hits@10": 0.6387551211097535,
+        "MRR": 0.4203421598559143,
+        "n": 27826
+      },
+      "relation_alignment_Hits@1(joint)": 0.8181818181818182,
+      "relations_total": 11
+    },
+    "seed=0.3": {
+      "n_seed": 10435,
+      "independent+Procrustes": {
+        "Hits@1": 0.11180022179323941,
+        "Hits@10": 0.36328911159485766,
+        "MRR": 0.1936975506929887,
+        "n": 24347
+      },
+      "seed_fit_Hits@1": 0.34202204120747487,
+      "anchor-neighbourhood (no embedding)": {
+        "Hits@1": 0.36201585410933584,
+        "Hits@10": 0.6925288536575348,
+        "MRR": 0.49436786465504323,
+        "n": 24347
+      },
+      "joint (shared anchors)": {
+        "Hits@1": 0.4657247299461946,
+        "Hits@10": 0.7630508892265988,
+        "MRR": 0.5697597226042882,
+        "n": 24347
+      },
+      "relation_alignment_Hits@1(joint)": 1.0,
+      "relations_total": 11
+    }
+  },
+  "text": {
+    "seed=0.05": {
+      "n_concepts": 21471,
+      "structure (joint RotatE)": {
+        "Hits@1": 0.048716873922965864,
+        "Hits@10": 0.18983745517209258,
+        "MRR": 0.09596849542330985,
+        "n": 21471
+      },
+      "lexical (char 3-gram)": {
+        "Hits@1": 0.32839644171207677,
+        "Hits@10": 0.536071910949653,
+        "MRR": 0.40402461830527087,
+        "n": 21471
+      },
+      "text embedding (MiniLM)": {
+        "Hits@1": 0.3423222020399609,
+        "Hits@10": 0.5692329188207349,
+        "MRR": 0.427776637270766,
+        "n": 21471
+      },
+      "hybrid structure+MiniLM": {
+        "Hits@1": 0.38260910064738485,
+        "Hits@10": 0.6477108658190117,
+        "MRR": 0.4758314182928542,
+        "n": 21471
+      },
+      "examples_label_pairs": [
+        [
+          "importing",
+          "importation"
+        ],
+        [
+          "galvanization",
+          "galvanisation"
+        ],
+        [
+          "lividness",
+          "lividity"
+        ],
+        [
+          "xyris",
+          "genus xyris"
+        ],
+        [
+          "stagger",
+          "reel"
+        ],
+        [
+          "meshuggeneh",
+          "meshuggener"
+        ],
+        [
+          "blue pimpernel",
+          "blue skullcap"
+        ],
+        [
+          "yugoslavian",
+          "yugoslav"
+        ],
+        [
+          "persoonia",
+          "genus persoonia"
+        ],
+        [
+          "network",
+          "electronic network"
+        ],
+        [
+          "democratize",
+          "democratise"
+        ],
+        [
+          "demote",
+          "bump"
+        ],
+        [
+          "subside",
+          "settle"
+        ],
+        [
+          "eden",
+          "paradise"
+        ],
+        [
+          "impenitence",
+          "impenitency"
+        ]
+      ]
+    },
+    "seed=0.3": {
+      "n_concepts": 15903,
+      "structure (joint RotatE)": {
+        "Hits@1": 0.5015405898258191,
+        "Hits@10": 0.7768345595170723,
+        "MRR": 0.5991906206093621,
+        "n": 15903
+      },
+      "lexical (char 3-gram)": {
+        "Hits@1": 0.3538326101993335,
+        "Hits@10": 0.5539835251210463,
+        "MRR": 0.4278857399782885,
+        "n": 15903
+      },
+      "text embedding (MiniLM)": {
+        "Hits@1": 0.3727598566308244,
+        "Hits@10": 0.5889454819845312,
+        "MRR": 0.454905646866864,
+        "n": 15903
+      },
+      "hybrid structure+MiniLM": {
+        "Hits@1": 0.6642771804062126,
+        "Hits@10": 0.9178142488838584,
+        "MRR": 0.7587984688807168,
+        "n": 15903
+      },
+      "examples_label_pairs": [
+        [
+          "leyte",
+          "leyte island"
+        ],
+        [
+          "wetting agent",
+          "wetter"
+        ],
+        [
+          "mysticeti",
+          "suborder mysticeti"
+        ],
+        [
+          "leave",
+          "allow for"
+        ],
+        [
+          "clothing store",
+          "haberdashery"
+        ],
+        [
+          "bombax",
+          "genus bombax"
+        ],
+        [
+          "chortle",
+          "chuckle"
+        ],
+        [
+          "collaboration",
+          "coaction"
+        ],
+        [
+          "whitethorn",
+          "english hawthorn"
+        ],
+        [
+          "color bearer",
+          "standard-bearer"
+        ],
+        [
+          "sambre",
+          "sambre river"
+        ],
+        [
+          "cheekbone",
+          "zygomatic bone"
+        ],
+        [
+          "sabotage",
+          "undermine"
+        ],
+        [
+          "cipher",
+          "cypher"
+        ],
+        [
+          "trichechidae",
+          "family trichechidae"
+        ]
+      ]
+    }
+  }
+}

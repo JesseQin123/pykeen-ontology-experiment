@@ -1,0 +1,93 @@
+{
+  "dataset": "fb15k237",
+  "views": {
+    "A_triples": 190598,
+    "B_triples": 189990,
+    "gold_pairs": 14245
+  },
+  "results": {
+    "seed=0.0": {
+      "n_seed": 0,
+      "independent+cosine": {
+        "Hits@1": 7.02000702000702e-05,
+        "Hits@10": 0.0009126009126009125,
+        "MRR": 0.0007804246710239223,
+        "n": 14245
+      },
+      "random_expectation_Hits@1": 7.02000702000702e-05
+    },
+    "seed=0.05": {
+      "n_seed": 712,
+      "independent+Procrustes": {
+        "Hits@1": 0.2564102564102564,
+        "Hits@10": 0.565876006798197,
+        "MRR": 0.35927036580287064,
+        "n": 13533
+      },
+      "seed_fit_Hits@1": 0.9691011235955056,
+      "anchor-neighbourhood (no embedding)": {
+        "Hits@1": 0.2871499298012266,
+        "Hits@10": 0.44897657577772854,
+        "MRR": 0.3455272047893418,
+        "n": 13533
+      },
+      "joint (shared anchors)": {
+        "Hits@1": 0.01758664006502623,
+        "Hits@10": 0.10189906155324023,
+        "MRR": 0.04872461494926768,
+        "n": 13533
+      },
+      "relation_alignment_Hits@1(joint)": 0.16455696202531644,
+      "relations_total": 237
+    },
+    "seed=0.1": {
+      "n_seed": 1424,
+      "independent+Procrustes": {
+        "Hits@1": 0.31510802589501596,
+        "Hits@10": 0.6443335153264176,
+        "MRR": 0.42469533635805107,
+        "n": 12821
+      },
+      "seed_fit_Hits@1": 0.9073033707865169,
+      "anchor-neighbourhood (no embedding)": {
+        "Hits@1": 0.3433429529677872,
+        "Hits@10": 0.4924732860151314,
+        "MRR": 0.3962491830882023,
+        "n": 12821
+      },
+      "joint (shared anchors)": {
+        "Hits@1": 0.06941736214023866,
+        "Hits@10": 0.2757975196942516,
+        "MRR": 0.1384423818693349,
+        "n": 12821
+      },
+      "relation_alignment_Hits@1(joint)": 0.39662447257383965,
+      "relations_total": 237
+    },
+    "seed=0.3": {
+      "n_seed": 4274,
+      "independent+Procrustes": {
+        "Hits@1": 0.40347006318323136,
+        "Hits@10": 0.7405475880052151,
+        "MRR": 0.5156768843177894,
+        "n": 9971
+      },
+      "seed_fit_Hits@1": 0.6626111371080955,
+      "anchor-neighbourhood (no embedding)": {
+        "Hits@1": 0.4109918764416809,
+        "Hits@10": 0.5434760806338381,
+        "MRR": 0.4595709278399378,
+        "n": 9971
+      },
+      "joint (shared anchors)": {
+        "Hits@1": 0.3459031190452312,
+        "Hits@10": 0.69662019857587,
+        "MRR": 0.46134554884427686,
+        "n": 9971
+      },
+      "relation_alignment_Hits@1(joint)": 0.6919831223628692,
+      "relations_total": 237
+    }
+  },
+  "text": null
+}

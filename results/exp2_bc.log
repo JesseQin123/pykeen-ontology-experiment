@@ -1,0 +1,12 @@
+You're trying to map triples with 30 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 28 from 20466 triples were filtered out
+You're trying to map triples with 9 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 9 from 17535 triples were filtered out
+14:56:03 {'triples': 68028, 'epoch_seconds': 3.3607434034347534}
+14:56:16 {'triples': 136057, 'epoch_seconds': 6.458736538887024}
+14:56:41 {'triples': 272115, 'epoch_seconds': 12.652016997337341}
+You're trying to map triples with 212 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3134 triples were filtered out
+You're trying to map triples with 211 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3034 triples were filtered out
+14:56:46 done

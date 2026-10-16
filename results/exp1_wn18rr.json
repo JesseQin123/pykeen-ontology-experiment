@@ -1,0 +1,1466 @@
+{
+  "dataset": "WN18RR",
+  "verifier_agreement_on_train": {
+    "_also_see": 0.7059276366435719,
+    "_derivationally_related_form": 0.9925,
+    "_has_part": 0.9975,
+    "_hypernym": 0.994,
+    "_instance_hypernym": 0.999,
+    "_member_meronym": 0.993,
+    "_member_of_domain_region": 0.9848320693391116,
+    "_member_of_domain_usage": 0.56120826709062,
+    "_similar_to": 0.525,
+    "_synset_domain_topic_of": 0.996,
+    "_verb_group": 0.9964850615114236
+  },
+  "methods": {
+    "Popularity": {
+      "MRR": 0.025595030749319993,
+      "Hits@1": 0.015218878248974008,
+      "Hits@3": 0.025136798905608757,
+      "Hits@10": 0.04497264021887825,
+      "MR": 15312.254360465116,
+      "n": 5848
+    },
+    "PathRules": {
+      "MRR": 0.4243084711747102,
+      "Hits@1": 0.4045827633378933,
+      "Hits@3": 0.429890560875513,
+      "Hits@10": 0.45896032831737343,
+      "MR": 9083.066603967169,
+      "n": 5848
+    },
+    "RotatE_s0": {
+      "MRR": 0.48728176647395566,
+      "Hits@1": 0.43399452804377564,
+      "Hits@3": 0.5083789329685362,
+      "Hits@10": 0.5861833105335157,
+      "MR": 1849.3548221614228,
+      "n": 5848
+    },
+    "RotatE_s1": {
+      "MRR": 0.4854150719754663,
+      "Hits@1": 0.4316005471956224,
+      "Hits@3": 0.5088919288645691,
+      "Hits@10": 0.5849863201094391,
+      "MR": 1839.8339603283173,
+      "n": 5848
+    },
+    "RotatE_s2": {
+      "MRR": 0.48883821855436993,
+      "Hits@1": 0.4362175102599179,
+      "Hits@3": 0.512311901504788,
+      "Hits@10": 0.5890902872777017,
+      "MR": 1909.3859439124487,
+      "n": 5848
+    },
+    "TransE_s0": {
+      "MRR": 0.21379285511066268,
+      "Hits@1": 0.011969904240766074,
+      "Hits@3": 0.3679890560875513,
+      "Hits@10": 0.5413816689466484,
+      "MR": 1398.3992818057457,
+      "n": 5848
+    },
+    "Hybrid(rules\u2192RotatE)": {
+      "MRR": 0.4510724157053324,
+      "Hits@1": 0.4109097127222982,
+      "Hits@3": 0.45571135430916554,
+      "Hits@10": 0.539500683994528,
+      "MR": 1856.0678009575922,
+      "n": 5848
+    }
+  },
+  "rules_build_seconds": 1.5211920738220215,
+  "top_rules": {
+    "_also_see": [
+      "_also_see^-1  conf=0.63 supp=828",
+      "_also_see . _also_see  conf=0.15 supp=205",
+      "_also_see^-1 . _also_see^-1  conf=0.15 supp=204",
+      "_also_see . _also_see^-1  conf=0.14 supp=211"
+    ],
+    "_derivationally_related_form": [
+      "_derivationally_related_form^-1  conf=0.93 supp=27701",
+      "_derivationally_related_form . _verb_group^-1  conf=0.30 supp=657",
+      "_derivationally_related_form . _verb_group  conf=0.30 supp=662",
+      "_derivationally_related_form^-1 . _verb_group^-1  conf=0.30 supp=643"
+    ],
+    "_has_part": [
+      "_has_part . _instance_hypernym^-1  conf=0.40 supp=144",
+      "_has_part . _hypernym^-1  conf=0.04 supp=75",
+      "_has_part . _has_part  conf=0.04 supp=130",
+      "_has_part . _has_part^-1  conf=0.03 supp=69"
+    ],
+    "_hypernym": [
+      "_verb_group^-1 . _hypernym  conf=0.14 supp=132",
+      "_verb_group . _hypernym  conf=0.14 supp=132",
+      "_has_part . _hypernym  conf=0.10 supp=215",
+      "_has_part^-1 . _hypernym  conf=0.10 supp=245"
+    ],
+    "_instance_hypernym": [
+      "_has_part^-1 . _instance_hypernym  conf=0.04 supp=64",
+      "_has_part . _instance_hypernym  conf=0.03 supp=37",
+      "_instance_hypernym . _hypernym  conf=0.00 supp=15",
+      "_has_part^-1 . _has_part  conf=0.00 supp=144"
+    ],
+    "_member_meronym": [
+      "_member_meronym . _hypernym^-1  conf=0.04 supp=260",
+      "_member_meronym . _hypernym  conf=0.04 supp=141",
+      "_has_part . _hypernym^-1  conf=0.00 supp=4",
+      "_has_part^-1 . _member_meronym  conf=0.00 supp=2"
+    ],
+    "_member_of_domain_region": [
+      "_member_of_domain_region . _instance_hypernym^-1  conf=0.31 supp=4",
+      "_member_of_domain_region . _hypernym^-1  conf=0.22 supp=14",
+      "_member_of_domain_region . _has_part  conf=0.13 supp=6",
+      "_member_of_domain_region . _member_meronym^-1  conf=0.10 supp=2"
+    ],
+    "_member_of_domain_usage": [
+      "_member_of_domain_usage . _hypernym^-1  conf=0.19 supp=31",
+      "_member_of_domain_usage . _hypernym  conf=0.04 supp=18",
+      "_member_of_domain_region . _hypernym  conf=0.00 supp=2"
+    ],
+    "_similar_to": [
+      "_similar_to^-1  conf=0.87 supp=74",
+      "_derivationally_related_form^-1 . _derivationally_related_form  conf=0.00 supp=2",
+      "_derivationally_related_form . _derivationally_related_form  conf=0.00 supp=2",
+      "_derivationally_related_form^-1 . _derivationally_related_form^-1  conf=0.00 supp=2"
+    ],
+    "_synset_domain_topic_of": [
+      "_member_meronym . _synset_domain_topic_of  conf=0.43 supp=21",
+      "_instance_hypernym . _synset_domain_topic_of  conf=0.39 supp=100",
+      "_verb_group^-1 . _synset_domain_topic_of  conf=0.37 supp=39",
+      "_verb_group . _synset_domain_topic_of  conf=0.36 supp=39"
+    ],
+    "_verb_group": [
+      "_verb_group^-1  conf=0.93 supp=1060",
+      "_verb_group^-1 . _verb_group^-1  conf=0.07 supp=27",
+      "_verb_group . _verb_group^-1  conf=0.07 supp=25",
+      "_verb_group^-1 . _verb_group  conf=0.07 supp=25"
+    ],
+    "_also_see^-1": [
+      "_also_see  conf=0.63 supp=828",
+      "_also_see^-1 . _also_see^-1  conf=0.15 supp=205",
+      "_also_see . _also_see  conf=0.15 supp=204",
+      "_also_see . _also_see^-1  conf=0.14 supp=211"
+    ],
+    "_derivationally_related_form^-1": [
+      "_derivationally_related_form  conf=0.93 supp=27701",
+      "_verb_group . _derivationally_related_form^-1  conf=0.30 supp=657",
+      "_verb_group^-1 . _derivationally_related_form^-1  conf=0.30 supp=662",
+      "_verb_group . _derivationally_related_form  conf=0.30 supp=643"
+    ],
+    "_has_part^-1": [
+      "_instance_hypernym . _has_part^-1  conf=0.40 supp=144",
+      "_has_part^-1 . _member_of_domain_region^-1  conf=0.11 supp=5",
+      "_hypernym . _has_part^-1  conf=0.04 supp=75",
+      "_has_part^-1 . _has_part^-1  conf=0.04 supp=130"
+    ],
+    "_hypernym^-1": [
+      "_hypernym^-1 . _verb_group  conf=0.14 supp=132",
+      "_hypernym^-1 . _verb_group^-1  conf=0.14 supp=132",
+      "_hypernym^-1 . _has_part^-1  conf=0.10 supp=215",
+      "_hypernym^-1 . _has_part  conf=0.10 supp=245"
+    ],
+    "_instance_hypernym^-1": [
+      "_instance_hypernym^-1 . _has_part  conf=0.04 supp=64",
+      "_instance_hypernym^-1 . _has_part^-1  conf=0.03 supp=37",
+      "_hypernym^-1 . _instance_hypernym^-1  conf=0.00 supp=15",
+      "_has_part^-1 . _has_part  conf=0.00 supp=144"
+    ],
+    "_member_meronym^-1": [
+      "_hypernym . _member_meronym^-1  conf=0.04 supp=260",
+      "_hypernym^-1 . _member_meronym^-1  conf=0.04 supp=141",
+      "_member_meronym^-1 . _has_part^-1  conf=0.01 supp=2",
+      "_derivationally_related_form^-1 . _derivationally_related_form  conf=0.00 supp=31"
+    ],
+    "_member_of_domain_region^-1": [
+      "_instance_hypernym . _member_of_domain_region^-1  conf=0.31 supp=4",
+      "_hypernym . _member_of_domain_region^-1  conf=0.22 supp=14",
+      "_has_part^-1 . _member_of_domain_region^-1  conf=0.13 supp=6",
+      "_member_meronym . _member_of_domain_region^-1  conf=0.10 supp=2"
+    ],
+    "_member_of_domain_usage^-1": [
+      "_hypernym . _member_of_domain_usage^-1  conf=0.19 supp=31",
+      "_hypernym^-1 . _member_of_domain_usage^-1  conf=0.04 supp=18",
+      "_hypernym^-1 . _member_of_domain_region^-1  conf=0.00 supp=2"
+    ],
+    "_similar_to^-1": [
+      "_similar_to  conf=0.87 supp=74",
+      "_derivationally_related_form^-1 . _derivationally_related_form  conf=0.00 supp=2",
+      "_derivationally_related_form . _derivationally_related_form  conf=0.00 supp=2",
+      "_derivationally_related_form^-1 . _derivationally_related_form^-1  conf=0.00 supp=2"
+    ],
+    "_synset_domain_topic_of^-1": [
+      "_synset_domain_topic_of^-1 . _member_meronym^-1  conf=0.43 supp=21",
+      "_synset_domain_topic_of^-1 . _instance_hypernym^-1  conf=0.39 supp=100",
+      "_synset_domain_topic_of^-1 . _verb_group  conf=0.37 supp=39",
+      "_synset_domain_topic_of^-1 . _verb_group^-1  conf=0.36 supp=39"
+    ],
+    "_verb_group^-1": [
+      "_verb_group  conf=0.93 supp=1060",
+      "_verb_group . _verb_group  conf=0.07 supp=27",
+      "_verb_group . _verb_group^-1  conf=0.07 supp=25",
+      "_verb_group^-1 . _verb_group  conf=0.07 supp=25"
+    ]
+  },
+  "train_info": {
+    "RotatE_s0": {
+      "train_seconds": 211.952969789505,
+      "final_loss": 0.07240351683953229,
+      "epochs": 40
+    },
+    "RotatE_s1": {
+      "train_seconds": 186.80337405204773,
+      "final_loss": 0.07239593609290965,
+      "epochs": 40
+    },
+    "RotatE_s2": {
+      "train_seconds": 190.27595281600952,
+      "final_loss": 0.07224966265699442,
+      "epochs": 40
+    },
+    "TransE_s0": {
+      "train_seconds": 223.9559290409088,
+      "final_loss": 0.0863483620040557,
+      "epochs": 100
+    }
+  },
+  "RotatE_seed_mean_std": {
+    "MRR": [
+      0.48717835233459733,
+      0.0013994055853181232
+    ],
+    "Hits@1": [
+      0.43393752849977196,
+      0.0018852981541884672
+    ],
+    "Hits@10": [
+      0.5867533059735521,
+      0.0017232348903136138
+    ]
+  },
+  "bootstrap_MRR_diff_RotatE_minus_rules": {
+    "mean": 0.06297329529924552,
+    "ci95_lo": 0.055432197714253666,
+    "ci95_hi": 0.07039319841896596
+  },
+  "per_relation": {
+    "PathRules": {
+      "_also_see": {
+        "MRR": 0.6445406891520292,
+        "Hits@1": 0.6071428571428571,
+        "Hits@3": 0.6875,
+        "Hits@10": 0.7232142857142857,
+        "MR": 2631.035714285714,
+        "n": 112,
+        "share": 0.019151846785225718
+      },
+      "_derivationally_related_form": {
+        "MRR": 0.9489512003165984,
+        "Hits@1": 0.9459962756052142,
+        "Hits@3": 0.952048417132216,
+        "Hits@10": 0.9543761638733705,
+        "MR": 618.2099627560522,
+        "n": 2148,
+        "share": 0.36730506155950754
+      },
+      "_has_part": {
+        "MRR": 0.07767586300631568,
+        "Hits@1": 0.04142011834319527,
+        "Hits@3": 0.08284023668639054,
+        "Hits@10": 0.15088757396449703,
+        "MR": 9246.665680473372,
+        "n": 338,
+        "share": 0.057797537619699045
+      },
+      "_hypernym": {
+        "MRR": 0.05376503179638768,
+        "Hits@1": 0.02717900656044986,
+        "Hits@3": 0.06091846298031865,
+        "Hits@10": 0.09934395501405811,
+        "MR": 17987.4854732896,
+        "n": 2134,
+        "share": 0.3649110807113543
+      },
+      "_instance_hypernym": {
+        "MRR": 0.10206323600816511,
+        "Hits@1": 0.05357142857142857,
+        "Hits@3": 0.09821428571428571,
+        "Hits@10": 0.20535714285714285,
+        "MR": 4996.332589285715,
+        "n": 224,
+        "share": 0.038303693570451436
+      },
+      "_member_meronym": {
+        "MRR": 0.059766478512274554,
+        "Hits@1": 0.044715447154471545,
+        "Hits@3": 0.06300813008130081,
+        "Hits@10": 0.08130081300813008,
+        "MR": 13686.163617886179,
+        "n": 492,
+        "share": 0.08413132694938441
+      },
+      "_member_of_domain_region": {
+        "MRR": 0.3289538449952186,
+        "Hits@1": 0.28846153846153844,
+        "Hits@3": 0.34615384615384615,
+        "Hits@10": 0.38461538461538464,
+        "MR": 9109.451923076924,
+        "n": 52,
+        "share": 0.008891928864569083
+      },
+      "_member_of_domain_usage": {
+        "MRR": 0.2922013415071279,
+        "Hits@1": 0.22727272727272727,
+        "Hits@3": 0.3181818181818182,
+        "Hits@10": 0.45454545454545453,
+        "MR": 8861.897727272728,
+        "n": 44,
+        "share": 0.007523939808481532
+      },
+      "_similar_to": {
+        "MRR": 1.0,
+        "Hits@1": 1.0,
+        "Hits@3": 1.0,
+        "Hits@10": 1.0,
+        "MR": 1.0,
+        "n": 6,
+        "share": 0.0010259917920656635
+      },
+      "_synset_domain_topic_of": {
+        "MRR": 0.298180313218265,
+        "Hits@1": 0.2409090909090909,
+        "Hits@3": 0.30454545454545456,
+        "Hits@10": 0.37272727272727274,
+        "MR": 5666.804545454545,
+        "n": 220,
+        "share": 0.03761969904240766
+      },
+      "_verb_group": {
+        "MRR": 0.9743818493211154,
+        "Hits@1": 0.9743589743589743,
+        "Hits@3": 0.9743589743589743,
+        "Hits@10": 0.9743589743589743,
+        "MR": 274.69871794871796,
+        "n": 78,
+        "share": 0.013337893296853625
+      }
+    },
+    "RotatE_s0": {
+      "_also_see": {
+        "MRR": 0.5966528805071558,
+        "Hits@1": 0.5267857142857143,
+        "Hits@3": 0.6517857142857143,
+        "Hits@10": 0.6964285714285714,
+        "MR": 1132.705357142857,
+        "n": 112,
+        "share": 0.019151846785225718
+      },
+      "_derivationally_related_form": {
+        "MRR": 0.9331220402110453,
+        "Hits@1": 0.9078212290502793,
+        "Hits@3": 0.9562383612662942,
+        "Hits@10": 0.9678770949720671,
+        "MR": 180.80446927374302,
+        "n": 2148,
+        "share": 0.36730506155950754
+      },
+      "_has_part": {
+        "MRR": 0.18810391668461898,
+        "Hits@1": 0.10650887573964497,
+        "Hits@3": 0.21301775147928995,
+        "Hits@10": 0.34911242603550297,
+        "MR": 1917.8284023668639,
+        "n": 338,
+        "share": 0.057797537619699045
+      },
+      "_hypernym": {
+        "MRR": 0.1777934078992451,
+        "Hits@1": 0.11387066541705718,
+        "Hits@3": 0.19212746016869728,
+        "Hits@10": 0.3064667291471415,
+        "MR": 3724.2694470477977,
+        "n": 2134,
+        "share": 0.3649110807113543
+      },
+      "_instance_hypernym": {
+        "MRR": 0.3361368442723986,
+        "Hits@1": 0.22767857142857142,
+        "Hits@3": 0.38839285714285715,
+        "Hits@10": 0.5669642857142857,
+        "MR": 1124.9419642857142,
+        "n": 224,
+        "share": 0.038303693570451436
+      },
+      "_member_meronym": {
+        "MRR": 0.1747815839100987,
+        "Hits@1": 0.10569105691056911,
+        "Hits@3": 0.17276422764227642,
+        "Hits@10": 0.3231707317073171,
+        "MR": 527.760162601626,
+        "n": 492,
+        "share": 0.08413132694938441
+      },
+      "_member_of_domain_region": {
+        "MRR": 0.15824213428080317,
+        "Hits@1": 0.11538461538461539,
+        "Hits@3": 0.17307692307692307,
+        "Hits@10": 0.23076923076923078,
+        "MR": 7296.75,
+        "n": 52,
+        "share": 0.008891928864569083
+      },
+      "_member_of_domain_usage": {
+        "MRR": 0.28267087175479255,
+        "Hits@1": 0.2727272727272727,
+        "Hits@3": 0.2727272727272727,
+        "Hits@10": 0.2727272727272727,
+        "MR": 3382.5227272727275,
+        "n": 44,
+        "share": 0.007523939808481532
+      },
+      "_similar_to": {
+        "MRR": 1.0,
+        "Hits@1": 1.0,
+        "Hits@3": 1.0,
+        "Hits@10": 1.0,
+        "MR": 1.0,
+        "n": 6,
+        "share": 0.0010259917920656635
+      },
+      "_synset_domain_topic_of": {
+        "MRR": 0.3772540720381569,
+        "Hits@1": 0.31363636363636366,
+        "Hits@3": 0.41363636363636364,
+        "Hits@10": 0.4863636363636364,
+        "MR": 3006.1,
+        "n": 220,
+        "share": 0.03761969904240766
+      },
+      "_verb_group": {
+        "MRR": 0.8270904033869633,
+        "Hits@1": 0.6923076923076923,
+        "Hits@3": 0.9487179487179487,
+        "Hits@10": 0.9743589743589743,
+        "MR": 34.92307692307692,
+        "n": 78,
+        "share": 0.013337893296853625
+      }
+    },
+    "TransE_s0": {
+      "_also_see": {
+        "MRR": 0.2481943198243545,
+        "Hits@1": 0.0,
+        "Hits@3": 0.44642857142857145,
+        "Hits@10": 0.7232142857142857,
+        "MR": 983.5535714285714,
+        "n": 112,
+        "share": 0.019151846785225718
+      },
+      "_derivationally_related_form": {
+        "MRR": 0.39328287478586654,
+        "Hits@1": 0.0,
+        "Hits@3": 0.7779329608938548,
+        "Hits@10": 0.946927374301676,
+        "MR": 122.58193668528864,
+        "n": 2148,
+        "share": 0.36730506155950754
+      },
+      "_has_part": {
+        "MRR": 0.09555696384857607,
+        "Hits@1": 0.0,
+        "Hits@3": 0.10946745562130178,
+        "Hits@10": 0.2958579881656805,
+        "MR": 1251.9837278106509,
+        "n": 338,
+        "share": 0.057797537619699045
+      },
+      "_hypernym": {
+        "MRR": 0.058727735158709014,
+        "Hits@1": 0.0,
+        "Hits@3": 0.04639175257731959,
+        "Hits@10": 0.20196813495782567,
+        "MR": 2940.0332708528585,
+        "n": 2134,
+        "share": 0.3649110807113543
+      },
+      "_instance_hypernym": {
+        "MRR": 0.26630582309090567,
+        "Hits@1": 0.15178571428571427,
+        "Hits@3": 0.3169642857142857,
+        "Hits@10": 0.5178571428571429,
+        "MR": 471.7857142857143,
+        "n": 224,
+        "share": 0.038303693570451436
+      },
+      "_member_meronym": {
+        "MRR": 0.1605242269647669,
+        "Hits@1": 0.036585365853658534,
+        "Hits@3": 0.2073170731707317,
+        "Hits@10": 0.40447154471544716,
+        "MR": 246.16768292682926,
+        "n": 492,
+        "share": 0.08413132694938441
+      },
+      "_member_of_domain_region": {
+        "MRR": 0.16907729611759026,
+        "Hits@1": 0.07692307692307693,
+        "Hits@3": 0.21153846153846154,
+        "Hits@10": 0.38461538461538464,
+        "MR": 5464.7307692307695,
+        "n": 52,
+        "share": 0.008891928864569083
+      },
+      "_member_of_domain_usage": {
+        "MRR": 0.2127417122956705,
+        "Hits@1": 0.13636363636363635,
+        "Hits@3": 0.25,
+        "Hits@10": 0.3409090909090909,
+        "MR": 2620.659090909091,
+        "n": 44,
+        "share": 0.007523939808481532
+      },
+      "_similar_to": {
+        "MRR": 0.33055555555555555,
+        "Hits@1": 0.0,
+        "Hits@3": 0.5,
+        "Hits@10": 1.0,
+        "MR": 3.5,
+        "n": 6,
+        "share": 0.0010259917920656635
+      },
+      "_synset_domain_topic_of": {
+        "MRR": 0.14956078049267557,
+        "Hits@1": 0.03636363636363636,
+        "Hits@3": 0.18636363636363637,
+        "Hits@10": 0.40454545454545454,
+        "MR": 2149.318181818182,
+        "n": 220,
+        "share": 0.03761969904240766
+      },
+      "_verb_group": {
+        "MRR": 0.36407965894113087,
+        "Hits@1": 0.0,
+        "Hits@3": 0.717948717948718,
+        "Hits@10": 0.9615384615384616,
+        "MR": 102.98717948717949,
+        "n": 78,
+        "share": 0.013337893296853625
+      }
+    }
+  },
+  "reachability": {
+    "share_reachable_by_rules": 0.46751025991792067,
+    "PathRules": {
+      "reachable": {
+        "MRR": 0.8875593809942258,
+        "Hits@1": 0.8558888076079005,
+        "Hits@3": 0.9030724213606437,
+        "Hits@10": 0.9462326261887345,
+        "MR": 5.923006583760059,
+        "n": 2734
+      },
+      "unreachable": {
+        "MRR": 0.017587858635674896,
+        "Hits@1": 0.008349389852280027,
+        "Hits@3": 0.014450867052023121,
+        "Hits@10": 0.031149646756583174,
+        "MR": 17052.530507386,
+        "n": 3114
+      }
+    },
+    "RotatE_s0": {
+      "reachable": {
+        "MRR": 0.8442425450033516,
+        "Hits@1": 0.8002926115581566,
+        "Hits@3": 0.8745427944403804,
+        "Hits@10": 0.9169714703730797,
+        "MR": 26.627651792245793,
+        "n": 2734
+      },
+      "unreachable": {
+        "MRR": 0.17388074897255282,
+        "Hits@1": 0.1123956326268465,
+        "Hits@3": 0.18689788053949905,
+        "Hits@10": 0.2957610789980732,
+        "MR": 3449.655427103404,
+        "n": 3114
+      }
+    },
+    "TransE_s0": {
+      "reachable": {
+        "MRR": 0.37489663421005304,
+        "Hits@1": 0.011338697878566204,
+        "Hits@3": 0.7088514996342355,
+        "Hits@10": 0.9257498171177762,
+        "MR": 10.131675201170447,
+        "n": 2734
+      },
+      "unreachable": {
+        "MRR": 0.07234849671061991,
+        "Hits@1": 0.012524084778420038,
+        "Hits@3": 0.06872190109184328,
+        "Hits@10": 0.20391779062299292,
+        "MR": 2617.257225433526,
+        "n": 3114
+      }
+    },
+    "Popularity": {
+      "reachable": {
+        "MRR": 0.00958135750652022,
+        "Hits@1": 0.0036576444769568397,
+        "Hits@3": 0.010607168983174835,
+        "Hits@10": 0.018288222384784197,
+        "MR": 13352.588697878566,
+        "n": 2734
+      },
+      "unreachable": {
+        "MRR": 0.039654562748618186,
+        "Hits@1": 0.025369299935773925,
+        "Hits@3": 0.03789338471419396,
+        "Hits@10": 0.06840077071290944,
+        "MR": 17032.78291586384,
+        "n": 3114
+      }
+    }
+  },
+  "complementarity_hits10": {
+    "both": 0.429890560875513,
+    "embedding_only": 0.15629274965800274,
+    "rules_only": 0.029069767441860465,
+    "neither": 0.3847469220246238
+  },
+  "suggestions": {
+    "PathRules": {
+      "top10%": {
+        "n": 535,
+        "held_out": 1.0,
+        "true_in_wordnet_direct": 0.0,
+        "entailed_by_wordnet": 0.0,
+        "unverified": 0.0,
+        "precision_lower_bound": 1.0
+      },
+      "top25%": {
+        "n": 1339,
+        "held_out": 1.0,
+        "true_in_wordnet_direct": 0.0,
+        "entailed_by_wordnet": 0.0,
+        "unverified": 0.0,
+        "precision_lower_bound": 1.0
+      },
+      "top50%": {
+        "n": 2678,
+        "held_out": 0.8237490664675131,
+        "true_in_wordnet_direct": 0.0003734129947722181,
+        "entailed_by_wordnet": 0.018670649738610903,
+        "unverified": 0.1572068707991038,
+        "precision_lower_bound": 0.8427931292008962
+      },
+      "top100%": {
+        "n": 5356,
+        "held_out": 0.4346527259148618,
+        "true_in_wordnet_direct": 0.00018670649738610905,
+        "entailed_by_wordnet": 0.02669902912621359,
+        "unverified": 0.5384615384615384,
+        "precision_lower_bound": 0.46153846153846156
+      }
+    },
+    "RotatE_s0": {
+      "top10%": {
+        "n": 535,
+        "held_out": 0.8710280373831776,
+        "true_in_wordnet_direct": 0.0,
+        "entailed_by_wordnet": 0.001869158878504673,
+        "unverified": 0.12710280373831775,
+        "precision_lower_bound": 0.8728971962616823
+      },
+      "top25%": {
+        "n": 1339,
+        "held_out": 0.8581030619865572,
+        "true_in_wordnet_direct": 0.0007468259895444362,
+        "entailed_by_wordnet": 0.002987303958177745,
+        "unverified": 0.13816280806572068,
+        "precision_lower_bound": 0.8618371919342793
+      },
+      "top50%": {
+        "n": 2678,
+        "held_out": 0.7699775952203136,
+        "true_in_wordnet_direct": 0.0007468259895444362,
+        "entailed_by_wordnet": 0.010828976848394324,
+        "unverified": 0.21844660194174756,
+        "precision_lower_bound": 0.7815533980582524
+      },
+      "top100%": {
+        "n": 5356,
+        "held_out": 0.47796863330843914,
+        "true_in_wordnet_direct": 0.0005601194921583271,
+        "entailed_by_wordnet": 0.028192681105302465,
+        "unverified": 0.4932785660941001,
+        "precision_lower_bound": 0.5067214339059
+      }
+    },
+    "Popularity": {
+      "top10%": {
+        "n": 535,
+        "held_out": 0.07476635514018691,
+        "true_in_wordnet_direct": 0.0,
+        "entailed_by_wordnet": 0.011214953271028037,
+        "unverified": 0.914018691588785,
+        "precision_lower_bound": 0.08598130841121496
+      },
+      "top25%": {
+        "n": 1339,
+        "held_out": 0.05451829723674384,
+        "true_in_wordnet_direct": 0.0,
+        "entailed_by_wordnet": 0.05153099327856609,
+        "unverified": 0.89395070948469,
+        "precision_lower_bound": 0.10604929051530994
+      },
+      "top50%": {
+        "n": 2678,
+        "held_out": 0.03323375653472741,
+        "true_in_wordnet_direct": 0.0,
+        "entailed_by_wordnet": 0.026138909634055265,
+        "unverified": 0.9406273338312173,
+        "precision_lower_bound": 0.05937266616878267
+      },
+      "top100%": {
+        "n": 5356,
+        "held_out": 0.016616878267363706,
+        "true_in_wordnet_direct": 0.0,
+        "entailed_by_wordnet": 0.014189693801344288,
+        "unverified": 0.969193427931292,
+        "precision_lower_bound": 0.03080657206870799
+      }
+    }
+  },
+  "suggestion_examples": {
+    "PathRules": [
+      {
+        "verdict": "unverified",
+        "head": "ignition.n.03",
+        "relation": "_derivationally_related_form",
+        "suggested": "burn.v.05"
+      },
+      {
+        "verdict": "entailed",
+        "head": "computer_science.n.01",
+        "relation": "_synset_domain_topic_of^-1",
+        "suggested": "memory.n.04"
+      },
+      {
+        "verdict": "unverified",
+        "head": "farming.n.01",
+        "relation": "_synset_domain_topic_of^-1",
+        "suggested": "carry.v.34"
+      },
+      {
+        "verdict": "unverified",
+        "head": "law.n.01",
+        "relation": "_synset_domain_topic_of^-1",
+        "suggested": "give.v.41"
+      },
+      {
+        "verdict": "unverified",
+        "head": "precise.a.01",
+        "relation": "_also_see^-1",
+        "suggested": "clear.a.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "north_vietnam.n.01",
+        "relation": "_has_part^-1",
+        "suggested": "asia.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "medicine.n.01",
+        "relation": "_synset_domain_topic_of^-1",
+        "suggested": "disease.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "travel.v.01",
+        "relation": "_hypernym^-1",
+        "suggested": "travel.v.02"
+      },
+      {
+        "verdict": "entailed",
+        "head": "change.v.02",
+        "relation": "_hypernym^-1",
+        "suggested": "dress.v.04"
+      },
+      {
+        "verdict": "unverified",
+        "head": "utter.v.02",
+        "relation": "_hypernym^-1",
+        "suggested": "sing.v.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "disintegrate.v.01",
+        "relation": "_hypernym^-1",
+        "suggested": "ladder.v.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "seize.v.01",
+        "relation": "_hypernym^-1",
+        "suggested": "catch.v.27"
+      },
+      {
+        "verdict": "unverified",
+        "head": "advance.v.01",
+        "relation": "_hypernym^-1",
+        "suggested": "pull_in.v.03"
+      },
+      {
+        "verdict": "unverified",
+        "head": "have.v.01",
+        "relation": "_hypernym^-1",
+        "suggested": "keep_open.v.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "relocate.v.01",
+        "relation": "_hypernym",
+        "suggested": "move.v.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "burn.v.07",
+        "relation": "_hypernym",
+        "suggested": "destroy.v.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "psychoanalysis.n.01",
+        "relation": "_synset_domain_topic_of^-1",
+        "suggested": "unconscious_mind.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "trade_name.n.01",
+        "relation": "_member_of_domain_usage",
+        "suggested": "aspirin_powder.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "test.v.01",
+        "relation": "_derivationally_related_form",
+        "suggested": "attempt.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "religion.n.02",
+        "relation": "_synset_domain_topic_of^-1",
+        "suggested": "eject.v.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "experience.v.01",
+        "relation": "_hypernym^-1",
+        "suggested": "learn.v.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "prophesy.v.01",
+        "relation": "_derivationally_related_form^-1",
+        "suggested": "prediction.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "expectorate.v.02",
+        "relation": "_hypernym",
+        "suggested": "spit.v.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "icon.n.01",
+        "relation": "_hypernym",
+        "suggested": "interface.n.02"
+      },
+      {
+        "verdict": "entailed",
+        "head": "organic_process.n.01",
+        "relation": "_hypernym^-1",
+        "suggested": "meiosis.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "cavity.n.04",
+        "relation": "_hypernym^-1",
+        "suggested": "blastula.n.01"
+      },
+      {
+        "verdict": "entailed",
+        "head": "attribute.n.02",
+        "relation": "_hypernym^-1",
+        "suggested": "disposition.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "distribution.n.03",
+        "relation": "_hypernym^-1",
+        "suggested": "card_game.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "decoration.n.01",
+        "relation": "_hypernym^-1",
+        "suggested": "car.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "medicine.n.02",
+        "relation": "_hypernym^-1",
+        "suggested": "treatment.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "body_part.n.01",
+        "relation": "_hypernym^-1",
+        "suggested": "vertebrate.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "article.n.01",
+        "relation": "_hypernym^-1",
+        "suggested": "newspaper.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "address.n.03",
+        "relation": "_hypernym^-1",
+        "suggested": "inauguration.n.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "center.n.01",
+        "relation": "_hypernym^-1",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "pod.n.02",
+        "relation": "_hypernym^-1",
+        "suggested": "screw_bean.n.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "phase.n.01",
+        "relation": "_hypernym^-1",
+        "suggested": "infancy.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "personality.n.01",
+        "relation": "_hypernym",
+        "suggested": "trait.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "fence_line.n.01",
+        "relation": "_hypernym",
+        "suggested": "barrier.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "dispatch.n.01",
+        "relation": "_hypernym",
+        "suggested": "line.n.05"
+      },
+      {
+        "verdict": "unverified",
+        "head": "reaction.n.03",
+        "relation": "_hypernym^-1",
+        "suggested": "lie_detector.n.01"
+      }
+    ],
+    "RotatE_s0": [
+      {
+        "verdict": "unverified",
+        "head": "chiropodist.n.01",
+        "relation": "_derivationally_related_form^-1",
+        "suggested": "gynecology.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "oncorhynchus.n.01",
+        "relation": "_member_meronym",
+        "suggested": "atlantic_salmon.n.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "decameter.n.01",
+        "relation": "_has_part",
+        "suggested": "femtometer.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "lauraceae.n.01",
+        "relation": "_member_meronym",
+        "suggested": "myristica.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "lamnidae.n.01",
+        "relation": "_member_meronym",
+        "suggested": "hexanchus.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "pediocactus.n.01",
+        "relation": "_member_meronym^-1",
+        "suggested": "amaranthaceae.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "clinidae.n.01",
+        "relation": "_member_meronym",
+        "suggested": "cryptacanthodes.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "kilobyte.n.02",
+        "relation": "_has_part",
+        "suggested": "terabyte.n.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "isospondyli.n.01",
+        "relation": "_member_meronym",
+        "suggested": "anguillidae.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "kuwait.n.02",
+        "relation": "_has_part",
+        "suggested": "syrian_desert.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "hydrophidae.n.01",
+        "relation": "_member_meronym^-1",
+        "suggested": "sauria.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "hydrangeaceae.n.01",
+        "relation": "_member_meronym",
+        "suggested": "hymenaea.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "libya.n.01",
+        "relation": "_member_of_domain_region",
+        "suggested": "al_itihaad_al_islamiya.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "merginae.n.01",
+        "relation": "_member_meronym",
+        "suggested": "chen.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "mar.v.01",
+        "relation": "_derivationally_related_form",
+        "suggested": "defacement.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "beat_around_the_bush.v.01",
+        "relation": "_derivationally_related_form",
+        "suggested": "dodge.n.03"
+      },
+      {
+        "verdict": "unverified",
+        "head": "anthropoidea.n.01",
+        "relation": "_member_meronym",
+        "suggested": "tarsiidae.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "male_reproductive_system.n.01",
+        "relation": "_has_part",
+        "suggested": "male_reproductive_gland.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "ulva.n.01",
+        "relation": "_member_meronym^-1",
+        "suggested": "bangiaceae.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "eliminate.v.03",
+        "relation": "_hypernym",
+        "suggested": "wipe_out.v.03"
+      },
+      {
+        "verdict": "unverified",
+        "head": "conclude.v.03",
+        "relation": "_derivationally_related_form^-1",
+        "suggested": "settlement.n.03"
+      },
+      {
+        "verdict": "unverified",
+        "head": "liter.n.01",
+        "relation": "_has_part^-1",
+        "suggested": "cubic_kilometer.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "endeavor.v.01",
+        "relation": "_derivationally_related_form^-1",
+        "suggested": "essay.n.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "trade.v.01",
+        "relation": "_hypernym^-1",
+        "suggested": "trade.v.03"
+      },
+      {
+        "verdict": "unverified",
+        "head": "mustard.n.01",
+        "relation": "_hypernym^-1",
+        "suggested": "head_cabbage.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "switch.n.05",
+        "relation": "_hypernym",
+        "suggested": "switcher.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "heparin.n.01",
+        "relation": "_hypernym",
+        "suggested": "jaggery.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "clown.n.02",
+        "relation": "_derivationally_related_form",
+        "suggested": "joke.v.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "sterculiaceae.n.01",
+        "relation": "_member_meronym",
+        "suggested": "ochroma.n.01"
+      },
+      {
+        "verdict": "entailed",
+        "head": "system.n.06",
+        "relation": "_hypernym^-1",
+        "suggested": "circulatory_system.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "upset.v.02",
+        "relation": "_hypernym^-1",
+        "suggested": "perturb.v.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "leave.v.01",
+        "relation": "_hypernym^-1",
+        "suggested": "go.v.03"
+      },
+      {
+        "verdict": "entailed",
+        "head": "writing.n.01",
+        "relation": "_synset_domain_topic_of^-1",
+        "suggested": "paragraph.v.02"
+      },
+      {
+        "verdict": "unverified",
+        "head": "hellebore.n.01",
+        "relation": "_member_meronym^-1",
+        "suggested": "genus_scilla.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "elaeocarpaceae.n.01",
+        "relation": "_member_meronym^-1",
+        "suggested": "parietales.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "mannheim.n.01",
+        "relation": "_instance_hypernym",
+        "suggested": "concentration_camp.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "genus_tyrannosaurus.n.01",
+        "relation": "_member_meronym",
+        "suggested": "allosaur.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "sneezeweed.n.01",
+        "relation": "_member_meronym^-1",
+        "suggested": "smyrnium.n.01"
+      },
+      {
+        "verdict": "entailed",
+        "head": "statistic.n.01",
+        "relation": "_hypernym^-1",
+        "suggested": "mean.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "plethodontidae.n.01",
+        "relation": "_member_meronym^-1",
+        "suggested": "salientia.n.01"
+      }
+    ],
+    "Popularity": [
+      {
+        "verdict": "unverified",
+        "head": "battle_of_the_marne.n.01",
+        "relation": "_instance_hypernym",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "hizb_ut-tahrir.n.01",
+        "relation": "_instance_hypernym",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "prussia.n.01",
+        "relation": "_instance_hypernym",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "volcano_islands.n.01",
+        "relation": "_instance_hypernym",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "entailed",
+        "head": "lansing.n.01",
+        "relation": "_instance_hypernym",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "sierra_nevada.n.01",
+        "relation": "_instance_hypernym",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "fuller.n.02",
+        "relation": "_instance_hypernym",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "nansen.n.01",
+        "relation": "_instance_hypernym",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "iron_age.n.01",
+        "relation": "_instance_hypernym",
+        "suggested": "city.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "hiccup.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "perfume.v.02",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "failure.n.05",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "enlarge.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "demotion.n.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "shrivel.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "obscure.v.05",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "depletion.n.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "accrete.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "eliminate.v.03",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "recover.v.03",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "piloting.n.02",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "mastermind.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "apostatize.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "preservation.n.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "learned_reaction.n.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "whisper.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "pant.v.02",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "garrison.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "justification.n.03",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "kick.v.03",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "genus_noctiluca.n.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "groove.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "lark.n.03",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "new_world_warbler.n.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "trump_up.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "heloderma.n.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "fringe.v.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "distress.v.02",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "swing.v.03",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      },
+      {
+        "verdict": "unverified",
+        "head": "enterobius.n.01",
+        "relation": "_hypernym",
+        "suggested": "person.n.01"
+      }
+    ]
+  }
+}

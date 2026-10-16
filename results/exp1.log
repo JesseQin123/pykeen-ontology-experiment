@@ -1,0 +1,14 @@
+You're trying to map triples with 212 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3134 triples were filtered out
+You're trying to map triples with 211 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3034 triples were filtered out
+11:26:48 loaded 40559 entities 86835 train triples
+11:26:52 baselines done {'MRR': 0.4243084711747102, 'Hits@1': 0.4045827633378933, 'Hits@3': 0.429890560875513, 'Hits@10': 0.45896032831737343, 'MR': 9083.066603967169, 'n': 5848}
+11:30:35 RotatE_s0 {'train_seconds': 211.952969789505, 'final_loss': 0.07240351683953229, 'epochs': 40} {'MRR': 0.48728176647395566, 'Hits@1': 0.43399452804377564, 'Hits@3': 0.5083789329685362, 'Hits@10': 0.5861833105335157, 'MR': 1849.3548221614228, 'n': 5848}
+11:33:52 RotatE_s1 {'train_seconds': 186.80337405204773, 'final_loss': 0.07239593609290965, 'epochs': 40} {'MRR': 0.4854150719754663, 'Hits@1': 0.4316005471956224, 'Hits@3': 0.5088919288645691, 'Hits@10': 0.5849863201094391, 'MR': 1839.8339603283173, 'n': 5848}
+11:37:11 RotatE_s2 {'train_seconds': 190.27595281600952, 'final_loss': 0.07224966265699442, 'epochs': 40} {'MRR': 0.48883821855436993, 'Hits@1': 0.4362175102599179, 'Hits@3': 0.512311901504788, 'Hits@10': 0.5890902872777017, 'MR': 1909.3859439124487, 'n': 5848}
+11:40:58 TransE_s0 {'train_seconds': 223.9559290409088, 'final_loss': 0.0863483620040557, 'epochs': 100} {'MRR': 0.21379285511066268, 'Hits@1': 0.011969904240766074, 'Hits@3': 0.3679890560875513, 'Hits@10': 0.5413816689466484, 'MR': 1398.3992818057457, 'n': 5848}
+11:41:08 suggestions PathRules {'n': 1339, 'held_out': 1.0, 'true_in_wordnet_direct': 0.0, 'entailed_by_wordnet': 0.0, 'unverified': 0.0, 'precision_lower_bound': 1.0}
+11:41:16 suggestions RotatE_s0 {'n': 1339, 'held_out': 0.8581030619865572, 'true_in_wordnet_direct': 0.0007468259895444362, 'entailed_by_wordnet': 0.002987303958177745, 'unverified': 0.13816280806572068, 'precision_lower_bound': 0.8618371919342793}
+11:41:16 suggestions Popularity {'n': 1339, 'held_out': 0.05451829723674384, 'true_in_wordnet_direct': 0.0, 'entailed_by_wordnet': 0.05153099327856609, 'unverified': 0.89395070948469, 'precision_lower_bound': 0.10604929051530994}
+11:41:16 done
