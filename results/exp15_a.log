@@ -1,0 +1,14 @@
+08:37:43 probe created 2024-2026 claude-opus-5-5 0.0
+08:41:20 probe created 2024-2026 gpt-6.1-sol 0.0
+08:42:02 probe existed in 2018 claude-opus-5-5 0.0
+08:44:44 probe existed in 2018 gpt-6.1-sol 0.46
+08:47:31 oaei rank text bge-large (+syn) {'Hits@1': 0.8344827586206897, 'Hits@10': 0.9741379310344828, 'MRR': 0.8906943727165385, 'n': 580}
+08:47:31 oaei rank text bge-large + joint RotatE {'Hits@1': 0.8862068965517241, 'Hits@10': 0.9844827586206897, 'MRR': 0.9187192126034304, 'n': 580}
+08:47:31 oaei rank 4-way hybrid (bge-large) {'Hits@1': 0.8379310344827586, 'Hits@10': 0.9862068965517241, 'MRR': 0.89286994809079, 'n': 580}
+08:50:20 oaei F1 claude-opus-5-5 text bge-large (+syn) {'pairs': 1007, 'precision': 0.9890764647467726, 'recall': 0.6569920844327177, 'F1': 0.7895362663495837, 'recall_nontrivial': 0.11262798634812286}
+08:51:04 oaei F1 claude-opus-5-5 text bge-large + joint RotatE {'pairs': 1008, 'precision': 0.9890873015873016, 'recall': 0.6576517150395779, 'F1': 0.7900158478605388, 'recall_nontrivial': 0.11433447098976109}
+08:51:50 oaei F1 claude-opus-5-5 4-way hybrid (bge-large) {'pairs': 1002, 'precision': 0.9890219560878244, 'recall': 0.6536939313984169, 'F1': 0.7871326449563145, 'recall_nontrivial': 0.10409556313993173}
+08:55:31 oaei F1 gpt-6.1-sol text bge-large (+syn) {'pairs': 1376, 'precision': 0.9767441860465116, 'recall': 0.8865435356200527, 'F1': 0.929460580912863, 'recall_nontrivial': 0.7064846416382252}
+08:56:21 oaei F1 gpt-6.1-sol text bge-large + joint RotatE {'pairs': 1402, 'precision': 0.9750356633380884, 'recall': 0.9017150395778364, 'F1': 0.9369431117203564, 'recall_nontrivial': 0.7457337883959044}
+09:06:50 oaei F1 gpt-6.1-sol 4-way hybrid (bge-large) {'pairs': 1349, 'precision': 0.9733135656041513, 'recall': 0.8660949868073878, 'F1': 0.9165794066317626, 'recall_nontrivial': 0.6535836177474402}
+09:06:50 done

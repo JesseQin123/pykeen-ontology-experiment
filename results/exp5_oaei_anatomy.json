@@ -1,0 +1,354 @@
+{
+  "mouse_classes": 2744,
+  "human_classes": 3304,
+  "reference": 1516,
+  "auto_anchors(exact label)": {
+    "n": 939,
+    "precision": 0.9904153354632588,
+    "recall": 0.6134564643799473
+  },
+  "nontrivial_eval_pairs": 580,
+  "candidates_per_query": 2365,
+  "nontrivial_ranking": {
+    "structure: independent, no anchors": {
+      "Hits@1": 0.0017241379310344827,
+      "Hits@10": 0.005172413793103448,
+      "MRR": 0.004623333181330983,
+      "n": 580
+    },
+    "structure: independent + Procrustes(auto anchors)": {
+      "Hits@1": 0.07413793103448275,
+      "Hits@10": 0.29310344827586204,
+      "MRR": 0.14291204877184088,
+      "n": 580
+    },
+    "structure: joint RotatE (auto anchors)": {
+      "Hits@1": 0.21724137931034482,
+      "Hits@10": 0.5568965517241379,
+      "MRR": 0.3285351245014636,
+      "n": 580
+    },
+    "structure: anchor-neighbourhood (no embedding)": {
+      "Hits@1": 0.07586206896551724,
+      "Hits@10": 0.3586206896551724,
+      "MRR": 0.17007344991826878,
+      "n": 580
+    },
+    "lexical: char 3-4gram TF-IDF (+syn)": {
+      "Hits@1": 0.7086206896551724,
+      "Hits@10": 0.9206896551724137,
+      "MRR": 0.7919702417861012,
+      "n": 580
+    },
+    "text: all-MiniLM-L6-v2 (label only)": {
+      "Hits@1": 0.7258620689655172,
+      "Hits@10": 0.8896551724137931,
+      "MRR": 0.7872649725767582,
+      "n": 580
+    },
+    "text: all-MiniLM-L6-v2 (+synonyms)": {
+      "Hits@1": 0.7948275862068965,
+      "Hits@10": 0.95,
+      "MRR": 0.852506046091429,
+      "n": 580
+    },
+    "text: bge-small-en-v1.5 (label only)": {
+      "Hits@1": 0.743103448275862,
+      "Hits@10": 0.9224137931034483,
+      "MRR": 0.8083191977443576,
+      "n": 580
+    },
+    "text: bge-small-en-v1.5 (+synonyms)": {
+      "Hits@1": 0.8155172413793104,
+      "Hits@10": 0.9620689655172414,
+      "MRR": 0.8732532606307395,
+      "n": 580
+    },
+    "text: bge-large-en-v1.5 (label only)": {
+      "Hits@1": 0.7741379310344828,
+      "Hits@10": 0.9517241379310345,
+      "MRR": 0.8388063346929299,
+      "n": 580
+    },
+    "text: bge-large-en-v1.5 (+synonyms)": {
+      "Hits@1": 0.8344827586206897,
+      "Hits@10": 0.9741379310344828,
+      "MRR": 0.8906941592216562,
+      "n": 580
+    },
+    "hybrid: bge-large + joint RotatE": {
+      "Hits@1": 0.8862068965517241,
+      "Hits@10": 0.9844827586206897,
+      "MRR": 0.9187203759893487,
+      "n": 580
+    },
+    "hybrid: bge-large + anchor-neighbourhood": {
+      "Hits@1": 0.7706896551724138,
+      "Hits@10": 0.9689655172413794,
+      "MRR": 0.837094620336425,
+      "n": 580
+    },
+    "hybrid: bge-large + joint + anchor-neigh + lexical": {
+      "Hits@1": 0.8379310344827586,
+      "Hits@10": 0.9862068965517241,
+      "MRR": 0.89286994809079,
+      "n": 580
+    }
+  },
+  "llm_rerank_nontrivial": {
+    "model": "qwen3.5:27b",
+    "n": 580,
+    "gold_in_top10": 0.9862068965517241,
+    "hybrid_Hits@1": 0.8379310344827586,
+    "llm_Hits@1": 0.9431034482758621,
+    "examples": [
+      {
+        "mouse": "spinal cord grey matter",
+        "human_gold": "gray matter of the spinal cord",
+        "hybrid_top1": "gray matter of the spinal cord",
+        "llm": "gray matter of the spinal cord",
+        "llm_ok": true
+      },
+      {
+        "mouse": "head/neck",
+        "human_gold": "head and neck",
+        "hybrid_top1": "head and neck",
+        "llm": "head and neck",
+        "llm_ok": true
+      },
+      {
+        "mouse": "limb",
+        "human_gold": "extremities",
+        "hybrid_top1": "extremity part",
+        "llm": "none",
+        "llm_ok": false
+      },
+      {
+        "mouse": "hemolymphoid system",
+        "human_gold": "hematopoietic and lymphatic system",
+        "hybrid_top1": "hematopoietic and lymphatic system",
+        "llm": "hematopoietic and lymphatic system",
+        "llm_ok": true
+      },
+      {
+        "mouse": "integumental system",
+        "human_gold": "integumentary system",
+        "hybrid_top1": "integumentary system",
+        "llm": "integumentary system",
+        "llm_ok": true
+      },
+      {
+        "mouse": "sensory organ",
+        "human_gold": "organ of the special sense",
+        "hybrid_top1": "organ of the special sense",
+        "llm": "organ of the special sense",
+        "llm_ok": true
+      },
+      {
+        "mouse": "visceral organ system",
+        "human_gold": "viscera",
+        "hybrid_top1": "organ",
+        "llm": "viscera",
+        "llm_ok": true
+      },
+      {
+        "mouse": "forelimb",
+        "human_gold": "upper extremity",
+        "hybrid_top1": "upper extremity",
+        "llm": "upper extremity",
+        "llm_ok": true
+      },
+      {
+        "mouse": "hindlimb",
+        "human_gold": "lower extremity",
+        "hybrid_top1": "lower extremity",
+        "llm": "lower extremity",
+        "llm_ok": true
+      },
+      {
+        "mouse": "abdomen",
+        "human_gold": "abdominal cavity",
+        "hybrid_top1": "abdominal cavity",
+        "llm": "abdominal cavity",
+        "llm_ok": true
+      },
+      {
+        "mouse": "lower arm",
+        "human_gold": "forearm",
+        "hybrid_top1": "forearm",
+        "llm": "forearm",
+        "llm_ok": true
+      },
+      {
+        "mouse": "hand digit",
+        "human_gold": "finger",
+        "hybrid_top1": "digit",
+        "llm": "finger",
+        "llm_ok": true
+      },
+      {
+        "mouse": "foot digit",
+        "human_gold": "toe",
+        "hybrid_top1": "digit",
+        "llm": "toe",
+        "llm_ok": true
+      },
+      {
+        "mouse": "upper leg",
+        "human_gold": "thigh",
+        "hybrid_top1": "upper extremity",
+        "llm": "none",
+        "llm_ok": false
+      },
+      {
+        "mouse": "brown fat",
+        "human_gold": "brown adipose tissue",
+        "hybrid_top1": "brown adipose tissue",
+        "llm": "brown adipose tissue",
+        "llm_ok": true
+      },
+      {
+        "mouse": "white fat",
+        "human_gold": "white adipose tissue",
+        "hybrid_top1": "white adipose tissue",
+        "llm": "white adipose tissue",
+        "llm_ok": true
+      },
+      {
+        "mouse": "capillary",
+        "human_gold": "blood capillary",
+        "hybrid_top1": "blood capillary",
+        "llm": "blood capillary",
+        "llm_ok": true
+      },
+      {
+        "mouse": "heart atrium",
+        "human_gold": "cardiac atrium",
+        "hybrid_top1": "cardiac atrium",
+        "llm": "cardiac atrium",
+        "llm_ok": true
+      },
+      {
+        "mouse": "heart left atrium",
+        "human_gold": "left atrium",
+        "hybrid_top1": "left atrium",
+        "llm": "left atrium",
+        "llm_ok": true
+      },
+      {
+        "mouse": "heart right atrium",
+        "human_gold": "right atrium",
+        "hybrid_top1": "left atrium",
+        "llm": "right atrium",
+        "llm_ok": true
+      },
+      {
+        "mouse": "heart endocardium",
+        "human_gold": "endocardium",
+        "hybrid_top1": "endocardium",
+        "llm": "endocardium",
+        "llm_ok": true
+      },
+      {
+        "mouse": "atrial septum",
+        "human_gold": "interatrial septum",
+        "hybrid_top1": "interatrial septum",
+        "llm": "interatrial septum",
+        "llm_ok": true
+      },
+      {
+        "mouse": "ventricular septum",
+        "human_gold": "interventricular septum",
+        "hybrid_top1": "interventricular septum",
+        "llm": "interventricular septum",
+        "llm_ok": true
+      },
+      {
+        "mouse": "heart valve",
+        "human_gold": "cardiac valve",
+        "hybrid_top1": "cardiac valve",
+        "llm": "cardiac valve",
+        "llm_ok": true
+      },
+      {
+        "mouse": "heart ventricle",
+        "human_gold": "cardiac ventricle",
+        "hybrid_top1": "cardiac ventricle",
+        "llm": "cardiac ventricle",
+        "llm_ok": true
+      }
+    ]
+  },
+  "alignment_PRF": {
+    "exact labels only": {
+      "pairs": 939,
+      "precision": 0.9904153354632588,
+      "recall": 0.6134564643799473,
+      "F1": 0.7576374745417516
+    },
+    "exact + text: bge-large-en-v1.5 (+synonyms) mutual-best >= 0.8": {
+      "pairs": 1569,
+      "precision": 0.8750796685787126,
+      "recall": 0.9056728232189973,
+      "F1": 0.8901134521880065
+    },
+    "exact + text: bge-large-en-v1.5 (+synonyms) mutual-best >= 0.85": {
+      "pairs": 1473,
+      "precision": 0.9192124915139172,
+      "recall": 0.8931398416886543,
+      "F1": 0.9059886249581799
+    },
+    "exact + text: bge-large-en-v1.5 (+synonyms) mutual-best >= 0.9": {
+      "pairs": 1326,
+      "precision": 0.9630467571644042,
+      "recall": 0.8423482849604221,
+      "F1": 0.8986629134412385
+    },
+    "exact + text: bge-large-en-v1.5 (+synonyms) mutual-best >= 0.95": {
+      "pairs": 1203,
+      "precision": 0.9808811305070657,
+      "recall": 0.7783641160949868,
+      "F1": 0.8679661640308938
+    },
+    "exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 0.0": {
+      "pairs": 1623,
+      "precision": 0.8262476894639557,
+      "recall": 0.8845646437994723,
+      "F1": 0.8544122331952851
+    },
+    "exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 1.0": {
+      "pairs": 1623,
+      "precision": 0.8262476894639557,
+      "recall": 0.8845646437994723,
+      "F1": 0.8544122331952851
+    },
+    "exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 2.0": {
+      "pairs": 1623,
+      "precision": 0.8262476894639557,
+      "recall": 0.8845646437994723,
+      "F1": 0.8544122331952851
+    },
+    "exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 3.0": {
+      "pairs": 1623,
+      "precision": 0.8262476894639557,
+      "recall": 0.8845646437994723,
+      "F1": 0.8544122331952851
+    },
+    "exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 4.0": {
+      "pairs": 1623,
+      "precision": 0.8262476894639557,
+      "recall": 0.8845646437994723,
+      "F1": 0.8544122331952851
+    },
+    "exact + hybrid mutual-best + LLM yes/no verification": {
+      "pairs": 1385,
+      "precision": 0.9595667870036101,
+      "recall": 0.8766490765171504,
+      "F1": 0.9162357807652535
+    },
+    "_llm_verified_candidates": {
+      "candidates": 684,
+      "kept": 446
+    }
+  }
+}

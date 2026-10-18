@@ -1,0 +1,9 @@
+15:10:28 B judged gpt-6.1-sol 0.0682
+15:26:12 B judged gemini-4-argon-high 0.0674
+15:46:32 B judged claude-opus-5-5 0.0956
+15:46:32 B {'suggestions': 5000, 'terms': 1000, 'true_in_2026_all_top5': 0.003, 'true_in_2026_top1_only': 0.008, 'LLM_majority_accept_rate': 0.0682, 'true_in_2026_among_accepted': 0.03812316715542522, 'true_in_2026_among_rejected': 0.00042927666881305, 'recall_of_true_by_LLM_filter': 0.8666666666666667, 'terms_with_any_accepted': 258, 'accept_rate_gpt-6.1-sol': 0.0682, 'true_among_accepted_gpt-6.1-sol': 0.03812316715542522, 'accept_rate_gemini-4-argon-high': 0.0674, 'true_among_accepted_gemini-4-argon-high': 0.03857566765578635, 'accept_rate_claude-opus-5-5': 0.0956, 'true_among_accepted_claude-opus-5-5': 0.027196652719665274}
+You're trying to map triples with 212 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3134 triples were filtered out
+You're trying to map triples with 211 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3034 triples were filtered out
+16:19:06 A gpt-6.1-sol {'MRR': 0.5682209452821878, 'Hits@1': 0.4988030095759234, 'Hits@10': 0.6475718194254446, 'n': 5848}

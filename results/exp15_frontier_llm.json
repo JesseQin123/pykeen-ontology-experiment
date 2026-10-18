@@ -1,0 +1,175 @@
+{
+  "contamination_probe": {
+    "created 2024-2026": {
+      "n": 100,
+      "claude-opus-5-5": 0.11,
+      "gpt-6.1-sol": 0.0
+    },
+    "existed in 2018": {
+      "n": 100,
+      "claude-opus-5-5": 0.75,
+      "gpt-6.1-sol": 0.46
+    }
+  },
+  "oaei_nontrivial_ranking": {
+    "text bge-large (+syn)": {
+      "Hits@1": 0.8344827586206897,
+      "Hits@10": 0.9741379310344828,
+      "MRR": 0.8906943727165385,
+      "n": 580
+    },
+    "text bge-large + joint RotatE": {
+      "Hits@1": 0.8862068965517241,
+      "Hits@10": 0.9844827586206897,
+      "MRR": 0.9187192126034304,
+      "n": 580
+    },
+    "4-way hybrid (bge-large)": {
+      "Hits@1": 0.8379310344827586,
+      "Hits@10": 0.9862068965517241,
+      "MRR": 0.89286994809079,
+      "n": 580
+    }
+  },
+  "oaei_pipeline_F1": {
+    "text bge-large (+syn)": {
+      "candidates": 670,
+      "no_LLM": {
+        "pairs": 1609,
+        "precision": 0.8551895587321318,
+        "recall": 0.9076517150395779,
+        "F1": 0.8806400000000001,
+        "recall_nontrivial": 0.7610921501706485
+      },
+      "claude-opus-5-5": {
+        "pairs": 1416,
+        "precision": 0.9653954802259888,
+        "recall": 0.9017150395778364,
+        "F1": 0.932469304229195,
+        "recall_nontrivial": 0.7457337883959044
+      },
+      "gpt-6.1-sol": {
+        "pairs": 1376,
+        "precision": 0.9767441860465116,
+        "recall": 0.8865435356200527,
+        "F1": 0.929460580912863,
+        "recall_nontrivial": 0.7064846416382252
+      }
+    },
+    "text bge-large + joint RotatE": {
+      "candidates": 685,
+      "no_LLM": {
+        "pairs": 1624,
+        "precision": 0.8614532019704434,
+        "recall": 0.9228232189973615,
+        "F1": 0.8910828025477707,
+        "recall_nontrivial": 0.8003412969283277
+      },
+      "claude-opus-5-5": {
+        "pairs": 1441,
+        "precision": 0.963913948646773,
+        "recall": 0.9162269129287599,
+        "F1": 0.9394656746702739,
+        "recall_nontrivial": 0.7832764505119454
+      },
+      "gpt-6.1-sol": {
+        "pairs": 1402,
+        "precision": 0.9750356633380884,
+        "recall": 0.9017150395778364,
+        "F1": 0.9369431117203564,
+        "recall_nontrivial": 0.7457337883959044
+      }
+    },
+    "4-way hybrid (bge-large)": {
+      "candidates": 684,
+      "no_LLM": {
+        "pairs": 1623,
+        "precision": 0.8262476894639557,
+        "recall": 0.8845646437994723,
+        "F1": 0.8544122331952851,
+        "recall_nontrivial": 0.7013651877133106
+      },
+      "claude-opus-5-5": {
+        "pairs": 1380,
+        "precision": 0.9644927536231884,
+        "recall": 0.8779683377308707,
+        "F1": 0.9191988950276243,
+        "recall_nontrivial": 0.6843003412969283
+      },
+      "gpt-6.1-sol": {
+        "pairs": 1349,
+        "precision": 0.9733135656041513,
+        "recall": 0.8660949868073878,
+        "F1": 0.9165794066317626,
+        "recall_nontrivial": 0.6535836177474402
+      }
+    }
+  },
+  "rerank": {
+    "go_novel_isa": {
+      "n": 150,
+      "gold_in_candidates": 0.38666666666666666,
+      "claude-opus-5-5": 0.26666666666666666,
+      "gpt-6.1-sol": 0.23333333333333334
+    },
+    "go_new_terms": {
+      "n": 150,
+      "gold_in_candidates": 0.7266666666666667,
+      "claude-opus-5-5": 0.5466666666666666,
+      "gpt-6.1-sol": 0.56
+    },
+    "oaei_nontrivial": {
+      "n": 574,
+      "gold_in_candidates": 0.9860627177700348,
+      "claude-opus-5-5": 0.9651567944250871,
+      "gpt-6.1-sol": 0.9547038327526133
+    },
+    "go_novel_isa_full": {
+      "n": 2386,
+      "gold_in_candidates": 0.37426655490360433,
+      "claude-opus-5-5": 0.23595976529756915,
+      "gpt-6.1-sol": 0.2162615255658005
+    },
+    "go_new_terms_full": {
+      "n": 1465,
+      "gold_in_candidates": 0.7447098976109215,
+      "claude-opus-5-5": 0.548122866894198,
+      "gpt-6.1-sol": 0.5174061433447099
+    }
+  },
+  "llm_only_generation": {
+    "go_novel_isa": {
+      "n": 150,
+      "claude-opus-5-5": {
+        "Hits@1": 0.26,
+        "Hits@5": 0.62
+      },
+      "gpt-6.1-sol": {
+        "Hits@1": 0.23333333333333334,
+        "Hits@5": 0.30666666666666664
+      }
+    },
+    "go_new_terms": {
+      "n": 150,
+      "claude-opus-5-5": {
+        "Hits@1": 0.5866666666666667,
+        "Hits@5": 0.86
+      },
+      "gpt-6.1-sol": {
+        "Hits@1": 0.5133333333333333,
+        "Hits@5": 0.5533333333333333
+      }
+    },
+    "oaei_nontrivial": {
+      "n": 580,
+      "claude-opus-5-5": {
+        "Hits@1": 0.8224137931034483,
+        "Hits@5": 0.9293103448275862
+      },
+      "gpt-6.1-sol": {
+        "Hits@1": 0.7896551724137931,
+        "Hits@5": 0.8017241379310345
+      }
+    }
+  }
+}

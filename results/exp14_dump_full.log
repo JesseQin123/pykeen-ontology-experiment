@@ -1,0 +1,5 @@
+W1017 09:18:03.120000 91703 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 8323.94it/s]
+09:18:39 go_novel_isa_full 2386 upper bound (gold in candidates): 0.37426655490360433
+09:21:20 go_new_terms_full 1465 upper bound (gold in candidates): 0.7447098976109215

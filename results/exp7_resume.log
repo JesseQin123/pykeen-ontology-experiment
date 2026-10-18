@@ -1,0 +1,165 @@
+You're trying to map triples with 212 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3134 triples were filtered out
+You're trying to map triples with 211 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3034 triples were filtered out
+08:57:16 AutoSF 0.01 val MRR=0.000 434s
+09:04:25 AutoSF 0.001 val MRR=0.000 424s
+09:04:42 AutoSF TEST {'MRR': 0.00039337806658387193, 'Hits@1': 0.0001709986320109439, 'Hits@3': 0.0001709986320109439, 'Hits@10': 0.0005129958960328317, 'MR': 20017.57446990424, 'n': 5848}
+09:07:22 CrossE 0.01 val MRR=0.426 158s
+09:10:04 CrossE 0.001 val MRR=0.350 160s
+09:10:15 CrossE TEST {'MRR': 0.4281360919351535, 'Hits@1': 0.40868673050615595, 'Hits@3': 0.4331395348837209, 'Hits@10': 0.4637482900136799, 'MR': 4937.3207079343365, 'n': 5848}
+09:10:16 TuckER 0.01 FAILED RuntimeError('MPSGraph does not support tensor dims larger than INT_MAX')
+Traceback (most recent call last):
+  File "/Users/jesseqin/dev/PyKEEN-experiement/experiments/exp7_model_zoo.py", line 50, in main
+    m, info = kge.train(kg, name, seed=0, device="mps", lr=lr, **ov)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/kgv/kge.py", line 62, in train
+    losses = loop.train(triples_factory=tf, num_epochs=epochs or cfg["epochs"], batch_size=cfg["batch_size"],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 383, in train
+    result = self._train(
+             ^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 589, in _train
+    sub_batch_size, slice_size = self.sub_batch_and_slice(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 962, in sub_batch_and_slice
+    sub_batch_size, finished_search, supports_sub_batching = self._sub_batch_size_search(
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 1047, in _sub_batch_size_search
+    raise runtime_error
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 1036, in _sub_batch_size_search
+    self._train(
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 740, in _train
+    raise e
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 707, in _train
+    epoch_loss = self._train_epoch(
+                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 466, in _train_epoch
+    batch_loss = self._forward_pass(
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 840, in _forward_pass
+    loss = self._process_batch(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/slcwa.py", line 157, in _process_batch
+    return self._process_batch_static(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/slcwa.py", line 133, in _process_batch_static
+    negative_scores = model.score_hrt(negative_batch, mode=mode).view(*negative_score_shape)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/models/nbase.py", line 496, in score_hrt
+    return self.interaction.score_hrt(h=h, r=r, t=t)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/nn/modules.py", line 333, in score_hrt
+    return self.score(h=h, r=r, t=t).unsqueeze(dim=-1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/nn/modules.py", line 305, in score
+    return self(h=h, r=r, t=t)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/nn/modules.py", line 1982, in forward
+    x=einsum("...ik,...i->...k", r, h),
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/torch/functional.py", line 372, in einsum
+    return _VF.einsum(equation, operands)  # type: ignore[attr-defined]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: MPSGraph does not support tensor dims larger than INT_MAX
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Insufficient Memory (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory)
+	<AGXG17XFamilyCommandBuffer: 0x89ba70380>
+    label = <none> 
+    device = <AGXG17SDevice: 0x100e6ce00>
+        name = Apple M5 Pro 
+    commandQueue = <AGXG17XFamilyCommandQueue: 0x100e6dd60>
+        label = <none> 
+        device = <AGXG17SDevice: 0x100e6ce00>
+            name = Apple M5 Pro 
+    retainedReferences = 1
+09:10:20 TuckER 0.001 FAILED RuntimeError('MPSGraph does not support tensor dims larger than INT_MAX')
+Traceback (most recent call last):
+  File "/Users/jesseqin/dev/PyKEEN-experiement/experiments/exp7_model_zoo.py", line 50, in main
+    m, info = kge.train(kg, name, seed=0, device="mps", lr=lr, **ov)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/kgv/kge.py", line 62, in train
+    losses = loop.train(triples_factory=tf, num_epochs=epochs or cfg["epochs"], batch_size=cfg["batch_size"],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 383, in train
+    result = self._train(
+             ^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 589, in _train
+    sub_batch_size, slice_size = self.sub_batch_and_slice(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 962, in sub_batch_and_slice
+    sub_batch_size, finished_search, supports_sub_batching = self._sub_batch_size_search(
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 1047, in _sub_batch_size_search
+    raise runtime_error
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 1036, in _sub_batch_size_search
+    self._train(
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 740, in _train
+    raise e
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 707, in _train
+    epoch_loss = self._train_epoch(
+                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 466, in _train_epoch
+    batch_loss = self._forward_pass(
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/training_loop.py", line 840, in _forward_pass
+    loss = self._process_batch(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/slcwa.py", line 157, in _process_batch
+    return self._process_batch_static(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/training/slcwa.py", line 133, in _process_batch_static
+    negative_scores = model.score_hrt(negative_batch, mode=mode).view(*negative_score_shape)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/models/nbase.py", line 496, in score_hrt
+    return self.interaction.score_hrt(h=h, r=r, t=t)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/nn/modules.py", line 333, in score_hrt
+    return self.score(h=h, r=r, t=t).unsqueeze(dim=-1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/nn/modules.py", line 305, in score
+    return self(h=h, r=r, t=t)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/pykeen/nn/modules.py", line 1982, in forward
+    x=einsum("...ik,...i->...k", r, h),
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jesseqin/dev/PyKEEN-experiement/.venv/lib/python3.12/site-packages/torch/functional.py", line 372, in einsum
+    return _VF.einsum(equation, operands)  # type: ignore[attr-defined]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: MPSGraph does not support tensor dims larger than INT_MAX
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Insufficient Memory (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory)
+	<AGXG17XFamilyCommandBuffer: 0x89ba70a80>
+    label = <none> 
+    device = <AGXG17SDevice: 0x100e6ce00>
+        name = Apple M5 Pro 
+    commandQueue = <AGXG17XFamilyCommandQueue: 0x100e6dd60>
+        label = <none> 
+        device = <AGXG17SDevice: 0x100e6ce00>
+            name = Apple M5 Pro 
+    retainedReferences = 1
+09:39:03 ComplEx[softplus] 0.01 val MRR=0.016 1720s
+10:07:12 ComplEx[softplus] 0.001 val MRR=0.000 1687s
+10:07:20 ComplEx[softplus] TEST {'MRR': 0.0173635308272306, 'Hits@1': 0.010601915184678522, 'Hits@3': 0.01658686730506156, 'Hits@10': 0.02975376196990424, 'MR': 11637.470417236662, 'n': 5848}
+10:09:21 DistMult[softplus] 0.01 val MRR=0.001 120s
+10:11:24 DistMult[softplus] 0.001 val MRR=0.000 122s
+10:11:27 DistMult[softplus] TEST {'MRR': 0.0009940257430344824, 'Hits@1': 0.0003419972640218878, 'Hits@3': 0.0003419972640218878, 'Hits@10': 0.0013679890560875513, 'MR': 16449.74743502052, 'n': 5848}
+10:11:27 done

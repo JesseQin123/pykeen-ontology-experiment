@@ -1,0 +1,14 @@
+09:26:48 rerank go_novel_isa claude-opus-5-5 0.26666666666666666
+09:28:33 rerank go_novel_isa gpt-6.1-sol 0.23333333333333334
+09:29:43 rerank go_new_terms claude-opus-5-5 0.5466666666666666
+09:31:07 rerank go_new_terms gpt-6.1-sol 0.56
+09:33:44 rerank oaei_nontrivial claude-opus-5-5 0.9651567944250871
+09:36:34 rerank oaei_nontrivial gpt-6.1-sol 0.9547038327526133
+09:46:01 gen go_novel_isa claude-opus-5-5 {'Hits@1': 0.26, 'Hits@5': 0.62}
+09:56:22 gen go_novel_isa gpt-6.1-sol {'Hits@1': 0.23333333333333334, 'Hits@5': 0.30666666666666664}
+10:06:11 gen go_new_terms claude-opus-5-5 {'Hits@1': 0.5866666666666667, 'Hits@5': 0.86}
+10:16:12 gen go_new_terms gpt-6.1-sol {'Hits@1': 0.5133333333333333, 'Hits@5': 0.5533333333333333}
+11:01:33 gen oaei_nontrivial claude-opus-5-5 {'Hits@1': 0.8224137931034483, 'Hits@5': 0.9293103448275862}
+11:33:57 gen oaei_nontrivial gpt-6.1-sol {'Hits@1': 0.7896551724137931, 'Hits@5': 0.8017241379310345}
+11:33:57 done
+EXP15_DONE

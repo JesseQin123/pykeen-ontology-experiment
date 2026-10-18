@@ -1,0 +1,19 @@
+{
+  "queries": 5356,
+  "seed0_vs_seed1": {
+    "mean_top10_overlap": 6.965646004480956,
+    "top1_agree": 0.5939133681852129,
+    "share_queries_overlap<=5": 0.1859596713965646
+  },
+  "seed0_vs_seed2": {
+    "mean_top10_overlap": 6.956870799103809,
+    "top1_agree": 0.5862584017923824,
+    "share_queries_overlap<=5": 0.19081404032860344
+  },
+  "seed1_vs_seed2": {
+    "mean_top10_overlap": 6.9232636295743095,
+    "top1_agree": 0.5793502613890963,
+    "share_queries_overlap<=5": 0.18857356235997014
+  },
+  "mean_top10_in_all_three": 5.865571321882001
+}

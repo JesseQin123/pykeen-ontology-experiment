@@ -1,0 +1,19 @@
+07:45:37 {'terms_old': 45001, 'edges_old': 92700, 'edges_added': 3474, 'edges_removed': 1847, 'added_kinds': {'entailed': 1896, 'novel': 1578}, 'added_by_relation': {'is_a': 2622, 'part_of': 791, 'regulates': 30, 'positively_regulates': 13, 'negatively_regulates': 18}}
+07:49:11 RotatE {'train_seconds': 211.5930140018463, 'final_loss': 0.0781151233957364, 'epochs': 40}
+07:53:16 TransE {'train_seconds': 244.58431696891785, 'final_loss': 0.09716259786388376, 'epochs': 100}
+W1017 07:53:18.231000 78791 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 10484.18it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 23591.48it/s]
+07:54:21 Popularity                   all MRR=0.002 H10=0.004 | novel MRR=0.002 H10=0.006 | entailed MRR=0.001
+07:54:21 PathRules                    all MRR=0.007 H10=0.010 | novel MRR=0.010 H10=0.017 | entailed MRR=0.004
+07:54:22 Reasoner(is_a transitivity)  all MRR=0.129 H10=0.209 | novel MRR=0.001 H10=0.000 | entailed MRR=0.236
+07:54:34 RotatE                       all MRR=0.066 H10=0.135 | novel MRR=0.096 H10=0.203 | entailed MRR=0.041
+07:54:38 TransE                       all MRR=0.077 H10=0.218 | novel MRR=0.090 H10=0.246 | entailed MRR=0.066
+07:54:38 Text(bge-small name)         all MRR=0.066 H10=0.143 | novel MRR=0.092 H10=0.189 | entailed MRR=0.045
+07:54:39 Text(bge-small name+def)     all MRR=0.058 H10=0.124 | novel MRR=0.083 H10=0.168 | entailed MRR=0.036
+07:54:52 Hybrid(RotatE+Text)          all MRR=0.106 H10=0.214 | novel MRR=0.152 H10=0.306 | entailed MRR=0.068
+07:55:05 Hybrid(RotatE+Text+Rules)    all MRR=0.060 H10=0.145 | novel MRR=0.090 H10=0.230 | entailed MRR=0.035
+07:55:30 removal AUC {'RotatE': 0.6483944058418274, 'TransE': 0.6364339590072632, 'PathRules': 0.5130444639956686, 'Text(bge-small name)': 0.6746648550033569, 'Hybrid(RotatE+Text)': 0.6651291283161884}
+07:55:41 realized {'PathRules': {'top1%': 0.0, 'top5%': 0.0, 'top10%': 0.0, 'top100%': 0.0}, 'RotatE': {'top1%': 0.0, 'top5%': 0.0, 'top10%': 0.0, 'top100%': 0.0016666666666666668}, 'Text(bge-small name)': {'top1%': 0.0, 'top5%': 0.0, 'top10%': 0.0, 'top100%': 0.001}, 'Hybrid(RotatE+Text)': {'top1%': 0.0, 'top5%': 0.0, 'top10%': 0.0, 'top100%': 0.0023333333333333335}}
+07:55:41 done

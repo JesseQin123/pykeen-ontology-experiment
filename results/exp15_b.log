@@ -1,0 +1,9 @@
+09:12:18 probe created 2024-2026 claude-opus-5-5 0.11
+09:13:55 probe existed in 2018 claude-opus-5-5 0.75
+09:17:40 oaei rank text bge-large (+syn) {'Hits@1': 0.8344827586206897, 'Hits@10': 0.9741379310344828, 'MRR': 0.8906943727165385, 'n': 580}
+09:17:40 oaei rank text bge-large + joint RotatE {'Hits@1': 0.8862068965517241, 'Hits@10': 0.9844827586206897, 'MRR': 0.9187192126034304, 'n': 580}
+09:17:40 oaei rank 4-way hybrid (bge-large) {'Hits@1': 0.8379310344827586, 'Hits@10': 0.9862068965517241, 'MRR': 0.89286994809079, 'n': 580}
+09:22:48 oaei F1 claude-opus-5-5 text bge-large (+syn) {'pairs': 1416, 'precision': 0.9653954802259888, 'recall': 0.9017150395778364, 'F1': 0.932469304229195, 'recall_nontrivial': 0.7457337883959044}
+09:24:07 oaei F1 claude-opus-5-5 text bge-large + joint RotatE {'pairs': 1441, 'precision': 0.963913948646773, 'recall': 0.9162269129287599, 'F1': 0.9394656746702739, 'recall_nontrivial': 0.7832764505119454}
+09:25:23 oaei F1 claude-opus-5-5 4-way hybrid (bge-large) {'pairs': 1380, 'precision': 0.9644927536231884, 'recall': 0.8779683377308707, 'F1': 0.9191988950276243, 'recall_nontrivial': 0.6843003412969283}
+09:25:23 done

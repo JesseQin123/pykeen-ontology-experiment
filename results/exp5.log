@@ -1,0 +1,41 @@
+20:02:05 {'mouse_classes': 2744, 'human_classes': 3304, 'reference': 1516, 'auto_anchors(exact label)': {'n': 939, 'precision': 0.9904153354632588, 'recall': 0.6134564643799473}, 'nontrivial_eval_pairs': 580, 'candidates_per_query': 2365}
+20:06:41 structure done
+W1016 20:06:43.642000 36768 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8026.11it/s]
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 22897.83it/s]
+20:06:48 text sentence-transformers/all-MiniLM-L6-v2
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 10292.83it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 20141.57it/s]
+20:06:52 text BAAI/bge-small-en-v1.5
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 18866.96it/s]
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 20425.36it/s]
+20:07:36 text BAAI/bge-large-en-v1.5
+20:07:36 structure: independent, no anchors                         H1=0.002 H10=0.005 MRR=0.005
+20:07:36 structure: independent + Procrustes(auto anchors)          H1=0.074 H10=0.293 MRR=0.143
+20:07:36 structure: joint RotatE (auto anchors)                     H1=0.217 H10=0.557 MRR=0.329
+20:07:36 structure: anchor-neighbourhood (no embedding)             H1=0.076 H10=0.359 MRR=0.170
+20:07:36 lexical: char 3-4gram TF-IDF (+syn)                        H1=0.709 H10=0.921 MRR=0.792
+20:07:36 text: all-MiniLM-L6-v2 (label only)                        H1=0.726 H10=0.890 MRR=0.787
+20:07:36 text: all-MiniLM-L6-v2 (+synonyms)                         H1=0.795 H10=0.950 MRR=0.853
+20:07:36 text: bge-small-en-v1.5 (label only)                       H1=0.743 H10=0.922 MRR=0.808
+20:07:36 text: bge-small-en-v1.5 (+synonyms)                        H1=0.816 H10=0.962 MRR=0.873
+20:07:36 text: bge-large-en-v1.5 (label only)                       H1=0.774 H10=0.952 MRR=0.839
+20:07:36 text: bge-large-en-v1.5 (+synonyms)                        H1=0.834 H10=0.974 MRR=0.891
+20:07:36 hybrid: bge-large + joint RotatE                           H1=0.886 H10=0.984 MRR=0.919
+20:07:36 hybrid: bge-large + anchor-neighbourhood                   H1=0.771 H10=0.969 MRR=0.837
+20:07:36 hybrid: bge-large + joint + anchor-neigh + lexical         H1=0.838 H10=0.986 MRR=0.893
+20:19:23 llm rerank {'model': 'qwen3.5:27b', 'n': 580, 'gold_in_top10': 0.9862068965517241, 'hybrid_Hits@1': np.float64(0.8379310344827586), 'llm_Hits@1': np.float64(0.9431034482758621)}
+20:31:21 exact labels only {'pairs': 939, 'precision': 0.9904153354632588, 'recall': 0.6134564643799473, 'F1': 0.7576374745417516}
+20:31:22 exact + text: bge-large-en-v1.5 (+synonyms) mutual-best >= 0.8 {'pairs': 1569, 'precision': 0.8750796685787126, 'recall': 0.9056728232189973, 'F1': 0.8901134521880065}
+20:31:22 exact + text: bge-large-en-v1.5 (+synonyms) mutual-best >= 0.85 {'pairs': 1473, 'precision': 0.9192124915139172, 'recall': 0.8931398416886543, 'F1': 0.9059886249581799}
+20:31:22 exact + text: bge-large-en-v1.5 (+synonyms) mutual-best >= 0.9 {'pairs': 1326, 'precision': 0.9630467571644042, 'recall': 0.8423482849604221, 'F1': 0.8986629134412385}
+20:31:22 exact + text: bge-large-en-v1.5 (+synonyms) mutual-best >= 0.95 {'pairs': 1203, 'precision': 0.9808811305070657, 'recall': 0.7783641160949868, 'F1': 0.8679661640308938}
+20:31:22 exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 0.0 {'pairs': 1623, 'precision': 0.8262476894639557, 'recall': 0.8845646437994723, 'F1': 0.8544122331952851}
+20:31:22 exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 1.0 {'pairs': 1623, 'precision': 0.8262476894639557, 'recall': 0.8845646437994723, 'F1': 0.8544122331952851}
+20:31:22 exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 2.0 {'pairs': 1623, 'precision': 0.8262476894639557, 'recall': 0.8845646437994723, 'F1': 0.8544122331952851}
+20:31:22 exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 3.0 {'pairs': 1623, 'precision': 0.8262476894639557, 'recall': 0.8845646437994723, 'F1': 0.8544122331952851}
+20:31:22 exact + hybrid: bge-large + joint + anchor-neigh + lexical mutual-best >= 4.0 {'pairs': 1623, 'precision': 0.8262476894639557, 'recall': 0.8845646437994723, 'F1': 0.8544122331952851}
+20:31:22 exact + hybrid mutual-best + LLM yes/no verification {'pairs': 1385, 'precision': 0.9595667870036101, 'recall': 0.8766490765171504, 'F1': 0.9162357807652535}
+20:31:22 _llm_verified_candidates {'candidates': 684, 'kept': 446}
+20:31:22 done

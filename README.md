@@ -1,20 +1,23 @@
 # Graph embeddings on semantic ontology graphs: a validation
 
-Does PyKEEN-style knowledge graph embedding actually help on ontology graphs? This repo tests four claims
-against non-embedding baselines (popularity, an AnyBURL-style path-rule learner, anchor-neighbourhood matching):
+Does PyKEEN-style knowledge graph embedding actually help on ontology graphs? 17 experiments test four claims,
+each against non-embedding baselines (popularity, AnyBURL rules, an is_a reasoner, label-text embeddings,
+anchor-neighbourhood matching) and with frontier LLMs as re-rankers, generators and blind judges:
 
-1. Embeddings recover relations that explicit graph search misses (WN18RR link prediction, reachability split).
-2. Embedding-suggested links are real (open-world check against full WordNet 3.0).
-3. Embeddings speed up queries on large graphs (k-hop traversal vs. brute-force / HNSW kNN, training cost).
-4. Embeddings align two ontologies that use different terms (renamed graph views, seed anchors, synonym labels).
+1. Embeddings recover relations the graph is missing: random hold-out (WN18RR) and a prospective test that trains on
+   Gene Ontology 2020 and scores what curators added by 2026.
+2. Embedding-suggested links are useful: seed stability, three-judge LLM blind rating, and a candidates -> LLM-filter pipeline.
+3. Embeddings help on large graphs: query latency vs. size, ANN recall, and accuracy vs. graph size on YAGO3-10.
+4. Embeddings align two ontologies with different terms: renamed views, seed-free optimal transport, and the real
+   OAEI Anatomy track (mouse vs. human) scored against the official reference.
 
-Results and discussion (Chinese, with an English summary): [REPORT.md](REPORT.md).
+Results and the converged recommendations (Chinese, with an English summary): [REPORT.md](REPORT.md).
+All quoted numbers trace to `results/SUMMARY.json`, `results/STATS.json` and the per-experiment JSON files.
 
 ```bash
 uv sync
-uv run python experiments/exp1_link_prediction.py
-uv run python experiments/exp3_alignment.py --dataset wn18rr
-uv run python experiments/exp3_alignment.py --dataset fb15k237 --epochs 20 --fractions 0.05,0.1,0.3
-uv run python experiments/exp2_scaling.py
-uv run python experiments/exp2b_ann_realistic.py
+uv run python experiments/exp4_go_temporal.py      # see REPORT.md for the full list
 ```
+
+Training runs locally (Apple MPS). LLM and embedding inference run on hosted endpoints configured in a
+gitignored `.env` (`RELAY_BASE_URL`, `RELAY_API_KEY`, `OPENROUTER_BASE_URL`, `OPENROUTER_API_KEY`).

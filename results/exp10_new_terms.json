@@ -1,0 +1,242 @@
+{
+  "n_new_terms": 1736,
+  "n_queries": 1465,
+  "methods": {
+    "text bge-small-en-v1.5": {
+      "Hits@1": 0.15993623804463336,
+      "Hits@10": 0.3894792773645058,
+      "MRR": 0.23576343479499137,
+      "n": 1882
+    },
+    "text bge-small-en-v1.5 +def": {
+      "Hits@1": 0.15090329436769395,
+      "Hits@10": 0.38522848034006374,
+      "MRR": 0.2302191969045969,
+      "n": 1882
+    },
+    "text bge-large-en-v1.5": {
+      "Hits@1": 0.15993623804463336,
+      "Hits@10": 0.4059511158342189,
+      "MRR": 0.23939650551003663,
+      "n": 1882
+    },
+    "text bge-large-en-v1.5 +def": {
+      "Hits@1": 0.14984059511158343,
+      "Hits@10": 0.3942614240170032,
+      "MRR": 0.23250231715861092,
+      "n": 1882
+    },
+    "bridge: text->RotatE (is_a scoring)": {
+      "Hits@1": 0.03506907545164718,
+      "Hits@10": 0.15249734325185973,
+      "MRR": 0.07526363879239965,
+      "n": 1882
+    },
+    "fusion: bge-large +def & bridge": {
+      "Hits@1": 0.1849096705632306,
+      "Hits@10": 0.4681190223166844,
+      "MRR": 0.28009314417488174,
+      "n": 1882
+    },
+    "fusion + parent-popularity prior": {
+      "Hits@1": 0.21094580233793836,
+      "Hits@10": 0.5499468650371945,
+      "MRR": 0.3273964738490523,
+      "n": 1882
+    }
+  },
+  "llm_rerank": {
+    "base_method": "fusion + parent-popularity prior",
+    "model": "qwen3.5:27b",
+    "n": 150,
+    "gold_in_top20": 0.7266666666666667,
+    "base_Hits@1(any parent)": 0.2866666666666667,
+    "llm_Hits@1(any parent)": 0.4,
+    "examples": [
+      {
+        "new_term": "cytoskeleton-nuclear membrane anchor activity",
+        "gold": [
+          "protein membrane adaptor"
+        ],
+        "fused_top1": "cytoskeletal anchoring at nuclear membrane",
+        "llm": "cytoskeletal adaptor activity",
+        "llm_ok": false
+      },
+      {
+        "new_term": "kinetochore adaptor activity",
+        "gold": [
+          "protein binding, bridging"
+        ],
+        "fused_top1": "cytoskeletal adaptor activity",
+        "llm": "molecular adaptor activity",
+        "llm_ok": false
+      },
+      {
+        "new_term": "flavin transferase activity",
+        "gold": [
+          "phosphotransferase activity, alcohol group as acceptor"
+        ],
+        "fused_top1": "catalytic activity, acting on a protein",
+        "llm": "nucleotidyltransferase activity",
+        "llm_ok": false
+      },
+      {
+        "new_term": "glycerol-3-phosphate dehydrogenase (NAD+) activity",
+        "gold": [
+          "glycerol-3-phosphate dehydrogenase [NAD(P)+] activity"
+        ],
+        "fused_top1": "oxidoreductase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor",
+        "llm": "oxidoreductase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor",
+        "llm_ok": false
+      },
+      {
+        "new_term": "futile creatine cycle",
+        "gold": [
+          "metabolic process"
+        ],
+        "fused_top1": "phosphocreatine metabolic process",
+        "llm": "phosphocreatine metabolic process",
+        "llm_ok": false
+      },
+      {
+        "new_term": "CTP-dependent diacylglycerol kinase activity",
+        "gold": [
+          "lipid kinase activity",
+          "phosphotransferase activity, alcohol group as acceptor"
+        ],
+        "fused_top1": "catalytic activity, acting on a protein",
+        "llm": "diacylglycerol kinase activity",
+        "llm_ok": false
+      },
+      {
+        "new_term": "protein serine pyrophosphorylase activity",
+        "gold": [
+          "phosphotransferase activity, phosphate group as acceptor"
+        ],
+        "fused_top1": "catalytic activity, acting on a protein",
+        "llm": "protein kinase activity",
+        "llm_ok": false
+      },
+      {
+        "new_term": "tryprostatin A biosynthetic process",
+        "gold": [
+          "ether biosynthetic process",
+          "indole alkaloid biosynthetic process",
+          "indole-containing compound biosynthetic process"
+        ],
+        "fused_top1": "organonitrogen compound biosynthetic process",
+        "llm": "antibiotic biosynthetic process",
+        "llm_ok": false
+      },
+      {
+        "new_term": "protein-glutamic acid ligase activity, elongating",
+        "gold": [
+          "protein-glutamic acid ligase activity"
+        ],
+        "fused_top1": "acid-amino acid ligase activity",
+        "llm": "protein-glutamic acid ligase activity",
+        "llm_ok": true
+      },
+      {
+        "new_term": "chenodeoxycholate 7-alpha-dehydrogenase (NAD+) activity",
+        "gold": [
+          "steroid dehydrogenase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor"
+        ],
+        "fused_top1": "oxidoreductase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor",
+        "llm": "steroid dehydrogenase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor",
+        "llm_ok": true
+      },
+      {
+        "new_term": "symbiont-mediated suppression of host cGAS-STING signal transduction",
+        "gold": [
+          "suppression by virus of host viral-induced cytoplasmic pattern recognition receptor signaling pathway"
+        ],
+        "fused_top1": "suppression by symbiont of host signal transduction pathway",
+        "llm": "suppression by symbiont of host signal transduction pathway",
+        "llm_ok": false
+      },
+      {
+        "new_term": "bindosome complex",
+        "gold": [
+          "membrane protein complex"
+        ],
+        "fused_top1": "protein-containing complex",
+        "llm": "transporter complex",
+        "llm_ok": false
+      },
+      {
+        "new_term": "spatial regulation of meiotic DNA double-strand break formation involved in reciprocal meiotic recombination",
+        "gold": [
+          "regulation of meiotic DNA double-strand break formation involved in reciprocal meiotic recombination"
+        ],
+        "fused_top1": "regulation of meiotic DNA double-strand break formation involved in reciprocal meiotic recombination",
+        "llm": "regulation of meiotic DNA double-strand break formation involved in reciprocal meiotic recombination",
+        "llm_ok": true
+      },
+      {
+        "new_term": "detoxification of free heme",
+        "gold": [
+          "detoxification"
+        ],
+        "fused_top1": "detoxification",
+        "llm": "detoxification",
+        "llm_ok": true
+      },
+      {
+        "new_term": "vacuole fission",
+        "gold": [
+          "organelle fission"
+        ],
+        "fused_top1": "organelle fission",
+        "llm": "organelle fission",
+        "llm_ok": true
+      },
+      {
+        "new_term": "regulation of promoter clearance from RNA polymerase II promoter",
+        "gold": [
+          "regulation of RNA biosynthetic process"
+        ],
+        "fused_top1": "regulation of transcription by RNA polymerase II",
+        "llm": "regulation of transcription initiation from RNA polymerase II promoter",
+        "llm_ok": false
+      },
+      {
+        "new_term": "large ribosomal subunit pre-assembly complex",
+        "gold": [
+          "chaperone complex"
+        ],
+        "fused_top1": "protein-containing complex",
+        "llm": "preribosome",
+        "llm_ok": false
+      },
+      {
+        "new_term": "23S rRNA pseudouridine(2457) synthase activity",
+        "gold": [
+          "rRNA pseudouridine synthase activity"
+        ],
+        "fused_top1": "rRNA pseudouridine synthase activity",
+        "llm": "rRNA pseudouridine synthase activity",
+        "llm_ok": true
+      },
+      {
+        "new_term": "cyclic-di-AMP binding",
+        "gold": [
+          "cyclic nucleotide binding",
+          "adenyl ribonucleotide binding"
+        ],
+        "fused_top1": "AMP binding",
+        "llm": "nucleoside phosphate binding",
+        "llm_ok": false
+      },
+      {
+        "new_term": "G protein-coupled chemorepellent receptor signaling pathway",
+        "gold": [
+          "G protein-coupled receptor signaling pathway"
+        ],
+        "fused_top1": "G protein-coupled receptor signaling pathway",
+        "llm": "G protein-coupled receptor signaling pathway",
+        "llm_ok": true
+      }
+    ]
+  }
+}

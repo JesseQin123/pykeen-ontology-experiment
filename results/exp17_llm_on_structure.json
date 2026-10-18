@@ -1,0 +1,203 @@
+{
+  "B_go_suggestion_pipeline": {
+    "suggestions": 5000,
+    "terms": 1000,
+    "true_in_2026_all_top5": 0.003,
+    "true_in_2026_top1_only": 0.008,
+    "LLM_majority_accept_rate": 0.0682,
+    "true_in_2026_among_accepted": 0.03812316715542522,
+    "true_in_2026_among_rejected": 0.00042927666881305,
+    "recall_of_true_by_LLM_filter": 0.8666666666666667,
+    "terms_with_any_accepted": 258,
+    "accept_rate_gpt-6.1-sol": 0.0682,
+    "true_among_accepted_gpt-6.1-sol": 0.03812316715542522,
+    "accept_rate_gemini-4-argon-high": 0.0674,
+    "true_among_accepted_gemini-4-argon-high": 0.03857566765578635,
+    "accept_rate_claude-opus-5-5": 0.0956,
+    "true_among_accepted_claude-opus-5-5": 0.027196652719665274
+  },
+  "B_examples_accepted_not_in_2026": [
+    {
+      "child": "corticotropin-releasing hormone receptor activity",
+      "parent": "neurotransmitter receptor activity"
+    },
+    {
+      "child": "hair follicle placode formation",
+      "parent": "ectodermal placode morphogenesis"
+    },
+    {
+      "child": "positive regulation of non-canonical Wnt signaling pathway via JNK cascade",
+      "parent": "regulation of Wnt signaling pathway, planar cell polarity pathway"
+    },
+    {
+      "child": "photoreceptor outer segment",
+      "parent": "cilium"
+    },
+    {
+      "child": "abscisic acid biosynthetic process",
+      "parent": "hormone biosynthetic process"
+    },
+    {
+      "child": "mammary gland specification",
+      "parent": "specification of animal organ position"
+    },
+    {
+      "child": "phytochromobilin biosynthetic process",
+      "parent": "porphyrin-containing compound metabolic process"
+    },
+    {
+      "child": "odontogenesis",
+      "parent": "animal organ development"
+    },
+    {
+      "child": "protein folding chaperone",
+      "parent": "binding"
+    },
+    {
+      "child": "metanephric nephron tubule formation",
+      "parent": "metanephric nephron tubule morphogenesis"
+    },
+    {
+      "child": "proteasome storage granule disassembly",
+      "parent": "cellular protein complex disassembly"
+    },
+    {
+      "child": "negative regulation of acetylcholine uptake",
+      "parent": "negative regulation of neurotransmitter uptake"
+    },
+    {
+      "child": "establishment of bipolar cell polarity involved in cell morphogenesis",
+      "parent": "establishment or maintenance of bipolar cell polarity"
+    },
+    {
+      "child": "neuron projection regeneration",
+      "parent": "neuron projection morphogenesis"
+    },
+    {
+      "child": "hindgut morphogenesis",
+      "parent": "digestive tract morphogenesis"
+    },
+    {
+      "child": "response to methylphenidate",
+      "parent": "response to xenobiotic stimulus"
+    },
+    {
+      "child": "serotonin biosynthetic process",
+      "parent": "cellular biogenic amine biosynthetic process"
+    },
+    {
+      "child": "tetrose metabolic process",
+      "parent": "cellular carbohydrate metabolic process"
+    },
+    {
+      "child": "pancreatic bud formation",
+      "parent": "morphogenesis of an epithelial bud"
+    },
+    {
+      "child": "regulation of abscisic acid biosynthetic process",
+      "parent": "regulation of hormone biosynthetic process"
+    },
+    {
+      "child": "positive regulation of forward locomotion",
+      "parent": "positive regulation of locomotion involved in locomotory behavior"
+    },
+    {
+      "child": "suppression by symbiont of host I-kappaB kinase/NF-kappaB cascade",
+      "parent": "suppression by symbiont of host protein kinase-mediated signal transduction"
+    },
+    {
+      "child": "citrate:proton symporter activity",
+      "parent": "anion:cation symporter activity"
+    },
+    {
+      "child": "1,3-diacylglycerol acylhydrolase activity",
+      "parent": "acylglycerol lipase activity"
+    },
+    {
+      "child": "oxidative phosphorylation uncoupler activity",
+      "parent": "proton transmembrane transporter activity"
+    },
+    {
+      "child": "regulation of lipopolysaccharide-mediated signaling pathway",
+      "parent": "regulation of innate immune response"
+    },
+    {
+      "child": "high molecular weight B cell growth factor receptor activity",
+      "parent": "transmembrane signaling receptor activity"
+    },
+    {
+      "child": "monensin A biosynthetic process",
+      "parent": "polyketide biosynthetic process"
+    },
+    {
+      "child": "taurine metabolic process",
+      "parent": "amine metabolic process"
+    },
+    {
+      "child": "mucilage metabolic process",
+      "parent": "macromolecule metabolic process"
+    },
+    {
+      "child": "host cell nuclear lamina",
+      "parent": "host cell nuclear matrix"
+    },
+    {
+      "child": "schizogony",
+      "parent": "asexual reproduction"
+    },
+    {
+      "child": "coenzyme F420-0 gamma-glutamyl ligase activity",
+      "parent": "coenzyme F420-1:gamma-L-glutamate ligase activity"
+    },
+    {
+      "child": "Mre11 complex",
+      "parent": "DNA repair complex"
+    },
+    {
+      "child": "peptidoglycan-protein cross-linking",
+      "parent": "peptidyl-amino acid modification"
+    },
+    {
+      "child": "process resulting in tolerance to ketone",
+      "parent": "response to oxygen-containing compound"
+    },
+    {
+      "child": "protein repair",
+      "parent": "macromolecule modification"
+    },
+    {
+      "child": "eggshell formation",
+      "parent": "egg coat formation"
+    },
+    {
+      "child": "neuromedin U receptor binding",
+      "parent": "peptide hormone receptor binding"
+    },
+    {
+      "child": "cartilage development",
+      "parent": "tissue development"
+    }
+  ],
+  "A_wn18rr_rerank": {
+    "RRF(AnyBURL,RotatE,TransE) alone": {
+      "MRR": 0.5219997262135727,
+      "Hits@1": 0.47246922024623805,
+      "Hits@10": 0.6191860465116279,
+      "n": 5848
+    },
+    "gold_in_top20": 0.6621067031463749,
+    "+ gpt-6.1-sol re-rank": {
+      "MRR": 0.5682209452821878,
+      "Hits@1": 0.4988030095759234,
+      "Hits@10": 0.6475718194254446,
+      "n": 5848
+    },
+    "_note": "gemini-4-argon-high skipped: relay returned HTTP 429 (quota exhausted)",
+    "+ claude-opus-5-5 re-rank": {
+      "MRR": 0.580077986562515,
+      "Hits@1": 0.5186388508891929,
+      "Hits@10": 0.6508207934336525,
+      "n": 5848
+    }
+  }
+}

@@ -33,9 +33,16 @@ CONFIGS = {
 }
 
 
+DEFAULT = dict(
+    model_kwargs=dict(embedding_dim=256),
+    loss="NSSALoss", loss_kwargs=dict(margin=6.0, adversarial_temperature=0.5),
+    loop="sLCWA", num_negs=128, lr=1e-2, batch_size=1024, epochs=40,
+)
+
+
 def train(kg: KG, name: str, tf=None, seed: int = 0, device: str = "cpu", epochs: int | None = None,
           cache: Path | None = None, **overrides):
-    cfg = {**CONFIGS[name], **overrides}
+    cfg = {**CONFIGS.get(name, DEFAULT), **overrides}
     tf = tf if tf is not None else kg.factory
     if cache is not None and cache.exists():
         model = torch.load(cache, weights_only=False, map_location=device)

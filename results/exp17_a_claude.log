@@ -1,0 +1,7 @@
+You're trying to map triples with 212 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3134 triples were filtered out
+You're trying to map triples with 211 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3034 triples were filtered out
+19:55:55 A claude-opus-5-5 {'MRR': 0.580077986562515, 'Hits@1': 0.5186388508891929, 'Hits@10': 0.6508207934336525, 'n': 5848}
+19:55:55 done
+LLM_CHAIN_DONE

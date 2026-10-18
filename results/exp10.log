@@ -1,0 +1,16 @@
+08:00:59 new terms 1736 with is_a parent in 2020 graph 1465
+W1017 08:01:03.861000 80649 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 10223.49it/s]
+08:02:06 encoded BAAI/bge-small-en-v1.5
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 9605.26it/s]
+08:12:36 encoded BAAI/bge-large-en-v1.5
+08:13:05 text bge-small-en-v1.5                       {'Hits@1': 0.15993623804463336, 'Hits@10': 0.3894792773645058, 'MRR': 0.23576343479499137, 'n': 1882}
+08:13:05 text bge-small-en-v1.5 +def                  {'Hits@1': 0.15090329436769395, 'Hits@10': 0.38522848034006374, 'MRR': 0.2302191969045969, 'n': 1882}
+08:13:05 text bge-large-en-v1.5                       {'Hits@1': 0.15993623804463336, 'Hits@10': 0.4059511158342189, 'MRR': 0.23939650551003663, 'n': 1882}
+08:13:05 text bge-large-en-v1.5 +def                  {'Hits@1': 0.14984059511158343, 'Hits@10': 0.3942614240170032, 'MRR': 0.23250231715861092, 'n': 1882}
+08:13:05 bridge: text->RotatE (is_a scoring)          {'Hits@1': 0.03506907545164718, 'Hits@10': 0.15249734325185973, 'MRR': 0.07526363879239965, 'n': 1882}
+08:13:05 fusion: bge-large +def & bridge              {'Hits@1': 0.1849096705632306, 'Hits@10': 0.4681190223166844, 'MRR': 0.28009314417488174, 'n': 1882}
+08:13:05 fusion + parent-popularity prior             {'Hits@1': 0.21094580233793836, 'Hits@10': 0.5499468650371945, 'MRR': 0.3273964738490523, 'n': 1882}
+08:16:19 llm {'base_method': 'fusion + parent-popularity prior', 'model': 'qwen3.5:27b', 'n': 150, 'gold_in_top20': 0.7266666666666667, 'base_Hits@1(any parent)': 0.2866666666666667, 'llm_Hits@1(any parent)': 0.4}
+08:16:19 done

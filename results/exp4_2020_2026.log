@@ -1,0 +1,19 @@
+19:48:47 {'terms_old': 44700, 'edges_old': 91526, 'edges_added': 6412, 'edges_removed': 6758, 'added_kinds': {'entailed': 3743, 'novel': 2669}, 'added_by_relation': {'is_a': 6089, 'part_of': 234, 'regulates': 33, 'positively_regulates': 27, 'negatively_regulates': 29}}
+19:52:11 RotatE {'train_seconds': 201.77560091018677, 'final_loss': 0.07777891962064637, 'epochs': 40}
+19:56:33 TransE {'train_seconds': 261.2294611930847, 'final_loss': 0.09881454366776678, 'epochs': 100}
+W1016 19:56:34.678000 34724 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 17750.55it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 21960.28it/s]
+19:57:43 Popularity                   all MRR=0.005 H10=0.010 | novel MRR=0.004 H10=0.007 | entailed MRR=0.005
+19:57:44 PathRules                    all MRR=0.008 H10=0.015 | novel MRR=0.010 H10=0.018 | entailed MRR=0.006
+19:58:07 RotatE                       all MRR=0.072 H10=0.153 | novel MRR=0.081 H10=0.169 | entailed MRR=0.066
+19:58:16 TransE                       all MRR=0.093 H10=0.268 | novel MRR=0.088 H10=0.238 | entailed MRR=0.096
+19:58:17 Text(bge-small name)         all MRR=0.051 H10=0.158 | novel MRR=0.057 H10=0.171 | entailed MRR=0.046
+19:58:18 Text(bge-small name+def)     all MRR=0.048 H10=0.145 | novel MRR=0.056 H10=0.173 | entailed MRR=0.041
+19:58:44 Hybrid(RotatE+Text)          all MRR=0.087 H10=0.219 | novel MRR=0.102 H10=0.234 | entailed MRR=0.075
+19:59:11 Hybrid(RotatE+Text+Rules)    all MRR=0.058 H10=0.152 | novel MRR=0.067 H10=0.163 | entailed MRR=0.051
+19:59:47 removal AUC {'RotatE': 0.6497895121574402, 'TransE': 0.6600599884986877, 'PathRules': 0.48060365625, 'Text(bge-small name)': 0.6936604976654053, 'Hybrid(RotatE+Text)': 0.6628445625}
+20:00:00 realized {'PathRules': {'top1%': 0.0, 'top5%': 0.0, 'top10%': 0.0, 'top100%': 0.0}, 'RotatE': {'top1%': 0.0, 'top5%': 0.0, 'top10%': 0.0033333333333333335, 'top100%': 0.0026666666666666666}, 'Text(bge-small name)': {'top1%': 0.0, 'top5%': 0.006666666666666667, 'top10%': 0.006666666666666667, 'top100%': 0.0013333333333333333}, 'Hybrid(RotatE+Text)': {'top1%': 0.0, 'top5%': 0.006666666666666667, 'top10%': 0.0033333333333333335, 'top100%': 0.0026666666666666666}}
+20:01:29 llm {'n': 150, 'k': 20, 'model': 'qwen3.5:27b', 'true_parent_in_topk': 0.38666666666666666, 'hybrid_Hits@1': np.float64(0.08), 'llm_rerank_Hits@1': np.float64(0.16666666666666666)}
+20:01:29 done

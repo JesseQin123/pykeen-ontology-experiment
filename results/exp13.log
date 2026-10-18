@@ -1,0 +1,20 @@
+You're trying to map triples with 212 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3134 triples were filtered out
+You're trying to map triples with 211 entities and 0 relations that are not in the training set. These triples will be excluded from the mapping.
+In total 210 from 3034 triples were filtered out
+08:37:46 WN18RR AnyBURL {'MRR': 0.5169632112380074, 'Hits@1': 0.47452120383036933, 'Hits@3': 0.5326607387140903, 'Hits@10': 0.5918262653898769, 'MR': 6169.907575239398, 'n': 5848}
+08:37:58 WN18RR RotatE {'MRR': 0.48728176647395566, 'Hits@1': 0.43399452804377564, 'Hits@3': 0.5083789329685362, 'Hits@10': 0.5861833105335157, 'MR': 1849.3548221614228, 'n': 5848}
+08:38:24 WN18RR RRF(AnyBURL, RotatE) {'MRR': 0.5167835962777936, 'Hits@1': 0.4685362517099863, 'Hits@3': 0.5345417236662107, 'Hits@10': 0.6075581395348837, 'MR': 2085.113970588235, 'n': 5848}
+08:39:04 WN18RR RRF(AnyBURL, RotatE, TransE) {'MRR': 0.5219997262135727, 'Hits@1': 0.47246922024623805, 'Hits@3': 0.5400136798905609, 'Hits@10': 0.6191860465116279, 'MR': 1559.9504958960329, 'n': 5848}
+08:39:13 WN18RR Cascade(AnyBURL -> RotatE) {'MRR': 0.5232398224288451, 'Hits@1': 0.4793091655266758, 'Hits@3': 0.5410396716826266, 'Hits@10': 0.6087551299589603, 'MR': 1831.1947674418604, 'n': 5848}
+08:40:51 GO AnyBURL                                       tail MRR=0.092 H1=0.052 H10=0.177 | novel H10=0.173 | entailed H10=0.180
+08:40:52 GO Reasoner                                      tail MRR=0.283 H1=0.161 H10=0.543 | novel H10=0.007 | entailed H10=0.926
+08:40:54 GO Text (bge-large)                              tail MRR=0.084 H1=0.029 H10=0.205 | novel H10=0.219 | entailed H10=0.194
+08:41:28 GO RotatE                                        tail MRR=0.093 H1=0.038 H10=0.202 | novel H10=0.208 | entailed H10=0.198
+08:41:38 GO TransE                                        tail MRR=0.113 H1=0.006 H10=0.344 | novel H10=0.273 | entailed H10=0.394
+08:42:49 GO RRF(AnyBURL, RotatE)                          tail MRR=0.098 H1=0.051 H10=0.181 | novel H10=0.184 | entailed H10=0.179
+08:45:02 GO RRF(RotatE, TransE, Text)                     tail MRR=0.185 H1=0.092 H10=0.383 | novel H10=0.362 | entailed H10=0.398
+08:47:33 GO RRF(AnyBURL, RotatE, TransE, Text)            tail MRR=0.154 H1=0.082 H10=0.293 | novel H10=0.292 | entailed H10=0.294
+08:49:52 GO RRF(AnyBURL, RotatE, TransE, Text, Reasoner)  tail MRR=0.260 H1=0.156 H10=0.473 | novel H10=0.280 | entailed H10=0.611
+08:49:52 done
+QUEUE4_DONE

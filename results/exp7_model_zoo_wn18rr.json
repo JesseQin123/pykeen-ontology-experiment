@@ -1,0 +1,373 @@
+{
+  "TransE": {
+    "lr": 0.001,
+    "val_MRR": 0.22094061638611256,
+    "train_seconds": 494.8011591434479,
+    "test": {
+      "MRR": 0.2227625435080697,
+      "Hits@1": 0.018125854993160054,
+      "Hits@3": 0.37910396716826267,
+      "Hits@10": 0.5448016415868673,
+      "MR": 1206.0696819425445,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.24658409277823937,
+      "_derivationally_related_form": 0.40416134785388175,
+      "_has_part": 0.11076184007980165,
+      "_hypernym": 0.06266270019939067,
+      "_instance_hypernym": 0.2897829895717008,
+      "_member_meronym": 0.17779526649213734,
+      "_member_of_domain_region": 0.1278833871973978,
+      "_member_of_domain_usage": 0.2023329996697762,
+      "_similar_to": 0.30277777777777776,
+      "_synset_domain_topic_of": 0.17505164287276362,
+      "_verb_group": 0.35297922672841187
+    }
+  },
+  "TransH": {
+    "lr": 0.001,
+    "val_MRR": 0.003593252927457406,
+    "train_seconds": 285.34564304351807,
+    "test": {
+      "MRR": 0.003216797954583712,
+      "Hits@1": 0.0,
+      "Hits@3": 0.0025649794801641587,
+      "Hits@10": 0.0066689466484268125,
+      "MR": 13599.594647742819,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.024985428443468738,
+      "_derivationally_related_form": 0.004961772187664747,
+      "_has_part": 0.0005395862160673672,
+      "_hypernym": 0.00032472735430323955,
+      "_instance_hypernym": 0.0008582444054652675,
+      "_member_meronym": 0.0007402981663193681,
+      "_member_of_domain_region": 0.0005992870629930475,
+      "_member_of_domain_usage": 0.000759505528522944,
+      "_similar_to": 0.15937197455843424,
+      "_synset_domain_topic_of": 0.00016586222044300355,
+      "_verb_group": 0.03674942727547729
+    }
+  },
+  "TransD": {
+    "lr": 0.001,
+    "val_MRR": 0.06438127245143646,
+    "train_seconds": 533.9912528991699,
+    "test": {
+      "MRR": 0.06168815859101814,
+      "Hits@1": 0.039500683994528045,
+      "Hits@3": 0.07216142270861833,
+      "Hits@10": 0.09610123119015047,
+      "MR": 15985.012910396717,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.13805357360790807,
+      "_derivationally_related_form": 0.13228151792477613,
+      "_has_part": 0.012299054005978517,
+      "_hypernym": 0.0002276604106365167,
+      "_instance_hypernym": 0.00048221413040506464,
+      "_member_meronym": 0.0011241175296301052,
+      "_member_of_domain_region": 5.359576583451079e-05,
+      "_member_of_domain_usage": 4.3474809649835075e-05,
+      "_similar_to": 1.0,
+      "_synset_domain_topic_of": 0.00011608991423164444,
+      "_verb_group": 0.6386592523215693
+    }
+  },
+  "DistMult": {
+    "lr": 0.01,
+    "val_MRR": 0.004708560795218455,
+    "train_seconds": 124.53790616989136,
+    "test": {
+      "MRR": 0.008900016115930312,
+      "Hits@1": 0.0029069767441860465,
+      "Hits@3": 0.005813953488372093,
+      "Hits@10": 0.01692886456908345,
+      "MR": 9752.57147742818,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.006321277218394915,
+      "_derivationally_related_form": 0.011799595536879216,
+      "_has_part": 0.003316983289817174,
+      "_hypernym": 0.0039469512635778685,
+      "_instance_hypernym": 0.045343947705574185,
+      "_member_meronym": 0.00499367866323031,
+      "_member_of_domain_region": 0.00745235374397006,
+      "_member_of_domain_usage": 0.0398307426877275,
+      "_similar_to": 0.0013534122154862983,
+      "_synset_domain_topic_of": 0.0072428604172645695,
+      "_verb_group": 0.0012088026853177992
+    }
+  },
+  "ComplEx": {
+    "lr": 0.01,
+    "val_MRR": 0.3915141350827078,
+    "train_seconds": 1623.5666859149933,
+    "test": {
+      "MRR": 0.3848501978166057,
+      "Hits@1": 0.3792749658002736,
+      "Hits@3": 0.3866279069767442,
+      "Hits@10": 0.39346785225718195,
+      "MR": 9595.038218194255,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.5641014563000739,
+      "_derivationally_related_form": 0.9437225389852752,
+      "_has_part": 0.006225176530750144,
+      "_hypernym": 0.015767519424632236,
+      "_instance_hypernym": 0.1451472408613503,
+      "_member_meronym": 0.007607951407148886,
+      "_member_of_domain_region": 0.0025686044330647394,
+      "_member_of_domain_usage": 0.00013721956291171892,
+      "_similar_to": 0.012657267293888934,
+      "_synset_domain_topic_of": 0.05493107871856231,
+      "_verb_group": 0.9743603052253506
+    }
+  },
+  "SimplE": {
+    "lr": 0.01,
+    "val_MRR": 0.3795710106631568,
+    "train_seconds": 157.42361903190613,
+    "test": {
+      "MRR": 0.3758048657928751,
+      "Hits@1": 0.37140902872777015,
+      "Hits@3": 0.37722298221614226,
+      "Hits@10": 0.38149794801641584,
+      "MR": 9480.256583447332,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.6031997683110479,
+      "_derivationally_related_form": 0.9384777497388263,
+      "_has_part": 0.004122120040085669,
+      "_hypernym": 0.004131076689294463,
+      "_instance_hypernym": 0.06273362254168134,
+      "_member_meronym": 0.010330743537019633,
+      "_member_of_domain_region": 0.007381990125397747,
+      "_member_of_domain_usage": 0.006036540263422783,
+      "_similar_to": 1.0,
+      "_synset_domain_topic_of": 0.010475760567347005,
+      "_verb_group": 0.9743600587937931
+    }
+  },
+  "RotatE": {
+    "lr": 0.001,
+    "val_MRR": 0.498161175634298,
+    "train_seconds": 700.1629860401154,
+    "test": {
+      "MRR": 0.49680830210405785,
+      "Hits@1": 0.4528043775649795,
+      "Hits@3": 0.515218878248974,
+      "Hits@10": 0.5791723666210671,
+      "MR": 3453.120041039672,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.598647510180478,
+      "_derivationally_related_form": 0.9444990055438797,
+      "_has_part": 0.1801790679552999,
+      "_hypernym": 0.19056872366384542,
+      "_instance_hypernym": 0.3588145114313521,
+      "_member_meronym": 0.1852206922949306,
+      "_member_of_domain_region": 0.13161643993144156,
+      "_member_of_domain_usage": 0.24399717850862726,
+      "_similar_to": 1.0,
+      "_synset_domain_topic_of": 0.3413305702742935,
+      "_verb_group": 0.9199063721492083
+    }
+  },
+  "QuatE": {
+    "lr": 0.001,
+    "val_MRR": 0.0002605485214444424,
+    "train_seconds": 1960.5430283546448,
+    "test": {
+      "MRR": 0.00023998514306384263,
+      "Hits@1": 0.0,
+      "Hits@3": 0.0,
+      "Hits@10": 0.0003419972640218878,
+      "MR": 20775.436132010946,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.0005888100149443895,
+      "_derivationally_related_form": 0.00013206884428423903,
+      "_has_part": 0.00023842032838314192,
+      "_hypernym": 0.0003159351271810197,
+      "_instance_hypernym": 0.00018591832049202612,
+      "_member_meronym": 0.0003528931806684537,
+      "_member_of_domain_region": 0.00014439769998600118,
+      "_member_of_domain_usage": 0.00037249353118523723,
+      "_similar_to": 0.00010849703548507636,
+      "_synset_domain_topic_of": 0.00018121379686787442,
+      "_verb_group": 0.00024776055216510403
+    }
+  },
+  "PairRE": {
+    "lr": 0.001,
+    "val_MRR": 0.48394216065857826,
+    "train_seconds": 244.59418892860413,
+    "test": {
+      "MRR": 0.4832745615598055,
+      "Hits@1": 0.4357045143638851,
+      "Hits@3": 0.4957250341997264,
+      "Hits@10": 0.5837893296853626,
+      "MR": 1868.5990937072504,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.600487655703498,
+      "_derivationally_related_form": 0.9523526358801259,
+      "_has_part": 0.14502975013094996,
+      "_hypernym": 0.1506754468405425,
+      "_instance_hypernym": 0.36426453029447625,
+      "_member_meronym": 0.15623903508123116,
+      "_member_of_domain_region": 0.17067098903550917,
+      "_member_of_domain_usage": 0.35931901271072936,
+      "_similar_to": 1.0,
+      "_synset_domain_topic_of": 0.39343636429581424,
+      "_verb_group": 0.8591578129530191
+    }
+  },
+  "MuRE": {
+    "lr": 0.01,
+    "val_MRR": 0.01523514363385756,
+    "train_seconds": 126.74736309051514,
+    "test": {
+      "MRR": 0.00396468049460176,
+      "Hits@1": 0.0032489740082079343,
+      "Hits@3": 0.004103967168262654,
+      "Hits@10": 0.0047879616963064295,
+      "MR": 18692.151077291383,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 9.10465781735875e-05,
+      "_derivationally_related_form": 0.008010083577868215,
+      "_has_part": 0.0017398040693702285,
+      "_hypernym": 0.0010080121400922047,
+      "_instance_hypernym": 0.0005980453533931345,
+      "_member_meronym": 5.4054464814879194e-05,
+      "_member_of_domain_region": 9.238774572005815e-05,
+      "_member_of_domain_usage": 0.00014234527944143906,
+      "_similar_to": 7.515513193738817e-05,
+      "_synset_domain_topic_of": 0.009318653083311215,
+      "_verb_group": 0.012926463948318916
+    }
+  },
+  "BoxE": {
+    "failed": true,
+    "reason": "skipped: one 40-epoch run exceeded 4.5 h on MPS under the shared budget"
+  },
+  "AutoSF": {
+    "lr": 0.001,
+    "val_MRR": 0.0002661466444434639,
+    "train_seconds": 424.3271837234497,
+    "test": {
+      "MRR": 0.00039337806658387193,
+      "Hits@1": 0.0001709986320109439,
+      "Hits@3": 0.0001709986320109439,
+      "Hits@10": 0.0005129958960328317,
+      "MR": 20017.57446990424,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 8.488611634404024e-05,
+      "_derivationally_related_form": 0.0002952666601723569,
+      "_has_part": 0.00029702533760221037,
+      "_hypernym": 0.0006370961427718439,
+      "_instance_hypernym": 9.900140766157377e-05,
+      "_member_meronym": 0.0002695097720486549,
+      "_member_of_domain_region": 9.887277685141264e-05,
+      "_member_of_domain_usage": 8.868820975778765e-05,
+      "_similar_to": 0.00015036014506910058,
+      "_synset_domain_topic_of": 9.988065326289048e-05,
+      "_verb_group": 0.0001292625146034486
+    }
+  },
+  "CrossE": {
+    "lr": 0.01,
+    "val_MRR": 0.426425607441542,
+    "train_seconds": 157.98924279212952,
+    "test": {
+      "MRR": 0.4281360919351535,
+      "Hits@1": 0.40868673050615595,
+      "Hits@3": 0.4331395348837209,
+      "Hits@10": 0.4637482900136799,
+      "MR": 4937.3207079343365,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.6183604762712391,
+      "_derivationally_related_form": 0.9470433597766809,
+      "_has_part": 0.06598789237220257,
+      "_hypernym": 0.05634129833803984,
+      "_instance_hypernym": 0.2663349675084089,
+      "_member_meronym": 0.09077355135004346,
+      "_member_of_domain_region": 0.3031596600262076,
+      "_member_of_domain_usage": 0.30569968811922604,
+      "_similar_to": 1.0,
+      "_synset_domain_topic_of": 0.19165143681179764,
+      "_verb_group": 0.9743601607127889
+    }
+  },
+  "TuckER": {
+    "failed": true
+  },
+  "ComplEx[softplus]": {
+    "lr": 0.01,
+    "val_MRR": 0.01555157550183862,
+    "train_seconds": 1720.4112231731415,
+    "test": {
+      "MRR": 0.0173635308272306,
+      "Hits@1": 0.010601915184678522,
+      "Hits@3": 0.01658686730506156,
+      "Hits@10": 0.02975376196990424,
+      "MR": 11637.470417236662,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.0008029758627308951,
+      "_derivationally_related_form": 0.0019676163661409493,
+      "_has_part": 0.00047613826163255235,
+      "_hypernym": 0.017839457379029856,
+      "_instance_hypernym": 0.15899759083516948,
+      "_member_meronym": 0.002378586791580733,
+      "_member_of_domain_region": 0.12966454795023807,
+      "_member_of_domain_usage": 0.00026719649369765186,
+      "_similar_to": 0.00020695444424807582,
+      "_synset_domain_topic_of": 0.07013291121549033,
+      "_verb_group": 0.0003166393015677975
+    }
+  },
+  "DistMult[softplus]": {
+    "lr": 0.01,
+    "val_MRR": 0.000572573867786228,
+    "train_seconds": 120.18144416809082,
+    "test": {
+      "MRR": 0.0009940257430344824,
+      "Hits@1": 0.0003419972640218878,
+      "Hits@3": 0.0003419972640218878,
+      "Hits@10": 0.0013679890560875513,
+      "MR": 16449.74743502052,
+      "n": 5848
+    },
+    "per_relation_MRR": {
+      "_also_see": 0.00027115387365966235,
+      "_derivationally_related_form": 0.000851761205717436,
+      "_has_part": 0.00018720044777268451,
+      "_hypernym": 0.0005958374661165331,
+      "_instance_hypernym": 0.0006789123034394047,
+      "_member_meronym": 0.004437949571332468,
+      "_member_of_domain_region": 6.99705810827331e-05,
+      "_member_of_domain_usage": 8.015171980658521e-05,
+      "_similar_to": 0.0006530737571554179,
+      "_synset_domain_topic_of": 0.0010825030086212067,
+      "_verb_group": 0.00042996848848048856
+    }
+  }
+}

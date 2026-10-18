@@ -1,0 +1,131 @@
+{
+  "fb15k237 views (2,500-node ball)": {
+    "nodes_A": 2500,
+    "nodes_B": 2500,
+    "edges_A": 11360,
+    "edges_B": 11339,
+    "gold": 2383,
+    "degree profile": {
+      "Hits@1": 0.009232060428031893,
+      "Hits@10": 0.03860679815358791,
+      "MRR": 0.023396979819375836,
+      "n": 2383,
+      "chance_Hits@1": 0.0004
+    },
+    "GW on graph shortest paths (eps=0.005)": {
+      "Hits@1": 0.0029374737725556023,
+      "Hits@10": 0.018464120856063786,
+      "MRR": 0.012915976097850857,
+      "n": 2383,
+      "chance_Hits@1": 0.0004
+    },
+    "GW on graph shortest paths (eps=0.001)": {
+      "Hits@1": 0.07679395719681074,
+      "Hits@10": 0.22576584137641628,
+      "MRR": 0.1264380743667578,
+      "n": 2383,
+      "chance_Hits@1": 0.0004
+    },
+    "GW on graph shortest paths (eps=0.0005)": {
+      "Hits@1": 0.1384809064204784,
+      "Hits@10": 0.27738145195132186,
+      "MRR": 0.18643058971394438,
+      "n": 2383,
+      "chance_Hits@1": 0.0004
+    },
+    "gw_seconds": 192.15302205085754,
+    "GW + spectral Procrustes self-learning": {
+      "Hits@1": 0.015526647083508182,
+      "Hits@10": 0.09819555182543013,
+      "MRR": 0.046242993863937217,
+      "n": 2383,
+      "chance_Hits@1": 0.0004
+    }
+  },
+  "wn18rr views (2,500-node ball)": {
+    "nodes_A": 2500,
+    "nodes_B": 2500,
+    "edges_A": 2713,
+    "edges_B": 2724,
+    "gold": 1808,
+    "degree profile": {
+      "Hits@1": 0.0055309734513274336,
+      "Hits@10": 0.03982300884955752,
+      "MRR": 0.01866777566755868,
+      "n": 1808,
+      "chance_Hits@1": 0.0004
+    },
+    "GW on graph shortest paths (eps=0.005)": {
+      "Hits@1": 0.014933628318584071,
+      "Hits@10": 0.08517699115044247,
+      "MRR": 0.042530800775146614,
+      "n": 1808,
+      "chance_Hits@1": 0.0004
+    },
+    "GW on graph shortest paths (eps=0.001)": {
+      "Hits@1": 0.018805309734513276,
+      "Hits@10": 0.09292035398230089,
+      "MRR": 0.04770098694556067,
+      "n": 1808,
+      "chance_Hits@1": 0.0004
+    },
+    "GW on graph shortest paths (eps=0.0005)": {
+      "Hits@1": 0.015486725663716814,
+      "Hits@10": 0.06692477876106195,
+      "MRR": 0.037779951530848024,
+      "n": 1808,
+      "chance_Hits@1": 0.0004
+    },
+    "gw_seconds": 663.1021749973297,
+    "GW + spectral Procrustes self-learning": {
+      "Hits@1": 0.0005530973451327434,
+      "Hits@10": 0.00331858407079646,
+      "MRR": 0.003199897744332629,
+      "n": 1808,
+      "chance_Hits@1": 0.0004
+    }
+  },
+  "OAEI anatomy (mouse vs human, independent ontologies)": {
+    "nodes_A": 2744,
+    "nodes_B": 3304,
+    "edges_A": 4493,
+    "edges_B": 5423,
+    "gold": 1516,
+    "degree profile": {
+      "Hits@1": 0.0006596306068601583,
+      "Hits@10": 0.011213720316622692,
+      "MRR": 0.006815605327053566,
+      "n": 1516,
+      "chance_Hits@1": 0.0003026634382566586
+    },
+    "GW on graph shortest paths (eps=0.005)": {
+      "Hits@1": 0.0,
+      "Hits@10": 0.00395778364116095,
+      "MRR": 0.003116592694899534,
+      "n": 1516,
+      "chance_Hits@1": 0.0003026634382566586
+    },
+    "GW on graph shortest paths (eps=0.001)": {
+      "Hits@1": 0.0,
+      "Hits@10": 0.011873350923482849,
+      "MRR": 0.006084065991650526,
+      "n": 1516,
+      "chance_Hits@1": 0.0003026634382566586
+    },
+    "GW on graph shortest paths (eps=0.0005)": {
+      "Hits@1": 0.0006596306068601583,
+      "Hits@10": 0.0158311345646438,
+      "MRR": 0.007718825147471693,
+      "n": 1516,
+      "chance_Hits@1": 0.0003026634382566586
+    },
+    "gw_seconds": 1148.4583778381348,
+    "GW + spectral Procrustes self-learning": {
+      "Hits@1": 0.0006596306068601583,
+      "Hits@10": 0.00395778364116095,
+      "MRR": 0.003966517335947142,
+      "n": 1516,
+      "chance_Hits@1": 0.0003026634382566586
+    }
+  }
+}

@@ -1,0 +1,1032 @@
+{
+  "setup": {
+    "terms_old": 44700,
+    "edges_old": 91526,
+    "edges_added": 6412,
+    "edges_removed": 6758,
+    "added_kinds": {
+      "entailed": 3743,
+      "novel": 2669
+    },
+    "added_by_relation": {
+      "is_a": 6089,
+      "part_of": 234,
+      "regulates": 33,
+      "positively_regulates": 27,
+      "negatively_regulates": 29
+    }
+  },
+  "methods": {
+    "Popularity": {
+      "all": {
+        "MRR": 0.004795617099230898,
+        "Hits@1": 0.0011696818465377417,
+        "Hits@3": 0.0030411728009981285,
+        "Hits@10": 0.009825327510917031,
+        "MR": 11111.229842482844,
+        "n": 12824
+      },
+      "tail_only(child->parent)": {
+        "MRR": 0.009087623824362094,
+        "Hits@1": 0.0023393636930754834,
+        "Hits@3": 0.006082345601996257,
+        "Hits@10": 0.019182782283218965,
+        "MR": 4327.721771678103,
+        "n": 6412
+      },
+      "entailed": {
+        "MRR": 0.005212838910421878,
+        "Hits@1": 0.0013358268768367619,
+        "Hits@3": 0.0030724018167245523,
+        "Hits@10": 0.012022441891530858,
+        "MR": 8439.214734170451,
+        "n": 7486
+      },
+      "entailed_tail_only": {
+        "MRR": 0.009836641855261367,
+        "Hits@1": 0.0026716537536735237,
+        "Hits@3": 0.006144803633449105,
+        "Hits@10": 0.023777718407694364,
+        "MR": 1824.95271172856,
+        "n": 3743
+      },
+      "novel": {
+        "MRR": 0.004210506106616495,
+        "Hits@1": 0.0009366804046459348,
+        "Hits@3": 0.0029973772948669914,
+        "Hits@10": 0.0067440989134507304,
+        "MR": 14858.458224053953,
+        "n": 5338
+      },
+      "novel_tail_only": {
+        "MRR": 0.008037202509391701,
+        "Hits@1": 0.0018733608092918695,
+        "Hits@3": 0.005994754589733983,
+        "Hits@10": 0.012738853503184714,
+        "MR": 7837.599850131135,
+        "n": 2669
+      },
+      "rel:is_a": {
+        "MRR": 0.00445522534291808,
+        "Hits@1": 0.0009032681885367055,
+        "Hits@3": 0.0027098045656101166,
+        "Hits@10": 0.009607488914435868,
+        "MR": 11074.010264411234,
+        "n": 12178
+      },
+      "rel:part_of": {
+        "MRR": 0.015340158464171113,
+        "Hits@1": 0.008547008547008548,
+        "Hits@3": 0.01282051282051282,
+        "Hits@10": 0.019230769230769232,
+        "MR": 11535.294871794871,
+        "n": 468
+      },
+      "rel:regulates": {
+        "MRR": 0.0003445651173065851,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0,
+        "Hits@10": 0.0,
+        "MR": 12128.39393939394,
+        "n": 66
+      },
+      "rel:positively_regulates": {
+        "MRR": 0.00036404104964626204,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0,
+        "Hits@10": 0.0,
+        "MR": 12995.055555555555,
+        "n": 54
+      },
+      "rel:negatively_regulates": {
+        "MRR": 0.0003735479107835985,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0,
+        "Hits@10": 0.0,
+        "MR": 12592.922413793103,
+        "n": 58
+      }
+    },
+    "PathRules": {
+      "all": {
+        "MRR": 0.00773410473642539,
+        "Hits@1": 0.0031191515907673115,
+        "Hits@3": 0.006394260761072988,
+        "Hits@10": 0.015205864004990643,
+        "MR": 10958.515595757954,
+        "n": 12824
+      },
+      "tail_only(child->parent)": {
+        "MRR": 0.01230725286973877,
+        "Hits@1": 0.004678727386150967,
+        "Hits@3": 0.010137242669993761,
+        "Hits@10": 0.024797255146600125,
+        "MR": 4261.999376169681,
+        "n": 6412
+      },
+      "entailed": {
+        "MRR": 0.006063118852633476,
+        "Hits@1": 0.0018701576275714667,
+        "Hits@3": 0.004408228693561314,
+        "Hits@10": 0.013491851456051297,
+        "MR": 8399.425995191023,
+        "n": 7486
+      },
+      "entailed_tail_only": {
+        "MRR": 0.010209494848877987,
+        "Hits@1": 0.0026716537536735237,
+        "Hits@3": 0.007480630510285867,
+        "Hits@10": 0.024846379909163774,
+        "MR": 1823.4444296019235,
+        "n": 3743
+      },
+      "novel": {
+        "MRR": 0.010077491833852563,
+        "Hits@1": 0.004870738104158861,
+        "Hits@3": 0.009179467965530161,
+        "Hits@10": 0.017609591607343576,
+        "MR": 14547.377482203072,
+        "n": 5338
+      },
+      "novel_tail_only": {
+        "MRR": 0.015249144316753347,
+        "Hits@1": 0.007493443237167478,
+        "Hits@3": 0.013862869988759834,
+        "Hits@10": 0.024728362682652678,
+        "MR": 7681.8237167478455,
+        "n": 2669
+      },
+      "rel:is_a": {
+        "MRR": 0.00741442243069628,
+        "Hits@1": 0.0030382657250780094,
+        "Hits@3": 0.006240762029889966,
+        "Hits@10": 0.014205945146986369,
+        "MR": 10965.048735424536,
+        "n": 12178
+      },
+      "rel:part_of": {
+        "MRR": 0.014585395593459824,
+        "Hits@1": 0.002136752136752137,
+        "Hits@3": 0.008547008547008548,
+        "Hits@10": 0.042735042735042736,
+        "MR": 10282.244658119658,
+        "n": 468
+      },
+      "rel:regulates": {
+        "MRR": 0.00033978405327363305,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0,
+        "Hits@10": 0.0,
+        "MR": 12149.537878787878,
+        "n": 66
+      },
+      "rel:positively_regulates": {
+        "MRR": 0.0003584944112286727,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0,
+        "Hits@10": 0.0,
+        "MR": 13014.75,
+        "n": 54
+      },
+      "rel:negatively_regulates": {
+        "MRR": 0.03485471026617741,
+        "Hits@1": 0.034482758620689655,
+        "Hits@3": 0.034482758620689655,
+        "Hits@10": 0.034482758620689655,
+        "MR": 11773.862068965518,
+        "n": 58
+      }
+    },
+    "Reasoner(is_a transitivity)": {
+      "all": {
+        "MRR": 0.19144739149725826,
+        "Hits@1": 0.1027760449157829,
+        "Hits@3": 0.2188084840923269,
+        "Hits@10": 0.37351840299438555,
+        "MR": 6698.946974422957,
+        "n": 12824
+      },
+      "tail_only(child->parent)": {
+        "MRR": 0.2827727183467837,
+        "Hits@1": 0.1607922645040549,
+        "Hits@3": 0.3435745477230193,
+        "Hits@10": 0.5433562071116657,
+        "MR": 3385.6965845290083,
+        "n": 6412
+      },
+      "entailed": {
+        "MRR": 0.32646346973824214,
+        "Hits@1": 0.17606198236708523,
+        "Hits@3": 0.3744322735773444,
+        "Hits@10": 0.6373230029388192,
+        "MR": 254.50888324873097,
+        "n": 7486
+      },
+      "entailed_tail_only": {
+        "MRR": 0.4814901668544011,
+        "Hits@1": 0.2754475020037403,
+        "Hits@3": 0.5877638258081752,
+        "Hits@10": 0.925728025647876,
+        "MR": 142.06665776115415,
+        "n": 3743
+      },
+      "novel": {
+        "MRR": 0.0021011266579916026,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0005620082427875609,
+        "Hits@10": 0.0035593855376545524,
+        "MR": 15736.613431997002,
+        "n": 5338
+      },
+      "novel_tail_only": {
+        "MRR": 0.004091785501518709,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0011240164855751218,
+        "Hits@10": 0.007118771075309105,
+        "MR": 7934.556388160359,
+        "n": 2669
+      },
+      "rel:is_a": {
+        "MRR": 0.20159014613985712,
+        "Hits@1": 0.10822795204467071,
+        "Hits@3": 0.2304155033667269,
+        "Hits@10": 0.3933322384628018,
+        "MR": 6123.853670553457,
+        "n": 12178
+      },
+      "rel:part_of": {
+        "MRR": 0.00019760538746679322,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0,
+        "Hits@10": 0.0,
+        "MR": 18043.143162393164,
+        "n": 468
+      },
+      "rel:regulates": {
+        "MRR": 0.00033876413785052713,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0,
+        "Hits@10": 0.0,
+        "MR": 14160.545454545454,
+        "n": 66
+      },
+      "rel:positively_regulates": {
+        "MRR": 0.00036365554029652524,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0,
+        "Hits@10": 0.0,
+        "MR": 17591.60185185185,
+        "n": 54
+      },
+      "rel:negatively_regulates": {
+        "MRR": 0.0003805813112410792,
+        "Hits@1": 0.0,
+        "Hits@3": 0.0,
+        "Hits@10": 0.0,
+        "MR": 17280.560344827587,
+        "n": 58
+      }
+    },
+    "RotatE": {
+      "all": {
+        "MRR": 0.07247108570466199,
+        "Hits@1": 0.029320024953212728,
+        "Hits@3": 0.06854335620711166,
+        "Hits@10": 0.15338427947598254,
+        "MR": 1420.7426699937616,
+        "n": 12824
+      },
+      "tail_only(child->parent)": {
+        "MRR": 0.09325534899838957,
+        "Hits@1": 0.038053649407361195,
+        "Hits@3": 0.08951965065502183,
+        "Hits@10": 0.20227698066126013,
+        "MR": 804.6118995633187,
+        "n": 6412
+      },
+      "entailed": {
+        "MRR": 0.06649390428118925,
+        "Hits@1": 0.02457921453379642,
+        "Hits@3": 0.0589099652685012,
+        "Hits@10": 0.1425327277584825,
+        "MR": 831.0688618755009,
+        "n": 7486
+      },
+      "entailed_tail_only": {
+        "MRR": 0.08976688733404226,
+        "Hits@1": 0.03339567192091905,
+        "Hits@3": 0.0830884317392466,
+        "Hits@10": 0.19823670852257547,
+        "MR": 262.88752337697036,
+        "n": 3743
+      },
+      "novel": {
+        "MRR": 0.08085347239183262,
+        "Hits@1": 0.0359685275384039,
+        "Hits@3": 0.08205320344698389,
+        "Hits@10": 0.16860247283626825,
+        "MR": 2247.699981266392,
+        "n": 5338
+      },
+      "novel_tail_only": {
+        "MRR": 0.09814756031710513,
+        "Hits@1": 0.044585987261146494,
+        "Hits@3": 0.09853877856875234,
+        "Hits@10": 0.20794304983139753,
+        "MR": 1564.325028100412,
+        "n": 2669
+      },
+      "rel:is_a": {
+        "MRR": 0.06810055308702573,
+        "Hits@1": 0.026523238627032354,
+        "Hits@3": 0.06413204138610609,
+        "Hits@10": 0.1454261783544096,
+        "MR": 1462.7588273936608,
+        "n": 12178
+      },
+      "rel:part_of": {
+        "MRR": 0.11799457632421317,
+        "Hits@1": 0.049145299145299144,
+        "Hits@3": 0.11965811965811966,
+        "Hits@10": 0.25,
+        "MR": 775.3525641025641,
+        "n": 468
+      },
+      "rel:regulates": {
+        "MRR": 0.20255940994809932,
+        "Hits@1": 0.10606060606060606,
+        "Hits@3": 0.19696969696969696,
+        "Hits@10": 0.3939393939393939,
+        "MR": 153.13636363636363,
+        "n": 66
+      },
+      "rel:positively_regulates": {
+        "MRR": 0.2551197261425811,
+        "Hits@1": 0.18518518518518517,
+        "Hits@3": 0.24074074074074073,
+        "Hits@10": 0.4444444444444444,
+        "MR": 511.8888888888889,
+        "n": 54
+      },
+      "rel:negatively_regulates": {
+        "MRR": 0.30472102749620994,
+        "Hits@1": 0.22413793103448276,
+        "Hits@3": 0.27586206896551724,
+        "Hits@10": 0.5,
+        "MR": 95.05172413793103,
+        "n": 58
+      }
+    },
+    "TransE": {
+      "all": {
+        "MRR": 0.09255565514255122,
+        "Hits@1": 0.006238303181534623,
+        "Hits@3": 0.10129444791016844,
+        "Hits@10": 0.26824703680598877,
+        "MR": 583.0578992514036,
+        "n": 12824
+      },
+      "tail_only(child->parent)": {
+        "MRR": 0.11296841702794494,
+        "Hits@1": 0.005926388022457892,
+        "Hits@3": 0.12429819089207736,
+        "Hits@10": 0.34388646288209607,
+        "MR": 322.7790081097941,
+        "n": 6412
+      },
+      "entailed": {
+        "MRR": 0.09551073763971048,
+        "Hits@1": 0.0010686615014694097,
+        "Hits@3": 0.10392733101790008,
+        "Hits@10": 0.290008014961261,
+        "MR": 218.18354261287737,
+        "n": 7486
+      },
+      "entailed_tail_only": {
+        "MRR": 0.12414243683459619,
+        "Hits@1": 0.0013358268768367619,
+        "Hits@3": 0.13572001068661502,
+        "Hits@10": 0.39433609404221215,
+        "MR": 41.97982901415976,
+        "n": 3743
+      },
+      "novel": {
+        "MRR": 0.08841145364878308,
+        "Hits@1": 0.013488197826901461,
+        "Hits@3": 0.09760209816410641,
+        "Hits@10": 0.23772948669913826,
+        "MR": 1094.7569314349944,
+        "n": 5338
+      },
+      "novel_tail_only": {
+        "MRR": 0.09729799509602445,
+        "Hits@1": 0.012364181341326339,
+        "Hits@3": 0.10828025477707007,
+        "Hits@10": 0.27313600599475457,
+        "MR": 716.5711877107531,
+        "n": 2669
+      },
+      "rel:is_a": {
+        "MRR": 0.08529938849944775,
+        "Hits@1": 0.0013959599277385448,
+        "Hits@3": 0.0917227787814091,
+        "Hits@10": 0.25652816554442437,
+        "MR": 599.8946871407456,
+        "n": 12178
+      },
+      "rel:part_of": {
+        "MRR": 0.1338300277559099,
+        "Hits@1": 0.0,
+        "Hits@3": 0.18376068376068377,
+        "Hits@10": 0.3952991452991453,
+        "MR": 335.80128205128204,
+        "n": 468
+      },
+      "rel:regulates": {
+        "MRR": 0.4419057522788947,
+        "Hits@1": 0.30303030303030304,
+        "Hits@3": 0.5,
+        "Hits@10": 0.7272727272727273,
+        "MR": 108.15151515151516,
+        "n": 66
+      },
+      "rel:positively_regulates": {
+        "MRR": 0.479796461978173,
+        "Hits@1": 0.37037037037037035,
+        "Hits@3": 0.5185185185185185,
+        "Hits@10": 0.6851851851851852,
+        "MR": 55.68518518518518,
+        "n": 54
+      },
+      "rel:negatively_regulates": {
+        "MRR": 0.5250090830139266,
+        "Hits@1": 0.39655172413793105,
+        "Hits@3": 0.603448275862069,
+        "Hits@10": 0.7931034482758621,
+        "MR": 74.43103448275862,
+        "n": 58
+      }
+    },
+    "Text(bge-small name)": {
+      "all": {
+        "MRR": 0.07263958403511336,
+        "Hits@1": 0.02698066126013724,
+        "Hits@3": 0.07002495321272614,
+        "Hits@10": 0.17085152838427947,
+        "MR": 1484.116890205864,
+        "n": 12824
+      },
+      "tail_only(child->parent)": {
+        "MRR": 0.08271727487144362,
+        "Hits@1": 0.02885215221459763,
+        "Hits@3": 0.07985028072364317,
+        "Hits@10": 0.2024329382407985,
+        "MR": 1249.6636774797255,
+        "n": 6412
+      },
+      "entailed": {
+        "MRR": 0.06315440949677306,
+        "Hits@1": 0.01856799358803099,
+        "Hits@3": 0.057306973016297086,
+        "Hits@10": 0.16297087897408497,
+        "MR": 927.1234304034197,
+        "n": 7486
+      },
+      "entailed_tail_only": {
+        "MRR": 0.0742015305760673,
+        "Hits@1": 0.01923590702644937,
+        "Hits@3": 0.0673256745925728,
+        "Hits@10": 0.2019770237777184,
+        "MR": 717.1248998129843,
+        "n": 3743
+      },
+      "novel": {
+        "MRR": 0.08594157290622903,
+        "Hits@1": 0.0387785687523417,
+        "Hits@3": 0.08786062195578868,
+        "Hits@10": 0.18190333458224053,
+        "MR": 2265.243349569127,
+        "n": 5338
+      },
+      "novel_tail_only": {
+        "MRR": 0.09465973680385033,
+        "Hits@1": 0.04233795428999625,
+        "Hits@3": 0.09741476208317722,
+        "Hits@10": 0.20307231172723866,
+        "MR": 1996.4949419258148,
+        "n": 2669
+      },
+      "rel:is_a": {
+        "MRR": 0.06959957087252053,
+        "Hits@1": 0.025045163409426835,
+        "Hits@3": 0.0668418459517162,
+        "Hits@10": 0.16521596321235013,
+        "MR": 1365.5310395795698,
+        "n": 12178
+      },
+      "rel:part_of": {
+        "MRR": 0.13683585788927224,
+        "Hits@1": 0.07905982905982906,
+        "Hits@3": 0.1346153846153846,
+        "Hits@10": 0.26495726495726496,
+        "MR": 4885.422008547009,
+        "n": 468
+      },
+      "rel:regulates": {
+        "MRR": 0.21101082568962656,
+        "Hits@1": 0.06060606060606061,
+        "Hits@3": 0.25757575757575757,
+        "Hits@10": 0.5303030303030303,
+        "MR": 48.09090909090909,
+        "n": 66
+      },
+      "rel:positively_regulates": {
+        "MRR": 0.053637862753314544,
+        "Hits@1": 0.0,
+        "Hits@3": 0.018518518518518517,
+        "Hits@10": 0.18518518518518517,
+        "MR": 513.3703703703703,
+        "n": 54
+      },
+      "rel:negatively_regulates": {
+        "MRR": 0.053174327661465515,
+        "Hits@1": 0.0,
+        "Hits@3": 0.05172413793103448,
+        "Hits@10": 0.1724137931034483,
+        "MR": 1475.9396551724137,
+        "n": 58
+      }
+    },
+    "Text(bge-small name+def)": {
+      "all": {
+        "MRR": 0.06740066645259205,
+        "Hits@1": 0.023627573300062384,
+        "Hits@3": 0.06511228945726762,
+        "Hits@10": 0.15470991890205865,
+        "MR": 1098.123635371179,
+        "n": 12824
+      },
+      "tail_only(child->parent)": {
+        "MRR": 0.0715397148573938,
+        "Hits@1": 0.021522145976294448,
+        "Hits@3": 0.06971303805364941,
+        "Hits@10": 0.17732376793512164,
+        "MR": 1120.031113537118,
+        "n": 6412
+      },
+      "entailed": {
+        "MRR": 0.05666536618959148,
+        "Hits@1": 0.016297087897408497,
+        "Hits@3": 0.051696500133582686,
+        "Hits@10": 0.13505209724819664,
+        "MR": 886.552364413572,
+        "n": 7486
+      },
+      "entailed_tail_only": {
+        "MRR": 0.06204961000889884,
+        "Hits@1": 0.014961261020571734,
+        "Hits@3": 0.05717339032861341,
+        "Hits@10": 0.16190221747261554,
+        "MR": 879.513091103393,
+        "n": 3743
+      },
+      "novel": {
+        "MRR": 0.08245582901700237,
+        "Hits@1": 0.03390783064818284,
+        "Hits@3": 0.08392656425627576,
+        "Hits@10": 0.1822780067440989,
+        "MR": 1394.8307418508805,
+        "n": 5338
+      },
+      "novel_tail_only": {
+        "MRR": 0.08484861798512576,
+        "Hits@1": 0.030723117272386663,
+        "Hits@3": 0.08729861371300113,
+        "Hits@10": 0.19895091794679656,
+        "MR": 1457.333083551892,
+        "n": 2669
+      },
+      "rel:is_a": {
+        "MRR": 0.06659892862390855,
+        "Hits@1": 0.02340285761208737,
+        "Hits@3": 0.06429627196584004,
+        "Hits@10": 0.1530629003120381,
+        "MR": 1102.146288388898,
+        "n": 12178
+      },
+      "rel:part_of": {
+        "MRR": 0.09037905366645538,
+        "Hits@1": 0.03418803418803419,
+        "Hits@3": 0.08547008547008547,
+        "Hits@10": 0.202991452991453,
+        "MR": 1188.604700854701,
+        "n": 468
+      },
+      "rel:regulates": {
+        "MRR": 0.0987334813083738,
+        "Hits@1": 0.015151515151515152,
+        "Hits@3": 0.15151515151515152,
+        "Hits@10": 0.21212121212121213,
+        "MR": 335.8787878787879,
+        "n": 66
+      },
+      "rel:positively_regulates": {
+        "MRR": 0.045625077040537414,
+        "Hits@1": 0.018518518518518517,
+        "Hits@3": 0.018518518518518517,
+        "Hits@10": 0.09259259259259259,
+        "MR": 699.7407407407408,
+        "n": 54
+      },
+      "rel:negatively_regulates": {
+        "MRR": 0.034945392476540015,
+        "Hits@1": 0.0,
+        "Hits@3": 0.017241379310344827,
+        "Hits@10": 0.10344827586206896,
+        "MR": 761.7068965517242,
+        "n": 58
+      }
+    },
+    "Hybrid(RotatE+Text)": {
+      "all": {
+        "MRR": 0.11304015709098783,
+        "Hits@1": 0.05536494073611978,
+        "Hits@3": 0.11026200873362445,
+        "Hits@10": 0.22949157829070493,
+        "MR": 390.8267311291329,
+        "n": 12824
+      },
+      "tail_only(child->parent)": {
+        "MRR": 0.1420010200503696,
+        "Hits@1": 0.06799750467872738,
+        "Hits@3": 0.14238927011852776,
+        "Hits@10": 0.29772301933873985,
+        "MR": 183.27916406737367,
+        "n": 6412
+      },
+      "entailed": {
+        "MRR": 0.10305745699013581,
+        "Hits@1": 0.046086027250868286,
+        "Hits@3": 0.09684744857066524,
+        "Hits@10": 0.2193427731765963,
+        "MR": 256.09791611007216,
+        "n": 7486
+      },
+      "entailed_tail_only": {
+        "MRR": 0.13422450127271532,
+        "Hits@1": 0.05877638258081753,
+        "Hits@3": 0.1285065455516965,
+        "Hits@10": 0.29655356665776117,
+        "MR": 93.98877905423457,
+        "n": 3743
+      },
+      "novel": {
+        "MRR": 0.12703987476707967,
+        "Hits@1": 0.06837766953915324,
+        "Hits@3": 0.12907455976020982,
+        "Hits@10": 0.24372424128887224,
+        "MR": 579.7701386286999,
+        "n": 5338
+      },
+      "novel_tail_only": {
+        "MRR": 0.15290679366773943,
+        "Hits@1": 0.08092918696140877,
+        "Hits@3": 0.16185837392281754,
+        "Hits@10": 0.29936305732484075,
+        "MR": 308.49981266391904,
+        "n": 2669
+      },
+      "rel:is_a": {
+        "MRR": 0.10541593795509421,
+        "Hits@1": 0.04976186565938578,
+        "Hits@3": 0.10141238298571194,
+        "Hits@10": 0.21620955821974053,
+        "MR": 394.4724913778946,
+        "n": 12178
+      },
+      "rel:part_of": {
+        "MRR": 0.1927854966954208,
+        "Hits@1": 0.1111111111111111,
+        "Hits@3": 0.19444444444444445,
+        "Hits@10": 0.3782051282051282,
+        "MR": 404.0534188034188,
+        "n": 468
+      },
+      "rel:regulates": {
+        "MRR": 0.4413715455279938,
+        "Hits@1": 0.2878787878787879,
+        "Hits@3": 0.5454545454545454,
+        "Hits@10": 0.803030303030303,
+        "MR": 12.757575757575758,
+        "n": 66
+      },
+      "rel:positively_regulates": {
+        "MRR": 0.3830987675689946,
+        "Hits@1": 0.25925925925925924,
+        "Hits@3": 0.4074074074074074,
+        "Hits@10": 0.6851851851851852,
+        "MR": 286.037037037037,
+        "n": 54
+      },
+      "rel:negatively_regulates": {
+        "MRR": 0.44534852087345334,
+        "Hits@1": 0.3275862068965517,
+        "Hits@3": 0.5172413793103449,
+        "Hits@10": 0.7413793103448276,
+        "MR": 46.39655172413793,
+        "n": 58
+      }
+    },
+    "Hybrid(RotatE+Text+Rules)": {
+      "all": {
+        "MRR": 0.06601462100322805,
+        "Hits@1": 0.01816905801621959,
+        "Hits@3": 0.04787897691827823,
+        "Hits@10": 0.16180598877105426,
+        "MR": 440.9402682470368,
+        "n": 12824
+      },
+      "tail_only(child->parent)": {
+        "MRR": 0.07106953236413656,
+        "Hits@1": 0.013568309419837804,
+        "Hits@3": 0.043044291952588895,
+        "Hits@10": 0.19447910168434185,
+        "MR": 130.24313786650032,
+        "n": 6412
+      },
+      "entailed": {
+        "MRR": 0.059942942144227566,
+        "Hits@1": 0.012556772642265563,
+        "Hits@3": 0.03807106598984772,
+        "Hits@10": 0.15562383115148276,
+        "MR": 290.8157894736842,
+        "n": 7486
+      },
+      "entailed_tail_only": {
+        "MRR": 0.06978473780788479,
+        "Hits@1": 0.010686615014694095,
+        "Hits@3": 0.03633449104995993,
+        "Hits@10": 0.19850387389794283,
+        "MR": 68.36708522575474,
+        "n": 3743
+      },
+      "novel": {
+        "MRR": 0.0745295306957117,
+        "Hits@1": 0.026039715249156988,
+        "Hits@3": 0.06163357062570251,
+        "Hits@10": 0.17047583364556013,
+        "MR": 651.4745222929936,
+        "n": 5338
+      },
+      "novel_tail_only": {
+        "MRR": 0.0728713255541142,
+        "Hits@1": 0.017609591607343576,
+        "Hits@3": 0.05245410266017235,
+        "Hits@10": 0.18883476957662046,
+        "MR": 217.0179842637692,
+        "n": 2669
+      },
+      "rel:is_a": {
+        "MRR": 0.06279970891625895,
+        "Hits@1": 0.01601248152405978,
+        "Hits@3": 0.04434225652816554,
+        "Hits@10": 0.1561011660371161,
+        "MR": 446.4817704056495,
+        "n": 12178
+      },
+      "rel:part_of": {
+        "MRR": 0.06359201044161303,
+        "Hits@1": 0.01282051282051282,
+        "Hits@3": 0.038461538461538464,
+        "Hits@10": 0.1517094017094017,
+        "MR": 416.35897435897436,
+        "n": 468
+      },
+      "rel:regulates": {
+        "MRR": 0.19797830708609784,
+        "Hits@1": 0.07575757575757576,
+        "Hits@3": 0.21212121212121213,
+        "Hits@10": 0.5303030303030303,
+        "MR": 23.848484848484848,
+        "n": 66
+      },
+      "rel:positively_regulates": {
+        "MRR": 0.20514908614996,
+        "Hits@1": 0.09259259259259259,
+        "Hits@3": 0.2037037037037037,
+        "Hits@10": 0.46296296296296297,
+        "MR": 317.1111111111111,
+        "n": 54
+      },
+      "rel:negatively_regulates": {
+        "MRR": 0.4808787027024083,
+        "Hits@1": 0.3793103448275862,
+        "Hits@3": 0.5344827586206896,
+        "Hits@10": 0.7413793103448276,
+        "MR": 65.67241379310344,
+        "n": 58
+      }
+    }
+  },
+  "top_rules_is_a": [
+    "positively_regulates . regulates^-1  conf=1.00 supp=2772",
+    "negatively_regulates . regulates^-1  conf=1.00 supp=2789",
+    "part_of . is_a  conf=0.10 supp=934",
+    "part_of^-1 . is_a  conf=0.07 supp=526",
+    "part_of . part_of  conf=0.00 supp=10",
+    "is_a . part_of^-1  conf=0.00 supp=15"
+  ],
+  "removed_edge_AUC(model flags later-removed edges)": {
+    "RotatE": 0.6497895121574402,
+    "TransE": 0.6600599884986877,
+    "PathRules": 0.48060365625,
+    "Text(bge-small name)": 0.6936604976654053,
+    "Hybrid(RotatE+Text)": 0.6626048125
+  },
+  "realized_suggestions_is_a": {
+    "PathRules": {
+      "top1%": 0.0,
+      "top5%": 0.0,
+      "top10%": 0.0,
+      "top100%": 0.0
+    },
+    "RotatE": {
+      "top1%": 0.0,
+      "top5%": 0.0,
+      "top10%": 0.0033333333333333335,
+      "top100%": 0.0026666666666666666
+    },
+    "Text(bge-small name)": {
+      "top1%": 0.0,
+      "top5%": 0.006666666666666667,
+      "top10%": 0.006666666666666667,
+      "top100%": 0.0013333333333333333
+    },
+    "Hybrid(RotatE+Text)": {
+      "top1%": 0.0,
+      "top5%": 0.006666666666666667,
+      "top10%": 0.0033333333333333335,
+      "top100%": 0.0026666666666666666
+    }
+  },
+  "llm_rerank_novel_is_a": {
+    "n": 150,
+    "k": 20,
+    "model": "qwen3.5:27b",
+    "true_parent_in_topk": 0.38666666666666666,
+    "hybrid_Hits@1": 0.08,
+    "llm_rerank_Hits@1": 0.18,
+    "examples": [
+      {
+        "head": "positive regulation of vacuolar transport",
+        "true": "positive regulation of intracellular transport",
+        "hybrid_top1": "negative regulation of vacuolar transport",
+        "llm_pick": "positive regulation of intracellular protein transport",
+        "llm_correct": false
+      },
+      {
+        "head": "regulation of dopamine receptor signaling pathway",
+        "true": "regulation of G protein-coupled receptor signaling pathway",
+        "hybrid_top1": "regulation of G protein-coupled receptor signaling pathway",
+        "llm_pick": "regulation of G protein-coupled receptor signaling pathway",
+        "llm_correct": true
+      },
+      {
+        "head": "enterobactin catabolic process",
+        "in_candidates": false
+      },
+      {
+        "head": "ecdysteroid 25-hydroxylase activity",
+        "in_candidates": false
+      },
+      {
+        "head": "glucose:proton symporter activity",
+        "in_candidates": false
+      },
+      {
+        "head": "(+)-abscisic acid 8'-hydroxylase activity",
+        "in_candidates": false
+      },
+      {
+        "head": "protein transmembrane import into intracellular organelle",
+        "true": "intracellular protein transmembrane transport",
+        "hybrid_top1": "intracellular protein transport",
+        "llm_pick": "intracellular protein transmembrane transport",
+        "llm_correct": true
+      },
+      {
+        "head": "positive regulation of production of siRNA involved in RNA interference",
+        "true": "regulation of production of siRNA involved in chromatin silencing by small RNA",
+        "hybrid_top1": "positive regulation of gene silencing by miRNA",
+        "llm_pick": "regulation of production of small RNA involved in gene silencing by RNA",
+        "llm_correct": false
+      },
+      {
+        "head": "vitamin-K-epoxide reductase (warfarin-insensitive) activity",
+        "in_candidates": false
+      },
+      {
+        "head": "plastid thylakoid membrane",
+        "true": "plastid membrane",
+        "hybrid_top1": "plastid thylakoid",
+        "llm_pick": "plastid membrane",
+        "llm_correct": true
+      },
+      {
+        "head": "protein localization to outer membrane",
+        "in_candidates": false
+      },
+      {
+        "head": "proton-transporting ATP synthase complex",
+        "in_candidates": false
+      },
+      {
+        "head": "response to vitamin K",
+        "true": "response to ketone",
+        "hybrid_top1": "cellular response to nutrient",
+        "llm_pick": "response to lipid",
+        "llm_correct": false
+      },
+      {
+        "head": "regulation of hypoxia-inducible factor-1alpha signaling pathway",
+        "in_candidates": false
+      },
+      {
+        "head": "podosome",
+        "in_candidates": false
+      },
+      {
+        "head": "inositol-1,4,5-trisphosphate 5-phosphatase activity",
+        "in_candidates": false
+      },
+      {
+        "head": "regulation of toll-like receptor 8 signaling pathway",
+        "in_candidates": false
+      },
+      {
+        "head": "oxygen homeostasis",
+        "true": "cellular chemical homeostasis",
+        "hybrid_top1": "carbon dioxide homeostasis",
+        "llm_pick": "cellular chemical homeostasis",
+        "llm_correct": true
+      },
+      {
+        "head": "deoxyguanosine salvage",
+        "true": "deoxyguanosine biosynthetic process",
+        "hybrid_top1": "purine ribonucleoside salvage",
+        "llm_pick": "purine nucleotide salvage",
+        "llm_correct": false
+      },
+      {
+        "head": "regulation of nucleotide-binding oligomerization domain containing signaling pathway",
+        "true": "regulation of viral-induced cytoplasmic pattern recognition receptor signaling pathway",
+        "hybrid_top1": "positive regulation of nucleotide-binding oligomerization domain containing signaling pathway",
+        "llm_pick": "regulation of signal transduction",
+        "llm_correct": false
+      },
+      {
+        "head": "S-adenosylmethionine cycle",
+        "in_candidates": false
+      },
+      {
+        "head": "polyadenylation-dependent mRNA catabolic process",
+        "in_candidates": false
+      },
+      {
+        "head": "curli",
+        "in_candidates": false
+      },
+      {
+        "head": "S-nitrosoglutathione reductase activity",
+        "in_candidates": false
+      },
+      {
+        "head": "positive regulation of antimicrobial humoral response",
+        "true": "positive regulation of defense response",
+        "hybrid_top1": "positive regulation of defense response",
+        "llm_pick": "regulation of humoral immune response",
+        "llm_correct": false
+      },
+      {
+        "head": "germacrene A acid 8beta-hydroxylase activity",
+        "in_candidates": false
+      },
+      {
+        "head": "Atg8 ligase activity",
+        "in_candidates": false
+      },
+      {
+        "head": "dihydrochelirubine 12-monooxygenase activity",
+        "in_candidates": false
+      },
+      {
+        "head": "mixed acid fermentation",
+        "in_candidates": false
+      },
+      {
+        "head": "eukaryotic translation initiation factor 4F complex",
+        "in_candidates": false
+      }
+    ]
+  }
+}

@@ -3,3 +3,6 @@ __pycache__/
 runs/
 *.pt
 .DS_Store
+data/
+tools/
+.env

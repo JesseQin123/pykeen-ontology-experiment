@@ -1,0 +1,665 @@
+{
+  "GO": {
+    "summary": {
+      "Hybrid(RotatE+Text)": {
+        "n": 1000,
+        "yes_claude-opus-5-5": 0.115,
+        "yes_gpt-6.1-sol": 0.087,
+        "yes_gemini-4-argon-high": 0.09,
+        "yes_all": 0.057,
+        "yes_majority": 0.085,
+        "true_in_2026_closure": 0.002
+      },
+      "RotatE": {
+        "n": 1000,
+        "yes_claude-opus-5-5": 0.101,
+        "yes_gpt-6.1-sol": 0.072,
+        "yes_gemini-4-argon-high": 0.071,
+        "yes_all": 0.048,
+        "yes_majority": 0.073,
+        "true_in_2026_closure": 0.001
+      },
+      "Text(bge-large)": {
+        "n": 1000,
+        "yes_claude-opus-5-5": 0.036,
+        "yes_gpt-6.1-sol": 0.032,
+        "yes_gemini-4-argon-high": 0.031,
+        "yes_all": 0.02,
+        "yes_majority": 0.031,
+        "true_in_2026_closure": 0.0
+      },
+      "TransE": {
+        "n": 1000,
+        "yes_claude-opus-5-5": 0.106,
+        "yes_gpt-6.1-sol": 0.084,
+        "yes_gemini-4-argon-high": 0.081,
+        "yes_all": 0.048,
+        "yes_majority": 0.085,
+        "true_in_2026_closure": 0.001
+      },
+      "control: curator-added 2020-2026 (true)": {
+        "n": 1000,
+        "yes_claude-opus-5-5": 0.78,
+        "yes_gpt-6.1-sol": 0.597,
+        "yes_gemini-4-argon-high": 0.64,
+        "yes_all": 0.505,
+        "yes_majority": 0.684,
+        "true_in_2026_closure": 1.0
+      },
+      "control: existing 2020 edge (true)": {
+        "n": 300,
+        "yes_claude-opus-5-5": 0.9566666666666667,
+        "yes_gpt-6.1-sol": 0.8566666666666667,
+        "yes_gemini-4-argon-high": 0.87,
+        "yes_all": 0.81,
+        "yes_majority": 0.9033333333333333,
+        "true_in_2026_closure": 0.64
+      },
+      "control: random candidate": {
+        "n": 1000,
+        "yes_claude-opus-5-5": 0.0,
+        "yes_gpt-6.1-sol": 0.0,
+        "yes_gemini-4-argon-high": 0.0,
+        "yes_all": 0.0,
+        "yes_majority": 0.0,
+        "true_in_2026_closure": 0.0
+      },
+      "_agreement_kappa": {
+        "claude-opus-5-5 vs gpt-6.1-sol": 0.768147971006127,
+        "claude-opus-5-5 vs gemini-4-argon-high": 0.795441807317699,
+        "gpt-6.1-sol vs gemini-4-argon-high": 0.8059666092777131
+      }
+    },
+    "examples": [
+      {
+        "source": "Text(bge-large)",
+        "child": "nucleoside phosphate catabolic process",
+        "parent": "nucleoside monophosphate catabolic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "negative regulation of paraxial mesodermal cell fate specification",
+        "parent": "regulation of lateral mesodermal cell fate specification",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "glutamic-type peptidase activity",
+        "parent": "serine hydrolase activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "plant-type vacuole lumen",
+        "parent": "fungal-type vacuole lumen",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "protein-N(PI)-phosphohistidine-trehalose phosphotransferase system transporter activity",
+        "parent": "protein-N(PI)-phosphohistidine-sucrose phosphotransferase system transporter activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "notum morphogenesis",
+        "parent": "imaginal disc eversion",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "positive regulation of chemokinesis",
+        "parent": "positive regulation of response to biotic stimulus",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "endonuclear canal",
+        "parent": "perinuclear endoplasmic reticulum",
+        "claude-opus-5-5": true,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "negative regulation of viral-induced cytoplasmic pattern recognition receptor signaling pathway",
+        "parent": "negative regulation of lipopolysaccharide-mediated signaling pathway",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "pinceau fiber",
+        "parent": "pericellular basket",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "cardiac muscle cell membrane repolarization",
+        "parent": "membrane repolarization during action potential",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "trans-lignocero-2-enoyl-CoA reductase activity",
+        "parent": "trans-docosan-2-enoyl-CoA reductase activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "1-phosphatidyl-1D-myo-inositol 3,5-bisphosphate biosynthetic process",
+        "parent": "1-phosphatidyl-1D-myo-inositol 4,5-bisphosphate metabolic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "gamma-delta T cell receptor complex",
+        "parent": "pre-T cell receptor complex",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "telencephalon glial cell migration",
+        "parent": "telencephalon astrocyte cell migration",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "metallocarboxypeptidase activity",
+        "parent": "serine-type exopeptidase activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "methylation",
+        "parent": "primary metabolic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "endocrocin catabolic process",
+        "parent": "antibiotic catabolic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": true,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "regulation of ubiquitin-protein transferase activity",
+        "parent": "regulation of protein sumoylation",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "inner acrosomal membrane",
+        "parent": "acrosomal membrane",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": true,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "mitochondrial inner membrane",
+        "parent": "nuclear membrane",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "beta-carotene biosynthetic process",
+        "parent": "beta-carotene catabolic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "positive regulation of compound eye photoreceptor cell differentiation",
+        "parent": "regulation of eye photoreceptor cell development",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": true,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "sodium:inorganic phosphate symporter activity",
+        "parent": "glutathione-regulated potassium exporter activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "nuclear membrane biogenesis",
+        "parent": "nuclear membrane organization",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": true,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "regulation of interleukin-27 production",
+        "parent": "regulation of tumor necrosis factor superfamily cytokine production",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "protein phosphate-linked glycosylation",
+        "parent": "protein phosphate-linked glycosylation via serine",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "positive regulation of epithelial cell differentiation",
+        "parent": "positive regulation of multicellular organismal process",
+        "claude-opus-5-5": true,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "plasma membrane proton-transporting ATP synthase complex",
+        "parent": "plasma membrane proton-transporting ATP synthase, catalytic core",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "thermospermine biosynthetic process",
+        "parent": "nor-spermidine metabolic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "7-methylguanosine biosynthetic process",
+        "parent": "5-methylcytosine biosynthetic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "negative regulation of calcidiol 1-monooxygenase activity",
+        "parent": "negative regulation of retinoic acid biosynthetic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "eisosome filament",
+        "parent": "eisosome",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "halohydrin hydrogen-halide-lyase A activity",
+        "parent": "S-carboxymethylcysteine synthase activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "positive regulation of glucosylceramidase activity",
+        "parent": "regulation of urease activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "indolalkylamine biosynthetic process",
+        "parent": "tryptophan metabolic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "nodal signaling pathway involved in determination of left/right asymmetry",
+        "parent": "BMP signaling pathway involved in determination of left/right symmetry",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "regulation of T-helper 2 cell differentiation",
+        "parent": "regulation of CD4-positive, CD25-positive, alpha-beta regulatory T cell differentiation involved in immune response",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "Wnt signaling pathway involved in heart development",
+        "parent": "fibroblast growth factor receptor signaling pathway",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "xylosylprotein 4-beta-galactosyltransferase activity",
+        "parent": "galactosylxylosylprotein 3-beta-galactosyltransferase activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "telencephalon glial cell migration",
+        "parent": "substrate-independent telencephalic tangential migration",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "autoinducer AI-2 transmembrane transport",
+        "parent": "p-aminobenzoyl-glutamate transmembrane transport",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "dinucleotide repeat insertion binding",
+        "parent": "single base insertion or deletion binding",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "CMP-N-acetylneuraminate biosynthetic process",
+        "parent": "CMP-keto-3-deoxy-D-manno-octulosonic acid metabolic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "chemoattraction of serotonergic neuron axon",
+        "parent": "chemorepulsion of axon",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "chlorophyllide-a:geranyl-geranyl diphosphate geranyl-geranyl transferase activity",
+        "parent": "discadenine synthase activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "integral component of Golgi trans cisterna membrane",
+        "parent": "intrinsic component of Golgi medial cisterna membrane",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "synthesis of RNA primer involved in bacterial-type DNA replication",
+        "parent": "cell cycle DNA replication DNA unwinding",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "regulation of generation of precursor metabolites and energy",
+        "parent": "regulation of primary metabolic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "maturation of LSU-rRNA from tetracistronic rRNA transcript (SSU-rRNA, LSU-rRNA, 4.5S-rRNA, 5S-rRNA)",
+        "parent": "maturation of LSU-rRNA from tetracistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, 2S rRNA, LSU-rRNA)",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "piRNA cluster binding",
+        "parent": "hemi-methylated DNA-binding",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Hybrid(RotatE+Text)",
+        "child": "positive regulation of cell communication by electrical coupling",
+        "parent": "regulation of cell communication by chemical coupling",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "negative regulation of synaptic vesicle transport",
+        "parent": "negative regulation of anterograde synaptic vesicle transport",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "positive regulation of osteoblast proliferation",
+        "parent": "positive regulation of osteoblast differentiation",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "regulation of alkane biosynthetic process",
+        "parent": "positive regulation of alkane biosynthetic process",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "peptide cross-linking via 2-(S-L-cysteinyl)-D-phenylalanine",
+        "parent": "peptide cross-linking via 2-(S-L-cysteinyl)-L-phenylalanine",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "mitogen-activated protein kinase kinase binding",
+        "parent": "mitogen-activated protein kinase binding",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "TransE",
+        "child": "gamma-delta T cell receptor complex",
+        "parent": "alpha-beta T cell receptor complex",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "Text(bge-large)",
+        "child": "suppression by virus of host transcription",
+        "parent": "suppression by virus of host mRNA processing",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      },
+      {
+        "source": "RotatE",
+        "child": "rRNA (cytosine-C5-)-methyltransferase activity",
+        "parent": "rRNA (uridine) methyltransferase activity",
+        "claude-opus-5-5": false,
+        "gpt-6.1-sol": false,
+        "gemini-4-argon-high": false,
+        "true_2026": false
+      }
+    ]
+  },
+  "WN18RR": {
+    "summary": {
+      "AnyBURL top-1": {
+        "n": 1498,
+        "yes_claude-opus-5-5": 0.4732977303070761,
+        "yes_gpt-6.1-sol": 0.4439252336448598,
+        "yes_gemini-4-argon-high": 0.4432576769025367,
+        "yes_all": 0.32777036048064084,
+        "yes_majority": 0.43457943925233644,
+        "true_by_wordnet": 0.5493991989319092,
+        "unverified_n": 675,
+        "unverified_judged_true_by_majority": 0.16
+      },
+      "RotatE top-1": {
+        "n": 1500,
+        "yes_claude-opus-5-5": 0.4513333333333333,
+        "yes_gpt-6.1-sol": 0.43933333333333335,
+        "yes_gemini-4-argon-high": 0.44133333333333336,
+        "yes_all": 0.31866666666666665,
+        "yes_majority": 0.4246666666666667,
+        "true_by_wordnet": 0.5126666666666667,
+        "unverified_n": 731,
+        "unverified_judged_true_by_majority": 0.18467852257181944
+      },
+      "control: held-out test edge (true)": {
+        "n": 600,
+        "yes_claude-opus-5-5": 0.8383333333333334,
+        "yes_gpt-6.1-sol": 0.7633333333333333,
+        "yes_gemini-4-argon-high": 0.8183333333333334,
+        "yes_all": 0.705,
+        "yes_majority": 0.8,
+        "true_by_wordnet": 1.0
+      },
+      "control: random candidate": {
+        "n": 1500,
+        "yes_claude-opus-5-5": 0.0013333333333333333,
+        "yes_gpt-6.1-sol": 0.0033333333333333335,
+        "yes_gemini-4-argon-high": 0.0006666666666666666,
+        "yes_all": 0.0006666666666666666,
+        "yes_majority": 0.0006666666666666666,
+        "true_by_wordnet": 0.0
+      },
+      "_agreement_kappa": {
+        "claude-opus-5-5 vs gpt-6.1-sol": 0.7610492448511795,
+        "claude-opus-5-5 vs gemini-4-argon-high": 0.7710145993905169,
+        "gpt-6.1-sol vs gemini-4-argon-high": 0.7506436910119925
+      }
+    }
+  }
+}
