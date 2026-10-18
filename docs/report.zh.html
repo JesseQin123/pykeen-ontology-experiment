@@ -1,0 +1,492 @@
+<title>PyKEEN 本体图实测</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650&display=swap">
+<style>
+/* Layout: one reading column (~70ch) with full-width evidence tables; verdict chips encode each claim's outcome. */
+:root {
+  --bg: #f5f6f4;
+  --surface: #ffffff;
+  --ink: #17201f;
+  --muted: #5b6765;
+  --rule: #d8dedb;
+  --accent: #0f6b62;
+  --accent-soft: #dcefeb;
+  --warn: #9a5b00;
+  --warn-soft: #fbefd9;
+  --bad: #a3302a;
+  --bad-soft: #f8e1df;
+  --good: #1f6f3a;
+  --good-soft: #def0e3;
+  --bar: #8a9491;
+  --f-display: "Source Serif 4", "Songti SC", "Noto Serif SC", Georgia, serif;
+  --f-body: "IBM Plex Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111716; --surface: #182120; --ink: #e4ebe9; --muted: #9aa8a5; --rule: #2c3836;
+  --accent: #5cc4b6; --accent-soft: #173a36; --warn: #e3a54a; --warn-soft: #3a2c14;
+  --bad: #ef8a80; --bad-soft: #3d1f1d; --good: #7fd09a; --good-soft: #17331f; --bar: #7d8986; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #111716; --surface: #182120; --ink: #e4ebe9; --muted: #9aa8a5; --rule: #2c3836;
+  --accent: #5cc4b6; --accent-soft: #173a36; --warn: #e3a54a; --warn-soft: #3a2c14;
+  --bad: #ef8a80; --bad-soft: #3d1f1d; --good: #7fd09a; --good-soft: #17331f; --bar: #7d8986; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.7;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px; }
+main { max-width: 880px; margin: 0 auto; display: grid; gap: 56px; }
+.prose { max-width: 70ch; display: grid; gap: 12px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.25; margin: 0; }
+h1 { font-size: clamp(30px, 5vw, 42px); font-weight: 650; }
+h2 { font-size: 26px; font-weight: 650; }
+h3 { font-size: 18px; font-weight: 650; font-family: var(--f-body); }
+p { margin: 0; }
+section { display: grid; gap: 18px; min-width: 0; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+code { font-family: var(--f-mono); font-size: .88em; }
+a { color: var(--accent); }
+header { display: grid; gap: 14px; }
+.question { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; color: var(--muted); font-size: 15px; max-width: 74ch; }
+
+.verdicts { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.verdict { background: var(--surface); padding: 18px 20px; display: grid; grid-template-columns: 10.5em 1fr; gap: 8px 18px; align-items: start; }
+.verdict h3 { grid-column: 1 / -1; }
+.verdict > div { min-width: 0; display: grid; gap: 8px; }
+.verdict .how { font-size: 14px; color: var(--muted); }
+.verdict .how b { color: var(--ink); font-weight: 600; }
+@media (max-width: 600px) { .verdict { grid-template-columns: 1fr; } }
+.chip { display: inline-block; font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px; white-space: nowrap; justify-self: start; }
+.chip.good { background: var(--good-soft); color: var(--good); }
+.chip.warn { background: var(--warn-soft); color: var(--warn); }
+.chip.bad { background: var(--bad-soft); color: var(--bad); }
+
+.en { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 20px 22px; display: grid; gap: 10px; font-size: 15px; }
+.en ul, ul.plain, ol.recs { margin: 0; padding-left: 1.25em; display: grid; gap: 8px; max-width: 74ch; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 9px 14px; text-align: right; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+td.wrap, th.wrap { white-space: normal; text-align: left; min-width: 14em; }
+thead th { font-weight: 600; color: var(--muted); font-size: 12px; letter-spacing: .04em; background: var(--bg); }
+tbody tr:last-child td { border-bottom: 0; }
+tr.hl td { background: var(--accent-soft); }
+tr.sub td { color: var(--muted); font-size: 13px; }
+tr.group td { font-weight: 600; text-align: left; background: var(--bg); }
+.caption { font-size: 13px; color: var(--muted); max-width: 74ch; }
+
+.bars { display: grid; gap: 8px; }
+.bar { display: grid; grid-template-columns: 13em 1fr 3.6em; gap: 12px; align-items: center; font-size: 14px; }
+.bar .track { height: 14px; background: var(--bg); border-radius: 3px; overflow: hidden; border: 1px solid var(--rule); }
+.bar .fill { height: 100%; background: var(--bar); }
+.bar.key .fill { background: var(--accent); }
+.bar .v { font-family: var(--f-mono); font-size: 13px; text-align: right; }
+@media (max-width: 520px) { .bar { grid-template-columns: 8.5em 1fr 3.2em; } }
+
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; display: grid; gap: 2px; }
+.stat b { font-family: var(--f-mono); font-size: 24px; font-weight: 500; }
+.stat span { font-size: 13px; color: var(--muted); }
+
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.step { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; font-size: 14px; }
+.step .n { font-family: var(--f-mono); font-size: 12px; color: var(--accent); }
+.step b { font-weight: 600; }
+
+.callout { background: var(--warn-soft); border-radius: 10px; padding: 14px 18px; font-size: 15px; max-width: 80ch; }
+.refs { font-size: 14px; color: var(--muted); margin: 0; padding-left: 1.2em; }
+.refs li { margin-bottom: 4px; }
+pre { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-family: var(--f-mono); font-size: 13px; line-height: 1.6; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">KGE 验证 · 最终版 · 2026-10-17 · 17 组实验 · PyKEEN 1.11</div>
+  <h1>图嵌入在语义本体图上到底有没有用</h1>
+  <p class="question">同事的问题：用 PyKEEN 做图嵌入，(1) 能不能发现图里漏掉的真实关系，(2) 能不能给出有用的连接建议，(3) 能不能提升大图上的性能，(4) 两张用不同术语描述同一批实体的图，嵌入能不能自动找出对应关系。他自己也说"复数的轶事不等于数据"。这份报告把每个说法变成可测量的实验，每个实验都配了不用嵌入的对照组，最后收敛成一套可以直接照做的方法。</p>
+</header>
+
+<section aria-labelledby="tldr">
+  <h2 id="tldr">结论与推荐做法</h2>
+  <div class="verdicts">
+    <div class="verdict">
+      <h3>1. 发现图里漏掉的真实关系</h3>
+      <span class="chip warn">成立，但比看起来弱得多</span>
+      <div>
+        <p>用 2020 年版的 Gene Ontology 训练，预测 2026 年专家真正新加的边。对真正新的关系，嵌入 + 文本融合的 Hits@10 为 30% 到 36%（2018→2020 的复现为 37%），规则学习器只有 2.5% 到 17%。嵌入确实能找到图搜索够不到的关系。但同样的方法在"随机藏边"测试里 MRR 约 0.5，在这里只有 0.1 到 0.19，常见的评估方式把真实能力高估了 3 到 5 倍。另外，专家新加的边有 58% 是旧图里已经能推出来的，一个简单的推理器就能把其中 93% 排进前 10。</p>
+        <p class="how"><b>怎么做：</b>先跑推理器，拿到"免费"的那一半；再用嵌入 + 文本融合生成候选；最后交给 LLM 和专家筛选。</p>
+      </div>
+    </div>
+    <div class="verdict">
+      <h3>2. 给出有用的连接建议</h3>
+      <span class="chip warn">需要过滤才可用</span>
+      <div>
+        <p>只换随机种子，排名第一的建议有 41% 会变。对随机概念给出的建议，6 年内被专家采纳的只有约 0.3%。三个前沿 LLM 盲审（两两一致性 kappa 0.75 到 0.81）只认可约 9% 的第一名建议。但"嵌入候选 + LLM 投票过滤"这条流水线有效：通过过滤的建议，后来成真的比例是被拒建议的 89 倍，并且保留了 87% 后来成真的建议。</p>
+        <p class="how"><b>怎么做：</b>多个种子、多个模型做融合，降低偶然性；用 LLM 投票做第一道过滤；剩下的进专家审核队列，按审核结果统计真实准确率。</p>
+      </div>
+    </div>
+    <div class="verdict">
+      <h3>3. 提升大图上的性能</h3>
+      <span class="chip warn">查询速度成立，准确率不成立</span>
+      <div>
+        <p>300 万节点的图上，3 跳遍历的 p99 是 1.5 秒；嵌入加 HNSW 索引单次查询 0.01 ms，在真实嵌入上召回率 99.9%。但准确率随规模下降：同一组测试题，图从 5 千节点扩到 12 万节点，相同配置下 RotatE 的 MRR 从 0.62 跌到 0.15；训练到 150 个 epoch 也只有 0.16，把学习率降到 2e-3 后也只到 0.21；规则方法只从 0.64 降到 0.48。</p>
+        <p class="how"><b>怎么做：</b>"找相关概念"这类近似查询用嵌入 + ANN；精确的结构查询继续交给图数据库；每次扩大规模都要重新调参；新概念用"文本 → 嵌入"映射放置，不用每次都重训。</p>
+      </div>
+    </div>
+    <div class="verdict">
+      <h3>4. 自然地跨越不同术语体系</h3>
+      <span class="chip bad">不会自然发生</span>
+      <div>
+        <p>在两套独立构建的真实解剖本体上（OAEI，小鼠 vs 人类），不给锚点时，所有纯结构方法都是随机水平，包括最强的 Gromov-Wasserstein 最优传输（Hits@1 0.07%）。但在组合流程里嵌入有真实贡献：以名称完全相同的概念作为自动锚点，"文本 + 图嵌入"对难例的 Hits@1 从 83.4% 提高到 88.6%。完整流程（文本 + 图嵌入 + Claude 核验）的 F1 是 0.939，OAEI 冠军 AML 是 0.941。</p>
+        <p class="how"><b>怎么做：</b>名称完全匹配作为锚点 → 文本嵌入（含同义词）生成候选 → 用锚点联合训练图嵌入，作为结构修正 → LLM 逐对核验。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="en" aria-labelledby="en-sum" lang="en">
+  <h3 id="en-sum">Summary in English (for the colleague)</h3>
+  <ul>
+    <li><b>Finding missing relations: real, but much weaker than benchmarks suggest.</b> Trained on GO 2020 and scored on what curators added by 2026, embedding + text fusion reaches Hits@10 0.30–0.36 on genuinely new is_a links (0.37 on a 2018 → 2020 replication), versus 0.03–0.17 for rule learners. The same methods score MRR ≈ 0.5 on random hold-out but 0.10–0.19 prospectively. 58% of curator additions were already entailed, and a transitivity reasoner ranks 93% of those in its top 10. On random hold-out, a real AnyBURL beats RotatE (MRR 0.517 vs 0.487, 95% CI of the gap [+0.023, +0.035]).</li>
+    <li><b>Suggested links: unstable alone, useful with filtering.</b> Top-1 suggestions change 41% of the time across seeds. Three frontier LLM judges (Claude Opus 5.5, GPT-6.1, Gemini 4; kappa 0.75–0.81) accept about 9% of top-1 GO suggestions. An embedding-candidates → LLM-majority-vote pipeline enriches suggestions that later came true 89-fold and keeps 87% of them.</li>
+    <li><b>Scale: faster approximate queries, not better accuracy.</b> HNSW over embeddings answers in 0.01 ms (99.9% recall) where 3-hop traversal hits 1.5 s p99 at 3M nodes. With a fixed configuration, RotatE MRR falls from 0.62 to 0.15 as YAGO grows from 5k to 123k entities; 150 epochs don't fix it, and a lower learning rate only reaches 0.21. Rules degrade from 0.64 to 0.48.</li>
+    <li><b>Cross-taxonomy mapping does not emerge on its own.</b> On OAEI Anatomy (independently built ontologies), every seed-free structural method is at chance, optimal transport included. With exact-label anchors, joint KGE lifts text-embedding matching on hard pairs from 0.834 to 0.886 Hits@1. The full pipeline (text + KGE + LLM verification) reaches F1 0.939; AML, the track winner, has 0.941.</li>
+    <li><b>LLMs:</b> frontier LLMs re-ranking structural candidates double or triple Hits@1. On GO an LLM alone matches that, because it has memorized GO: Claude recalls 75% of old GO IDs. On OAEI, structural candidates beat LLM-only by 14 points. For a private ontology no LLM has seen, the structural signal should matter more.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="design">
+  <h2 id="design">实验是怎么设计的</h2>
+  <div class="prose">
+    <p>直接在同事的图上测有两个问题：一是我们手上没有他的图；二是要判断"嵌入推荐的边对不对"，必须事先知道正确答案，而他的图里没有答案，所以他只能凭感觉。我们用五个有标准答案的公开数据集，每个负责检验一个问题。</p>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>数据集</th><th class="wrap">是什么</th><th class="wrap">为什么选它</th><th>检验</th></tr></thead>
+    <tbody>
+      <tr><td>WordNet（WN18RR）</td><td class="wrap">英语词汇的概念网，4 万个概念，11 种关系</td><td class="wrap">最接近"语义本体"的标准基准，方便和文献对比</td><td>问题 1、2 热身</td></tr>
+      <tr class="hl"><td>Gene Ontology</td><td class="wrap">生物学本体，约 4.5 万个概念，由专家持续维护，每月发布新版本</td><td class="wrap">有历史版本：用 2020 年版训练，用 2026 年专家真正新加的边检验。这是唯一能检验"真发现"的方式，文献里没找到用 GO 这样验证 PyKEEN 类嵌入的工作</td><td>问题 1、2 关键检验</td></tr>
+      <tr><td>YAGO3-10</td><td class="wrap">从维基百科抽取的知识图谱，12 万实体、108 万条边</td><td class="wrap">足够大，可以测图变大之后的变化</td><td>问题 3</td></tr>
+      <tr class="hl"><td>OAEI 解剖本体</td><td class="wrap">小鼠解剖学（2,744 个概念）和人类解剖学（3,304 个概念），不同团队独立构建，有 1,516 对专家标注的对应关系</td><td class="wrap">就是"两张图、不同术语、同一批东西"的真实场景，可以和历年参赛系统直接比较</td><td>问题 4</td></tr>
+      <tr><td>FB15k-237</td><td class="wrap">Freebase 的子集，比 WordNet 稠密得多</td><td class="wrap">对照图的稀疏程度对对齐的影响</td><td>问题 4 辅助</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p><b>对照组：</b>流行度基线（总是推荐最常见的答案）；正式的 AnyBURL 规则学习器（文献中最强的可解释方法之一）；只用 is_a 传递性的逻辑推理器；只用概念名称和定义的文本嵌入（bge-large）；以及"不用嵌入、只看邻居里有哪些锚点"的对齐方法。</p>
+    <p><b>LLM：</b>本地 qwen3.5-27B，以及通过中转站调用的 Claude Opus 5.5、GPT-6.1、Gemini 4。LLM 用在三处：对候选重新排序、不给候选直接生成答案、充当盲审评审。</p>
+    <p><b>评估协议：</b>所有方法用同一套 filtered ranking，同时预测头和尾，分数并列时取期望排名。关键对比都做了配对 bootstrap，给出 95% 置信区间。</p>
+  </div>
+</section>
+
+<section aria-labelledby="q1">
+  <div class="eyebrow">问题 1 · 发现漏掉的关系</div>
+  <h2 id="q1">随机藏边会严重高估真实的发现能力</h2>
+  <div class="bars" role="img" aria-label="同类方法在随机藏边和前瞻性测试中的 MRR">
+    <div class="bar"><span>WordNet 随机藏边 · AnyBURL</span><div class="track"><div class="fill" style="width:86%"></div></div><span class="v">0.517</span></div>
+    <div class="bar"><span>WordNet 随机藏边 · RotatE</span><div class="track"><div class="fill" style="width:81%"></div></div><span class="v">0.487</span></div>
+    <div class="bar key"><span>GO 前瞻 · 嵌入+文本融合</span><div class="track"><div class="fill" style="width:31%"></div></div><span class="v">0.185</span></div>
+    <div class="bar key"><span>GO 前瞻 · RotatE</span><div class="track"><div class="fill" style="width:16%"></div></div><span class="v">0.093</span></div>
+    <div class="bar key"><span>GO 前瞻 · AnyBURL</span><div class="track"><div class="fill" style="width:15%"></div></div><span class="v">0.092</span></div>
+  </div>
+  <p class="caption">MRR，满格 = 0.6。GO 这几行只算"给子概念找父概念"方向，共 6,412 条专家新增的边。融合指 RotatE + TransE + 文本的倒数排名融合。</p>
+
+  <h3>WordNet 随机藏边：规则方法比嵌入更准</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>方法</th><th>MRR</th><th>Hits@1</th><th>Hits@10</th></tr></thead>
+    <tbody>
+      <tr id="wn-claude"><td>融合 + Claude 重排序前 20 名</td><td>0.580</td><td>0.519</td><td>0.5190</td></tr>
+      <tr><td>融合 + GPT-6.1 重排序前 20 名</td><td>0.568</td><td>0.499</td><td>0.648</td></tr>
+      <tr><td>AnyBURL 优先、RotatE 兜底</td><td>0.523</td><td>0.479</td><td>0.609</td></tr>
+      <tr><td>融合（AnyBURL + RotatE + TransE）</td><td>0.522</td><td>0.472</td><td>0.619</td></tr>
+      <tr class="hl"><td>AnyBURL（规则，学习 100 秒）</td><td>0.517</td><td>0.475</td><td>0.592</td></tr>
+      <tr><td>RotatE（3 个种子，标准差 0.0014）</td><td>0.487</td><td>0.434</td><td>0.587</td></tr>
+      <tr><td>我自己写的 ≤2 跳规则</td><td>0.424</td><td>0.405</td><td>0.459</td></tr>
+      <tr><td>TransE</td><td>0.214</td><td>0.012</td><td>0.541</td></tr>
+      <tr><td>流行度</td><td>0.026</td><td>0.015</td><td>0.045</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">AnyBURL − RotatE：MRR +0.029，95% CI [+0.023, +0.035]。第一版报告说"嵌入比图搜索强"，是因为当时的规则对照组太弱。全量测试集 5,848 个查询。</p>
+
+  <h3>GO 前瞻性测试：用 2020 年版训练，预测到 2026 年的新增边</h3>
+  <div class="stat-row">
+    <div class="stat"><b>6,412</b><span>2020 到 2026 年专家在已有概念之间新加的边</span></div>
+    <div class="stat"><b>58%</b><span>旧图里已经能通过传递性推出（"可推导"）</span></div>
+    <div class="stat"><b>2,669</b><span>旧图推不出来的真正新关系</span></div>
+    <div class="stat"><b>6,758</b><span>同期被专家删掉的边（用来测"纠错"）</span></div>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>方法（给子概念找父概念）</th><th>全部 MRR</th><th>全部 Hits@10</th><th>真正新关系 Hits@1</th><th>真正新关系 Hits@10</th><th>可推导边 Hits@10</th></tr></thead>
+    <tbody>
+      <tr><td>推理器（只用 is_a 传递性）</td><td>0.283</td><td>0.543</td><td>0.000</td><td>0.007</td><td><b>0.926</b></td></tr>
+      <tr><td>融合（全部方法 + 推理器）</td><td><b>0.260</b></td><td>0.473</td><td>0.069</td><td>0.280</td><td>0.611</td></tr>
+      <tr class="hl"><td>融合（RotatE + TransE + 文本）</td><td>0.185</td><td>0.383</td><td><b>0.091</b></td><td><b>0.362</b></td><td>0.398</td></tr>
+      <tr><td>RotatE + 文本</td><td>0.142</td><td>0.298</td><td>0.081</td><td>0.299</td><td>0.297</td></tr>
+      <tr><td>TransE</td><td>0.113</td><td>0.344</td><td>0.012</td><td>0.273</td><td>0.394</td></tr>
+      <tr><td>Poincaré 双曲嵌入（50 维，只看 is_a）</td><td>0.104</td><td>0.218</td><td>–</td><td>–</td><td>–</td></tr>
+      <tr><td>RotatE</td><td>0.093</td><td>0.202</td><td>0.045</td><td>0.208</td><td>0.198</td></tr>
+      <tr><td>AnyBURL</td><td>0.092</td><td>0.177</td><td>0.048</td><td>0.173</td><td>0.180</td></tr>
+      <tr><td>文本（bge-large，名称 + 定义）</td><td>0.084</td><td>0.205</td><td>0.043</td><td>0.219</td><td>0.194</td></tr>
+      <tr><td>我自己写的 ≤2 跳规则</td><td>0.012</td><td>0.025</td><td>0.007</td><td>0.025</td><td>0.025</td></tr>
+      <tr><td>流行度</td><td>0.009</td><td>0.019</td><td>0.002</td><td>0.013</td><td>0.024</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p>在真正新的关系上，嵌入 + 文本明确好于任何一个单独使用：比单用 RotatE 高 MRR +0.055 [+0.046, +0.063]，比单用文本高 +0.058 [+0.048, +0.069]。2018→2020 的短期复现结果一致，RotatE + 文本在真正新关系上 MRR 0.183、Hits@10 36.6%。嵌入在这里有不可替代的价值，但它产出的是候选列表，不是答案。</p>
+    <p><b>纠错：</b>同期被专家删掉的边，模型给它们打的分确实偏低，AUC 在 0.65（RotatE）到 0.69（文本）之间；0.5 等于随机，规则是 0.48。信号存在，但不够强，不能单独用来自动删边。</p>
+  </div>
+
+  <h3>前沿 LLM 能帮多少</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>任务（Hits@1）</th><th>结构/文本候选</th><th>+ qwen3.5-27B</th><th>+ Claude Opus 5.5</th><th>+ GPT-6.1</th><th>纯 Claude（不给候选）</th></tr></thead>
+    <tbody>
+      <tr><td>GO 真正新增的 is_a（全量 2,386 题）</td><td>8%</td><td>18%*</td><td><b>23.6%</b></td><td>21.6%</td><td>26%*</td></tr>
+      <tr><td>GO 新概念放置（全量 1,465 题）</td><td>29%*</td><td>40%*</td><td>54.8%</td><td>51.7%</td><td><b>58.7%*</b></td></tr>
+      <tr><td>OAEI 难例对齐（580 题）</td><td>83.8%</td><td>94.3%</td><td><b>96.5%</b></td><td>95.5%</td><td>82.2%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">* 为 150 题抽样（误差约 ±7 个百分点）。候选列表本身有上限：GO 新增 is_a 只有 37% 的正确答案落在前 20 名内，新概念为 74%，OAEI 为 99%。</p>
+  <div class="callout">LLM 在 GO 上单独使用就很强，原因之一是它背过 GO：Claude 能说对 75% 的老 GO 概念 ID，2024 到 2026 年新建的概念也能说对 11%；GPT 分别是 46% 和 0%。所以在公开本体上，LLM 的提升有一部分来自"记忆"。在 OAEI 上，结构/文本候选 + LLM 比纯 LLM 高 14 个点。同事自己的私有本体是 LLM 没见过的，情况会更接近 OAEI。</div>
+</section>
+
+<section aria-labelledby="q2">
+  <div class="eyebrow">问题 2 · 连接建议</div>
+  <h2 id="q2">单独用不稳定，加一道过滤就能用</h2>
+  <div class="stat-row">
+    <div class="stat"><b>59%</b><span>只换随机种子，排名第一的建议保持不变的比例</span></div>
+    <div class="stat"><b>0.3%</b><span>对随机 GO 概念的建议，6 年内被专家采纳的比例</span></div>
+    <div class="stat"><b>0.75–0.81</b><span>三个 LLM 评审两两之间的一致性（kappa）</span></div>
+    <div class="stat"><b>89 倍</b><span>LLM 投票通过的建议，后来成真的比例是被拒建议的倍数</span></div>
+  </div>
+
+  <h3>三个 LLM 盲审（Claude、GPT、Gemini，不告诉它们建议来源）</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>GO：建议来源</th><th>数量</th><th>多数评审判为正确</th><th>2026 年版中确实成立</th></tr></thead>
+    <tbody>
+      <tr class="sub"><td>对照：2020 年已有的边（真）</td><td>300</td><td>90%</td><td>–</td></tr>
+      <tr class="sub"><td>对照：专家 2020 到 2026 年新加的边（真）</td><td>1,000</td><td>68%</td><td>100%</td></tr>
+      <tr class="hl"><td>RotatE + 文本，第一名建议</td><td>1,000</td><td>9%</td><td>0.2%</td></tr>
+      <tr><td>TransE，第一名建议</td><td>1,000</td><td>9%</td><td>0.1%</td></tr>
+      <tr><td>RotatE，第一名建议</td><td>1,000</td><td>7%</td><td>0.1%</td></tr>
+      <tr><td>文本，第一名建议</td><td>1,000</td><td>3%</td><td>0%</td></tr>
+      <tr class="sub"><td>对照：随机候选</td><td>1,000</td><td>0%</td><td>0%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>WordNet：建议来源</th><th>数量</th><th>多数评审判为正确</th><th>WordNet 可核实</th><th>查不到的建议中被判为正确</th></tr></thead>
+    <tbody>
+      <tr class="sub"><td>对照：测试集里的真实边</td><td>600</td><td>80%</td><td>100%</td><td>–</td></tr>
+      <tr><td>AnyBURL，第一名建议</td><td>1,498</td><td>43%</td><td>55%</td><td>16%</td></tr>
+      <tr class="hl"><td>RotatE，第一名建议</td><td>1,500</td><td>42%</td><td>51%</td><td>18.5%</td></tr>
+      <tr class="sub"><td>对照：随机候选</td><td>1,500</td><td>0%</td><td>0%</td><td>–</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">评审对真实边的认可率是 68% 到 90%，对随机候选是 0%，说明它们偏保守、不会乱给"正确"。WordNet 上把"查不到但评审认为对"的部分算进去，RotatE 第一名建议的真实准确率约从 51% 上调到 60%。</p>
+
+  <h3>完整的建议流水线</h3>
+  <div class="flow">
+    <div class="step"><span class="n">第 1 步</span><b>融合方法给候选</b><span>RotatE + TransE + 文本，每个概念 5 条，排除已知和可推导的</span></div>
+    <div class="step"><span class="n">第 2 步</span><b>三个 LLM 投票</b><span>多数同意才通过</span></div>
+    <div class="step"><span class="n">第 3 步</span><b>专家审核队列</b><span>只看通过的那部分</span></div>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>1,000 个随机 GO 概念 × 5 条建议</th><th>数值</th></tr></thead>
+    <tbody>
+      <tr><td>所有建议中，6 年内成真的</td><td>0.3%</td></tr>
+      <tr><td>LLM 投票通过的比例</td><td>6.8%（341 条）</td></tr>
+      <tr class="hl"><td>通过的建议中，6 年内成真的</td><td>3.8%</td></tr>
+      <tr><td>被拒的建议中，6 年内成真的</td><td>0.04%</td></tr>
+      <tr><td>成真的建议中，被 LLM 留下的</td><td>87%</td></tr>
+      <tr><td>至少有 1 条建议通过的概念</td><td>258 个</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p>"6 年内成真"是很严格的标准，因为专家不会主动去补每一条遗漏。被采纳但还没成真的建议，看起来大多合理，例如"脱落酸合成过程 是一种 激素合成过程"、"光感受器外段 是一种 纤毛"、"牙齿发生 是一种 器官发育"。这正是一份可以交给专家审核的候选清单：从 5,000 条压缩到 341 条，保留了 87% 的真建议。</p>
+  </div>
+
+  <h3>新概念应该挂在哪里</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>2020 年后新建的 1,465 个 GO 概念，找父节点</th><th>Hits@1</th><th>Hits@10</th></tr></thead>
+    <tbody>
+      <tr><td>文本（bge-large）</td><td>16.0%</td><td>40.6%</td></tr>
+      <tr><td>文本 + "文本 → RotatE"映射（不重训）</td><td>18.5%</td><td>46.8%</td></tr>
+      <tr><td>+ 父节点流行度先验</td><td>21.1%</td><td>55.0%</td></tr>
+      <tr class="hl"><td>+ Claude 重排序前 20 名（全量）</td><td>54.8%</td><td>–</td></tr>
+      <tr><td>纯 Claude 生成，不给候选（150 题抽样）</td><td>58.7%</td><td>Hits@5 86%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">文献参照：SNOMED 上最好的概念放置方法 P@1 4.5%、R@10 19.9%（Dong et al. 2023）。GO 的名称组合性很强（"正向调控 X"通常是"调控 X"的子类），所以文本信号也强。</p>
+</section>
+
+<section aria-labelledby="q3">
+  <div class="eyebrow">问题 3 · 大图性能</div>
+  <h2 id="q3">查询更快，准确率不会因此更好</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>节点数</th><th>嵌入暴力 kNN</th><th>2 跳 p99</th><th>3 跳 p50</th><th>3 跳 p99</th><th>3 跳最大覆盖</th></tr></thead>
+    <tbody>
+      <tr><td>1 万</td><td>0.07 ms</td><td>0.8 ms</td><td>0.6 ms</td><td>1.5 ms</td><td>95%</td></tr>
+      <tr><td>10 万</td><td>0.66 ms</td><td>7.2 ms</td><td>5.1 ms</td><td>15 ms</td><td>95%</td></tr>
+      <tr><td>100 万</td><td>6.6 ms</td><td>124 ms</td><td>43 ms</td><td>270 ms</td><td>94%</td></tr>
+      <tr class="hl"><td>300 万</td><td>19 ms</td><td>704 ms</td><td>268 ms</td><td>1,535 ms</td><td>94%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">幂律图（平均度 10），单线程 scipy 遍历。HNSW 索引在真实 RotatE 嵌入上单次查询 0.009 ms、召回率 99.9%；纯随机高斯向量是 ANN 的最坏情况，召回率只有 10% 到 47%，不代表真实嵌入。</p>
+
+  <h3>图变大之后，准确率怎么变</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>YAGO 子图（同一组 1,000 道测试题）</th><th>边数</th><th>规则 MRR</th><th>RotatE MRR</th><th>RotatE 训练时间</th></tr></thead>
+    <tbody>
+      <tr><td>4,874 个实体</td><td>1.5 万</td><td>0.639</td><td>0.619</td><td>30 秒</td></tr>
+      <tr><td>14,930</td><td>5.6 万</td><td>0.578</td><td>0.522</td><td>2 分钟</td></tr>
+      <tr><td>39,979</td><td>20.8 万</td><td>0.526</td><td>0.344</td><td>8 分钟</td></tr>
+      <tr class="hl"><td>123,143（全量）</td><td>108 万</td><td>0.478</td><td>0.147</td><td>34 分钟</td></tr>
+      <tr class="sub"><td>全量，同一配置训练到 150 个 epoch</td><td></td><td></td><td>0.156</td><td>3.7 小时</td></tr>
+      <tr class="sub" id="yago-lr"><td>全量，学习率降到 2e-3</td><td></td><td></td><td>0.21（10 到 50 个 epoch 基本不变）</td><td>1.2 小时</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p>同一套配置在 5 千节点上效果很好，到 12 万节点就失效了。训练更久补不回来；把学习率降到 2e-3 有一些改善（0.15 → 0.21），但离小图上的 0.62 仍然很远。论文里 RotatE 在 YAGO3-10 上能到约 0.49，用的是专门调过的配置和长得多的训练。结论是：嵌入在大图上的准确率不是"免费"的，每扩大一次规模，都需要重新调参并投入更多算力。规则方法的代价在另一个地方：全量 YAGO 上的规则索引有 4.8 亿个非零项。</p>
+    <p>训练成本大致是线性的：每百万条三元组、每个 epoch 约 48 秒（M5 Pro）。1 亿个实体的 256 维复数嵌入需要约 205 GB 参数，这个规模必须用 PyTorch-BigGraph 这类分片训练系统。</p>
+  </div>
+</section>
+
+<section aria-labelledby="q4">
+  <div class="eyebrow">问题 4 · 跨术语对齐</div>
+  <h2 id="q4">不会自然对齐，但在组合流程里有实际贡献</h2>
+  <h3>不给任何锚点：结构对齐只在"同源"的图上部分有效</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>场景</th><th>独立训练 + 余弦</th><th>最优传输（Gromov-Wasserstein）</th><th>随机水平</th></tr></thead>
+    <tbody>
+      <tr><td>FB15k-237 同源切分（2,500 节点子图）</td><td>随机</td><td>13.8%</td><td>0.04%</td></tr>
+      <tr><td>WordNet 同源切分</td><td>随机</td><td>1.9%</td><td>0.04%</td></tr>
+      <tr class="hl"><td>OAEI 解剖本体（两套独立构建）</td><td>0.2%</td><td><b>0.07%</b></td><td>0.03%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">Hits@1。嵌入只在旋转、反射、维度置换的意义下唯一，两次独立训练得到的坐标系之间没有关系，所以直接比余弦等于随机。最优传输按图的"形状"匹配，对同一份数据切出来的两张图有效，对独立建模的本体无效。</p>
+
+  <h3>OAEI 解剖本体：完全自动的流程</h3>
+  <div class="flow">
+    <div class="step"><span class="n">第 1 步</span><b>名称完全匹配</b><span>939 对，准确率 99%，当作自动锚点</span></div>
+    <div class="step"><span class="n">第 2 步</span><b>文本嵌入</b><span>bge-large，标签 + 同义词，生成候选</span></div>
+    <div class="step"><span class="n">第 3 步</span><b>联合图嵌入</b><span>锚点共享向量，作为结构修正</span></div>
+    <div class="step"><span class="n">第 4 步</span><b>LLM 核验</b><span>逐对判断"是不是同一个结构"</span></div>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>名称不同的 580 对难例（每题约 2,365 个候选）</th><th>Hits@1</th><th>Hits@10</th></tr></thead>
+    <tbody>
+      <tr><td>只用结构，不给锚点</td><td>0.2%</td><td>0.5%</td></tr>
+      <tr><td>不用嵌入的锚点邻域方法</td><td>7.6%</td><td>35.9%</td></tr>
+      <tr><td>只用结构，自动锚点联合训练 RotatE</td><td>21.7%</td><td>55.7%</td></tr>
+      <tr><td>字符串相似度</td><td>70.9%</td><td>92.1%</td></tr>
+      <tr><td>文本嵌入 bge-large（含同义词）</td><td>83.4%</td><td>97.4%</td></tr>
+      <tr class="hl"><td>文本嵌入 + 联合 RotatE</td><td><b>88.6%</b></td><td>98.4%</td></tr>
+      <tr><td>+ Claude 重排序前 10 名</td><td><b>96.5%</b></td><td>–</td></tr>
+      <tr><td>纯 Claude 生成，不给候选</td><td>82.2%</td><td>Hits@5 92.9%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>完整对齐结果（对照 OAEI 官方参考答案）</th><th>精确率</th><th>召回率</th><th>F1</th><th>难例召回</th></tr></thead>
+    <tbody>
+      <tr class="group"><td colspan="5">我们的流程</td></tr>
+      <tr><td>只用名称完全匹配</td><td>99.0%</td><td>61.3%</td><td>0.758</td><td>0%</td></tr>
+      <tr><td>+ 文本嵌入，不用 LLM</td><td>85.5%</td><td>90.8%</td><td>0.881</td><td>76.1%</td></tr>
+      <tr><td>+ 文本嵌入 + Claude 核验</td><td>96.5%</td><td>90.2%</td><td>0.932</td><td>74.6%</td></tr>
+      <tr class="hl"><td>+ 文本嵌入 + 图嵌入 + Claude 核验</td><td>96.4%</td><td>91.6%</td><td><b>0.939</b></td><td><b>78.3%</b></td></tr>
+      <tr><td>+ 文本嵌入 + 图嵌入 + GPT 核验</td><td>97.5%</td><td>90.2%</td><td>0.937</td><td>74.6%</td></tr>
+      <tr><td>+ 文本嵌入 + 图嵌入 + qwen3.5 核验（本地）</td><td>96.0%</td><td>87.7%</td><td>0.916</td><td>–</td></tr>
+      <tr class="group"><td colspan="5">OAEI 历年参赛系统（文献）</td></tr>
+      <tr><td>AML / Matcha（冠军）</td><td>95.6%</td><td>92.7%</td><td>0.941</td><td>81%</td></tr>
+      <tr><td>OLaLa（基于 LLM，2023）</td><td>92.4%</td><td>89.6%</td><td>0.910</td><td>72.6%</td></tr>
+      <tr><td>LogMap</td><td>91.7%</td><td>84.8%</td><td>0.881</td><td>60.2%</td></tr>
+      <tr><td>名称完全匹配基线</td><td>99.7%</td><td>62.2%</td><td>0.766</td><td>0%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p>在同一个 LLM 核验者下，加入图嵌入稳定提高结果：Claude 核验时 F1 从 0.932 升到 0.939，难例召回提高 3.7 个点；GPT 核验时从 0.929 升到 0.937。图嵌入在这里的角色是"结构修正"：它知道两个概念的上下位和组成关系是否吻合，能纠正一部分只看名称造成的误判。但它离不开文本和锚点。</p>
+    <p>在同源切分的 WordNet 上，用 30% 锚点联合训练，A 图里被改名的 11 种关系也能全部对上 B 图里的同类关系。这一点对同事的场景有用：两套本体的属性名不同时，可以先靠实体锚点把关系映射也推出来。</p>
+  </div>
+</section>
+
+<section aria-labelledby="model">
+  <div class="eyebrow">附：模型选择</div>
+  <h2 id="model">同一套训练配置，一半的模型直接失败</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>WordNet，统一配置（40 个 epoch，两个学习率取验证集更好的）</th><th>MRR</th><th>Hits@1</th><th>Hits@10</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>RotatE</td><td>0.497</td><td>0.453</td><td>0.579</td></tr>
+      <tr><td>PairRE</td><td>0.483</td><td>0.436</td><td>0.584</td></tr>
+      <tr><td>CrossE</td><td>0.428</td><td>0.409</td><td>0.464</td></tr>
+      <tr><td>ComplEx</td><td>0.385</td><td>0.379</td><td>0.394</td></tr>
+      <tr><td>SimplE</td><td>0.376</td><td>0.371</td><td>0.382</td></tr>
+      <tr><td>TransE</td><td>0.223</td><td>0.018</td><td>0.545</td></tr>
+      <tr><td>TransD、DistMult、TransH、QuatE、MuRE、AutoSF</td><td>≤ 0.06</td><td>–</td><td>–</td></tr>
+      <tr class="sub"><td>TuckER、BoxE</td><td colspan="3">在 Apple MPS 上无法运行或超时</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">失败反映的是"同一套配置不适合所有模型"，不是模型本身的上限。这也说明同事在自己配置下看到的效果，换个模型或换个配置未必能复现。TransE 表达不了对称关系，在 WordNet 上 Hits@1 只有 1.8%。</p>
+</section>
+
+<section aria-labelledby="recs">
+  <h2 id="recs">收敛版：针对同事的问题，可以怎么做</h2>
+  <ol class="recs">
+    <li><b>补全本体，找漏掉的关系：</b>(1) 先跑逻辑推理器，拿到可推导的那一半；(2) 用 RotatE、TransE 和文本嵌入做融合，生成候选；(3) 可解释的部分用 AnyBURL 规则给出路径；(4) LLM 投票过滤；(5) 专家审核。在 GO 上，融合把真正新关系的前 10 名命中率，从单一方法的 17% 到 27% 提高到 36%。</li>
+    <li><b>连接建议：</b>不要相信单次运行的单条建议。多个随机种子、多个模型取融合结果；LLM 投票做第一道过滤，把审核量降到约 7%；专家审核的结果持续记录下来，用来统计真实准确率、调整阈值。</li>
+    <li><b>大图性能：</b>需要"语义相近"的近似查询时，用嵌入 + HNSW；需要精确路径和约束时，用图数据库。每次扩大图的规模都重新调参。新概念用"文本 → 嵌入"的线性映射直接放置，再定期整体重训。</li>
+    <li><b>跨本体映射：</b>名称完全匹配作为锚点 → 文本嵌入（含同义词）生成候选 → 带锚点的联合图嵌入做结构修正 → LLM 逐对核验 → 最后做一致性检查（例如 LogMap 的逻辑修复，本实验没有做）。在 OAEI 解剖本体上，这套流程的 F1 达到 0.939。</li>
+    <li><b>评估方法：</b>不要只用"随机藏边"。有版本历史就做前瞻性测试（旧版本训练、新版本检验）；把"可推导"的边和"真正新的"分开报告；每次都和一个强规则基线、一个推理器、一个文本基线对比；建议类的结果用盲审评估，并混入正反对照。</li>
+  </ol>
+</section>
+
+<section aria-labelledby="next">
+  <h2 id="next">要在同事自己的数据上做实，还需要什么</h2>
+  <div class="prose">
+    <p>这里的结论都来自公开数据。同事的私有本体有两点不同：LLM 没见过它；它的术语和结构未必像 GO 那样规整。所以最后一步必须在他的数据上做。</p>
+  </div>
+  <ol class="recs">
+    <li><b>向他要三样东西：</b>本体本身（或脱敏样本）、当时的 PyKEEN 配置、让他觉得"真的有用"的几个具体例子。</li>
+    <li><b>复现他的轶事：</b>看那几个例子在规则基线、推理器和文本基线里能不能同样找到。如果能，说明那些发现并不需要嵌入。</li>
+    <li><b>如果本体有版本历史：</b>直接套用 GO 的前瞻性测试流程，这套代码已经写好。</li>
+    <li><b>盲审：</b>从嵌入、规则、随机三种来源各抽 50 条建议，打乱后请领域专家打分，同时让三个 LLM 评审也打分。专家结果作为最终标准，LLM 结果用来估计能否让 LLM 分担一部分专家的工作量。</li>
+    <li><b>如果有第二套术语体系要映射：</b>直接套用 OAEI 的四步流程，再请专家审核 100 到 200 对结果。</li>
+  </ol>
+</section>
+
+<section aria-labelledby="limits">
+  <h2 id="limits">局限</h2>
+  <ul class="plain">
+    <li>超参数只做了小范围搜索。RotatE 在 WordNet 上达到了论文水平，在全量 YAGO 上没有；PyKEEN 里不少模型在统一配置下训练失败。</li>
+    <li>GO 的"6 年内成真"是偏严的标准，专家不会补全所有遗漏，所以建议的真实准确率会高于这里的下限。盲审用来弥补这一点，但 LLM 评审也偏保守，对专家新加的边只认可 68%。</li>
+    <li>LLM 记住了不少公开本体的内容，GO 和 OAEI 上 LLM 的成绩可能偏高。</li>
+    <li>OAEI 只用了解剖学这一对本体，Bio-ML 等更大的赛道没有跑；流程里没有做逻辑一致性修复。</li>
+    <li>遍历延迟用的是单线程 scipy，没有和专门的图数据库比。Gemini 在中转站上的额度在最后一组实验中用完，WordNet 全量重排序只用了 GPT 和 Claude。</li>
+  </ul>
+</section>
+
+<section aria-labelledby="refs">
+  <h2 id="refs">相关文献</h2>
+  <p class="caption">完整调研约 75 篇，见仓库里的 research/literature_survey.md。</p>
+  <ul class="refs">
+    <li>Meilicke et al. AnyBURL（IJCAI 2019 及后续期刊版）；Ott et al. 2021 SAFRAN；Zhu et al. 2021 NBFNet：规则与路径方法可以匹敌甚至超过嵌入</li>
+    <li>Sun et al. 2020（ACL）；Ruffinelli et al. 2020（ICLR）；Rossi et al. 2021（TKDD）；Ali et al. 2021（TPAMI，PyKEEN 团队的复现研究）</li>
+    <li>Paliwal et al. 2020（Scientific Reports，Rosalind）：前瞻性验证，2005 年截断时 recall@200 为 23.9%</li>
+    <li>Dong et al. 2023（CIKM）：SNOMED 概念放置，P@1 4.5%</li>
+    <li>Chen et al. 2021 OWL2Vec*；Jackermeier et al. Box²EL；Nickel &amp; Kiela 2017 Poincaré 嵌入</li>
+    <li>OAEI Anatomy 历年结果；He et al. 2022 BERTMap；Hertling &amp; Paulheim 2023 OLaLa</li>
+    <li>Sun et al. 2020 OpenEA；Chen et al. 2017 MTransE；FGWEA（纯结构 GW 消融：Hits@1 0.004 到 0.011）</li>
+    <li>Lerer et al. 2019 PyTorch-BigGraph；Galkin et al. 2022 NodePiece、2024 ULTRA；Hu et al. OGB 与 WikiKG90M</li>
+    <li>Wang et al. 2022 SimKGC；Wei et al. 2023 KICGPT：LLM 与结构方法的混合</li>
+  </ul>
+</section>
+
+<section aria-labelledby="repro">
+  <h2 id="repro">复现</h2>
+  <p class="prose">代码在私有仓库 JesseQin123/pykeen-ontology-experiment。模型训练在本地 M5 Pro 上进行；LLM 和 embedding 推理走云端（自建中转站，以及 OpenRouter 上的 bge-large，它和本地 bge-large 的向量余弦相似度为 1.00000）。所有数字都能追溯到 results/SUMMARY.json、results/STATS.json 和各实验自己的 JSON 文件。</p>
+  <pre>uv sync
+uv run python experiments/exp4_go_temporal.py            # GO 2020→2026 前瞻性测试
+uv run python experiments/exp11_anyburl.py               # 正式 AnyBURL 基线
+uv run python experiments/exp5_oaei_anatomy.py           # OAEI 解剖本体对齐
+uv run python experiments/exp15_frontier_llm.py          # 前沿 LLM：重排序、生成、泄题检测、对齐核验
+uv run python experiments/exp16_llm_blind_rating.py      # 三评审盲审
+uv run python experiments/exp17_llm_on_structure.py      # 建议流水线、WordNet 全量重排序
+uv run python experiments/summarize.py &amp;&amp; uv run python experiments/stats.py</pre>
+</section>
+</main>

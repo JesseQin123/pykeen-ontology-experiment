@@ -11,7 +11,7 @@ anchor-neighbourhood matching) and with frontier LLMs as re-rankers, generators 
 4. Embeddings align two ontologies with different terms: renamed views, seed-free optimal transport, and the real
    OAEI Anatomy track (mouse vs. human) scored against the official reference.
 
-Results and the converged recommendations (Chinese, with an English summary): [REPORT.md](REPORT.md).
+Full report: [REPORT.md](REPORT.md) (English; HTML version in [docs/report.html](docs/report.html)). Chinese version: [REPORT.zh.md](REPORT.zh.md).
 All quoted numbers trace to `results/SUMMARY.json`, `results/STATS.json` and the per-experiment JSON files.
 
 ```bash

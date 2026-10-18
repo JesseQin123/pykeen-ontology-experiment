@@ -1,150 +1,160 @@
-# 图嵌入在语义本体图上到底有没有用（最终版）
+# Do graph embeddings actually help on semantic ontology graphs? (final report)
 
-2026-10-17 · 17 组实验 · PyKEEN 1.11 · 网页版（含完整表格）：https://claude.ai/artifact/AaLxK1ERkFzTmJxJapXfqA
+2026-10-17 · 17 experiments · PyKEEN 1.11 · HTML version with full tables: [docs/report.html](docs/report.html) ·
+中文版：[REPORT.zh.md](REPORT.zh.md)
 
-同事的问题：用 PyKEEN 做图嵌入，(1) 能不能发现图里漏掉的真实关系，(2) 能不能给出有用的连接建议，
-(3) 能不能提升大图上的性能，(4) 两张用不同术语描述同一批实体的图，嵌入能不能自动找出对应关系。
-每个说法都变成了可测量的实验，每个实验都配了不用嵌入的对照组。所有数字来自 `results/SUMMARY.json`、
-`results/STATS.json` 和各实验的 JSON。
+The question: with PyKEEN-style graph embeddings, (1) can we discover real relationships the graph is missing,
+(2) do we get useful suggested connections, (3) does it help performance on large graphs, and (4) given two graphs that
+use different terms for the same entities, will the embeddings find the correspondences and suggest mappings?
+Each claim became a measurable experiment, and every experiment is paired with a non-embedding baseline. All numbers
+come from `results/SUMMARY.json`, `results/STATS.json` and the per-experiment JSON files.
 
-## 结论
+## Findings
 
-| 主张 | 结果 | 关键证据 | 推荐做法 |
+| Claim | Verdict | Key evidence | Recommended practice |
 |---|---|---|---|
-| 1. 发现漏掉的关系 | 成立，但比看起来弱得多 | GO 2020→2026 前瞻测试：嵌入+文本融合对真正新关系 Hits@10 30–36%（2018→2020 复现 37%），规则 2.5–17%；同样方法在随机藏边上 MRR≈0.5，前瞻只有 0.1–0.19；58% 的新增边旧图已可推出，推理器把其中 93% 排进前 10 | 先跑推理器，再用嵌入+文本融合生成候选，LLM+专家筛选 |
-| 2. 有用的连接建议 | 需要过滤才可用 | 换种子后第一名建议 41% 会变；随机概念的建议 6 年内被采纳约 0.3%；三个 LLM 盲审（kappa 0.75–0.81）认可约 9%；嵌入候选+LLM 投票过滤后，成真率是被拒建议的 89 倍，保留 87% 的真建议 | 多种子多模型融合；LLM 投票做第一道过滤；专家审核 |
-| 3. 大图性能 | 查询速度成立，准确率不成立 | 300 万节点 3 跳 p99 1.5 s，HNSW 0.01 ms、召回 99.9%；同配置下 YAGO 从 5 千扩到 12 万实体，RotatE MRR 0.62→0.15，150 epoch 也只有 0.16，降低学习率只到 0.21；规则 0.64→0.48 | 近似查询用嵌入+ANN，精确查询用图数据库；随规模重新调参；新概念用文本→嵌入映射放置 |
-| 4. 自然跨术语对齐 | 不会自然发生 | OAEI 解剖本体（独立构建）：所有无锚点结构方法都是随机水平（GW 最优传输 0.07%）；自动锚点+文本+图嵌入难例 Hits@1 83.4%→88.6%；文本+图嵌入+Claude 核验 F1 0.939（冠军 AML 0.941） | 名称匹配锚点 → 文本候选 → 联合图嵌入修正 → LLM 核验 |
+| 1. Discovers missing relationships | True, but much weaker than it looks | GO trained on 2020, scored on 2026 curator additions: embedding + text fusion reaches Hits@10 0.30–0.36 on genuinely new links (0.37 on a 2018→2020 replication), rules 0.03–0.17. The same methods score MRR ≈ 0.5 on random hold-out but 0.10–0.19 prospectively. 58% of additions were already entailed; a reasoner ranks 93% of those in its top 10 | Reasoner first, then embedding + text fusion for candidates, then LLM and expert filtering |
+| 2. Useful suggested connections | Usable only with filtering | Top-1 suggestions change 41% of the time across seeds; about 0.3% of suggestions for random concepts were adopted within six years; three LLM judges (kappa 0.75–0.81) accept about 9%; candidates + LLM majority vote enrich later-realized suggestions 89-fold and keep 87% of them | Fuse seeds and models; LLM vote as first filter; expert review |
+| 3. Performance on large graphs | Faster queries, not better accuracy | 3-hop traversal p99 1.5 s at 3M nodes vs. HNSW 0.01 ms with 99.9% recall; under a fixed configuration RotatE MRR falls 0.62 → 0.15 as YAGO grows 5k → 123k entities (150 epochs: 0.16; lower learning rate: 0.21); rules 0.64 → 0.48 | Embeddings + ANN for approximate queries, graph database for exact ones; retune at each scale; place new concepts via a text-to-embedding mapping |
+| 4. Naturally crosses taxonomies | Does not happen on its own | OAEI Anatomy (independently built): every seed-free structural method is at chance (Gromov-Wasserstein 0.07% Hits@1); with exact-label anchors, text + joint KGE lifts hard-pair Hits@1 from 83.4% to 88.6%; text + KGE + Claude verification F1 0.939 (AML, the winner: 0.941) | Exact-label anchors → text candidates → joint KGE correction → LLM verification |
 
-## 实验设计
+## Experimental design
 
-| 数据集 | 用途 |
+| Dataset | Purpose |
 |---|---|
-| WordNet（WN18RR） | 标准语义本体基准，问题 1、2 热身 |
-| Gene Ontology 2018/2020/2024/2026 版 | 旧版本训练、新版本检验："真发现"的唯一检验方式（问题 1、2） |
-| YAGO3-10 | 12 万实体、108 万边，检验规模（问题 3） |
-| OAEI 解剖本体（小鼠 vs 人类） | 两套独立构建、术语不同、有专家答案的本体（问题 4） |
-| FB15k-237 | 稠密图，对照稀疏度对对齐的影响 |
+| WordNet (WN18RR) | Standard semantic-ontology benchmark; warm-up for Q1 and Q2 |
+| Gene Ontology releases 2018 / 2020 / 2024 / 2026 | Train on an old release, test on a newer one: the only real test of discovery (Q1, Q2) |
+| YAGO3-10 | 123k entities, 1.08M edges, for scale (Q3) |
+| OAEI Anatomy (mouse vs. human) | Two independently built ontologies with different terms and an expert reference alignment (Q4) |
+| FB15k-237 | A dense graph, as a control for density in alignment |
 
-对照组：流行度、正式 AnyBURL、is_a 传递性推理器、文本嵌入（bge-large）、锚点邻域匹配。LLM：本地 qwen3.5-27B，
-中转站上的 Claude Opus 5.5、GPT-6.1、Gemini 4。统一的 filtered ranking（头尾双向，并列取期望排名），配对 bootstrap 95% CI。
+Baselines: popularity, the published AnyBURL rule learner, an is_a transitivity reasoner, label-text embeddings
+(bge-large), and anchor-neighbourhood matching. LLMs: local qwen3.5-27B; Claude Opus 5.5, GPT-6.1 and Gemini 4 via a
+relay. Protocol: filtered ranking, both directions, expected rank on ties; paired-bootstrap 95% CIs.
 
-## 问题 1：发现漏掉的关系
+## Question 1: discovering missing relationships
 
-**WordNet 随机藏边（5,848 个查询）**
+**WordNet random hold-out (5,848 queries)**
 
-| 方法 | MRR | Hits@1 | Hits@10 |
+| Method | MRR | Hits@1 | Hits@10 |
 |---|---|---|---|
-| 融合 + Claude 重排序前 20 | 0.580 | 0.519 | 0.5190 |
-| 融合 + GPT-6.1 重排序前 20 | 0.568 | 0.499 | 0.648 |
-| AnyBURL 优先、RotatE 兜底 | 0.523 | 0.479 | 0.609 |
-| 融合（AnyBURL+RotatE+TransE） | 0.522 | 0.472 | 0.619 |
+| Fusion + Claude re-ranking the top 20 | 0.580 | 0.519 | 0.651 |
+| Fusion + GPT-6.1 re-ranking the top 20 | 0.568 | 0.499 | 0.648 |
+| AnyBURL first, RotatE for the rest | 0.523 | 0.479 | 0.609 |
+| Fusion (AnyBURL + RotatE + TransE) | 0.522 | 0.472 | 0.619 |
 | AnyBURL | 0.517 | 0.475 | 0.592 |
-| RotatE（3 seeds，sd 0.0014） | 0.487 | 0.434 | 0.587 |
-| 自写 ≤2 跳规则 | 0.424 | 0.405 | 0.459 |
+| RotatE (3 seeds, sd 0.0014) | 0.487 | 0.434 | 0.587 |
+| Our own path rules (length ≤ 2) | 0.424 | 0.405 | 0.459 |
 | TransE | 0.214 | 0.012 | 0.541 |
 
-AnyBURL − RotatE：MRR +0.029 [+0.023, +0.035]。第一版报告的"嵌入胜过图搜索"源于规则对照组太弱。
+AnyBURL − RotatE: MRR +0.029 [+0.023, +0.035]. The first report's "embeddings beat graph search" came from a rule
+baseline that was too weak.
 
-**GO 2020→2026 前瞻测试**（6,412 条新增边：3,743 条可推导，2,669 条真正新；同期删除 6,758 条）
+**GO 2020 → 2026 prospective test** (6,412 added links: 3,743 entailed, 2,669 genuinely new; 6,758 removed in the same period)
 
-| 方法（子→父） | 全部 MRR | 全部 H@10 | 新关系 H@1 | 新关系 H@10 | 可推导 H@10 |
+| Method (child → parent) | All MRR | All H@10 | New H@1 | New H@10 | Entailed H@10 |
 |---|---|---|---|---|---|
-| 推理器（is_a 传递性） | 0.283 | 0.543 | 0.000 | 0.007 | 0.926 |
-| 融合（全部 + 推理器） | 0.260 | 0.473 | 0.069 | 0.280 | 0.611 |
-| 融合（RotatE+TransE+文本） | 0.185 | 0.383 | 0.091 | 0.362 | 0.398 |
-| RotatE + 文本 | 0.142 | 0.298 | 0.081 | 0.299 | 0.297 |
+| Reasoner (is_a transitivity) | 0.283 | 0.543 | 0.000 | 0.007 | 0.926 |
+| Fusion (all methods + reasoner) | 0.260 | 0.473 | 0.069 | 0.280 | 0.611 |
+| Fusion (RotatE + TransE + text) | 0.185 | 0.383 | 0.091 | 0.362 | 0.398 |
+| RotatE + text | 0.142 | 0.298 | 0.081 | 0.299 | 0.297 |
 | TransE | 0.113 | 0.344 | 0.012 | 0.273 | 0.394 |
-| Poincaré（50 维，is_a） | 0.104 | 0.218 | – | – | – |
+| Poincaré (50-d, is_a only) | 0.104 | 0.218 | – | – | – |
 | RotatE | 0.093 | 0.202 | 0.045 | 0.208 | 0.198 |
 | AnyBURL | 0.092 | 0.177 | 0.048 | 0.173 | 0.180 |
-| 文本（bge-large） | 0.084 | 0.205 | 0.043 | 0.219 | 0.194 |
-| 自写 ≤2 跳规则 | 0.012 | 0.025 | 0.007 | 0.025 | 0.025 |
+| Text (bge-large) | 0.084 | 0.205 | 0.043 | 0.219 | 0.194 |
+| Our own path rules (length ≤ 2) | 0.012 | 0.025 | 0.007 | 0.025 | 0.025 |
 
-新关系上，RotatE+文本 vs RotatE：MRR +0.055 [+0.046, +0.063]；vs 文本：+0.058 [+0.048, +0.069]。
-2018→2020 复现：RotatE+文本新关系 MRR 0.183、H@10 0.366。纠错 AUC（模型给后来被删的边打低分）：0.65–0.69，规则 0.48。
+On new links, RotatE + text vs. RotatE: MRR +0.055 [+0.046, +0.063]; vs. text: +0.058 [+0.048, +0.069].
+2018 → 2020 replication: RotatE + text reaches MRR 0.183 and H@10 0.366 on new links. Error detection (scoring links that
+curators later removed lower than kept ones): AUC 0.65–0.69; rules 0.48.
 
-**LLM（Hits@1）**
+**LLMs (Hits@1)**
 
-| 任务 | 候选本身 | +qwen | +Claude | +GPT | 纯 Claude |
+| Task | Candidates alone | + qwen | + Claude | + GPT | Claude alone |
 |---|---|---|---|---|---|
-| GO 新增 is_a（全量 2,386） | 8% | 18%* | 23.6% | 21.6% | 26%* |
-| GO 新概念（全量 1,465） | 29%* | 40%* | 54.8% | 51.7% | 58.7%* |
-| OAEI 难例（580） | 83.8% | 94.3% | 96.5% | 95.5% | 82.2% |
+| GO new is_a links (all 2,386) | 8% | 18%* | 23.6% | 21.6% | 26%* |
+| GO new concepts (all 1,465) | 29%* | 40%* | 54.8% | 51.7% | 58.7%* |
+| OAEI hard pairs (580) | 83.8% | 94.3% | 96.5% | 95.5% | 82.2% |
 
-\* 150 题抽样。泄题检测（说出 GO ID）：Claude 老概念 75%、2024–26 新概念 11%；GPT 46% / 0%。
+\* 150-question sample. Contamination probe (naming the GO ID): Claude 75% for older concepts and 11% for concepts created
+in 2024–26; GPT 46% / 0%.
 
-## 问题 2：连接建议
+## Question 2: suggested connections
 
-- 种子稳定性：三个只差种子的 RotatE，第一名建议一致 59%，前 10 平均重合 7 个。
-- 三评审盲审（Claude/GPT/Gemini，kappa 0.75–0.81）。GO 第一名建议被多数判对：RotatE+文本 9%、TransE 9%、RotatE 7%、文本 3%；
-  对照：专家新增边 68%、已有边 90%、随机 0%。WordNet：AnyBURL 43%、RotatE 42%；WordNet 查不到的建议中被判对 16% / 18.5%。
-- 建议流水线（1,000 概念 × 5 条）：6 年内成真 0.3%；LLM 多数通过 6.8%；通过者成真 3.8%，被拒者 0.04%（89 倍）；成真者 87% 被保留。
-- 新概念放置（1,465 个）：文本 16.0% / 40.6%（H@1/H@10）；+文本→RotatE 映射 18.5% / 46.8%；+流行度先验 21.1% / 55.0%；+Claude 重排序 54.8%。
+- Seed stability: three RotatE runs differing only in seed agree on the top-1 suggestion 59% of the time and share 7 of the top 10 on average.
+- Three-judge blind rating (Claude / GPT / Gemini, kappa 0.75–0.81). GO top suggestions judged correct by majority:
+  RotatE + text 9%, TransE 9%, RotatE 7%, text 3%; controls: curator additions 68%, existing links 90%, random 0%.
+  WordNet: AnyBURL 43%, RotatE 42%; among suggestions WordNet cannot confirm, 16% / 18.5% judged correct.
+- Suggestion pipeline (1,000 concepts × 5): 0.3% came true within six years; 6.8% pass the LLM majority vote;
+  3.8% of passed vs. 0.04% of rejected came true (89-fold); 87% of true ones kept.
+- New-concept placement (1,465 concepts): text 16.0% / 40.6% (H@1 / H@10); + text → RotatE mapping 18.5% / 46.8%;
+  + popularity prior 21.1% / 55.0%; + Claude re-ranking 54.8%.
 
-## 问题 3：大图性能
+## Question 3: large graphs
 
-| 节点 | 暴力 kNN | 2 跳 p99 | 3 跳 p50 | 3 跳 p99 |
+| Nodes | Brute-force kNN | 2-hop p99 | 3-hop p50 | 3-hop p99 |
 |---|---|---|---|---|
-| 1 万 | 0.07 ms | 0.8 ms | 0.6 ms | 1.5 ms |
-| 100 万 | 6.6 ms | 124 ms | 43 ms | 270 ms |
-| 300 万 | 19 ms | 704 ms | 268 ms | 1,535 ms |
+| 10k | 0.07 ms | 0.8 ms | 0.6 ms | 1.5 ms |
+| 1M | 6.6 ms | 124 ms | 43 ms | 270 ms |
+| 3M | 19 ms | 704 ms | 268 ms | 1,535 ms |
 
-HNSW：真实 RotatE 嵌入 0.009 ms、召回 99.9%。训练约 48 s / 百万三元组 / epoch。
+HNSW over real RotatE embeddings: 0.009 ms per query, 99.9% recall. Training: about 48 s per million triples per epoch.
 
-| YAGO（同一组 1,000 题） | 边数 | 规则 MRR | RotatE MRR |
+| YAGO (same 1,000 test triples) | Edges | Rules MRR | RotatE MRR |
 |---|---|---|---|
-| 4,874 实体 | 1.5 万 | 0.639 | 0.619 |
-| 14,930 | 5.6 万 | 0.578 | 0.522 |
-| 39,979 | 20.8 万 | 0.526 | 0.344 |
-| 123,143 | 108 万 | 0.478 | 0.147 |
-| 全量，150 epoch | | | 0.156 |
-| 全量，学习率 2e-3 | | | 0.21（10 到 50 个 epoch 基本不变） |
+| 4,874 entities | 15k | 0.639 | 0.619 |
+| 14,930 | 56k | 0.578 | 0.522 |
+| 39,979 | 208k | 0.526 | 0.344 |
+| 123,143 | 1.08M | 0.478 | 0.147 |
+| Full, 150 epochs | | | 0.156 |
+| Full, learning rate 2e-3 | | | 0.21 (flat from 10 to 50 epochs) |
 
-## 问题 4：跨术语对齐
+## Question 4: crossing taxonomies
 
-无锚点（Hits@1）：FB15k-237 同源切分 GW 13.8%，WordNet 同源 1.9%，OAEI 独立本体 0.07%（随机 0.03%）。
+Seed-free (Hits@1): FB15k-237 views GW 13.8%, WordNet views 1.9%, independently built OAEI ontologies 0.07% (chance 0.03%).
 
-OAEI 难例 580 对：结构无锚点 0.2%；锚点邻域 7.6%；自动锚点联合 RotatE 21.7%；字符串 70.9%；bge-large 83.4%；
-bge-large+联合 RotatE 88.6%；+Claude 重排序 96.5%；纯 Claude 82.2%。
+OAEI hard pairs (580): structure without anchors 0.2%; anchor-neighbourhood 7.6%; joint RotatE over automatic anchors
+21.7%; string similarity 70.9%; bge-large 83.4%; bge-large + joint RotatE 88.6%; + Claude re-ranking 96.5%; Claude alone 82.2%.
 
-| 完整对齐 | P | R | F1 |
+| Full alignment | P | R | F1 |
 |---|---|---|---|
-| 名称完全匹配 | 0.990 | 0.613 | 0.758 |
-| +文本+Claude 核验 | 0.965 | 0.902 | 0.932 |
-| +文本+图嵌入+Claude 核验 | 0.964 | 0.916 | 0.939 |
-| +文本+图嵌入+GPT 核验 | 0.975 | 0.902 | 0.937 |
-| AML / Matcha（冠军，文献） | 0.956 | 0.927 | 0.941 |
-| OLaLa（LLM，文献） | 0.924 | 0.896 | 0.910 |
-| LogMap（文献） | 0.917 | 0.848 | 0.881 |
+| Exact label matches | 0.990 | 0.613 | 0.758 |
+| + text + Claude verification | 0.965 | 0.902 | 0.932 |
+| + text + graph embeddings + Claude verification | 0.964 | 0.916 | 0.939 |
+| + text + graph embeddings + GPT verification | 0.975 | 0.902 | 0.937 |
+| AML / Matcha (winners, literature) | 0.956 | 0.927 | 0.941 |
+| OLaLa (LLM-based, literature) | 0.924 | 0.896 | 0.910 |
+| LogMap (literature) | 0.917 | 0.848 | 0.881 |
 
-## 模型选择（WordNet，统一配置）
+## Model choice (WordNet, shared configuration)
 
-RotatE 0.497、PairRE 0.483、CrossE 0.428、ComplEx 0.385、SimplE 0.376、TransE 0.223；TransD、DistMult、TransH、QuatE、
-MuRE、AutoSF ≤ 0.06（训练失败）；TuckER、BoxE 在 MPS 上无法运行。
+RotatE 0.497, PairRE 0.483, CrossE 0.428, ComplEx 0.385, SimplE 0.376, TransE 0.223; TransD, DistMult, TransH, QuatE,
+MuRE and AutoSF ≤ 0.06 (failed to train); TuckER and BoxE could not run on MPS.
 
-## 收敛版做法
+## The converged method
 
-1. **补全本体**：推理器 → 嵌入（RotatE+TransE）+文本融合候选 → AnyBURL 给可解释路径 → LLM 投票 → 专家审核。
-2. **连接建议**：多种子多模型融合；LLM 投票把审核量降到约 7%；记录专家结论，统计真实准确率。
-3. **大图**：近似"相关概念"查询用嵌入+HNSW，精确查询用图数据库；随规模重新调参；新概念用文本→嵌入映射。
-4. **跨本体映射**：名称匹配锚点 → 文本候选（含同义词）→ 联合图嵌入修正 → LLM 核验 →（建议）逻辑修复。
-5. **评估**：前瞻性测试优先于随机藏边；分开报告可推导与真正新的边；必须有强规则、推理器、文本三个基线；建议用带正反对照的盲审。
+1. **Completing an ontology:** reasoner → embedding (RotatE + TransE) + text fusion for candidates → AnyBURL for explainable paths → LLM vote → expert review.
+2. **Suggested connections:** fuse seeds and models; an LLM vote cuts review volume to about 7%; record expert decisions to measure real precision.
+3. **Large graphs:** embeddings + HNSW for approximate "related concept" queries, graph database for exact ones; retune at each scale; place new concepts with a text-to-embedding mapping.
+4. **Cross-ontology mapping:** exact-label anchors → text candidates with synonyms → joint graph embedding as structural correction → LLM verification → (recommended) logical repair.
+5. **Evaluation:** prefer prospective tests to random hold-out; report entailed and new links separately; always include a strong rule baseline, a reasoner and a text baseline; rate suggestions blind with positive and negative controls.
 
-## 在同事数据上完成验证还需要
+## What it takes to confirm this on the original ontology
 
-1. 他的本体（或脱敏样本）、PyKEEN 配置、具体的"成功例子"。
-2. 用规则、推理器、文本基线复现这些例子，判断是否真的需要嵌入。
-3. 有版本历史就套用 GO 前瞻流程（代码已就绪）。
-4. 三种来源各 50 条建议，专家 + 三个 LLM 盲审。
-5. 有第二套术语就套用 OAEI 四步流程，专家审核 100–200 对。
+1. The ontology (or an anonymized sample), the PyKEEN configuration, and the specific examples that looked useful.
+2. Reproduce those examples with the rule, reasoner and text baselines to see whether embeddings were needed.
+3. With version history, apply the GO prospective protocol (code ready).
+4. 50 suggestions each from embeddings, rules and random, rated blind by experts and the three LLM judges.
+5. With a second vocabulary, apply the OAEI four-step pipeline and have experts review 100–200 pairs.
 
-## 局限
+## Limitations
 
-超参数只小范围搜索；GO"6 年内成真"是偏严的下限；LLM 背过公开本体；OAEI 只用了解剖赛道，未做逻辑修复；
-遍历延迟用单线程 scipy；Gemini 中转额度用尽，WordNet 全量重排序只有 GPT 和 Claude。
+Limited hyperparameter search; "came true in GO within six years" is a strict lower bound; LLMs have memorized public
+ontologies; only the OAEI Anatomy track was used and no logical repair was done; traversal used single-threaded scipy;
+Gemini's relay quota ran out, so the full WordNet re-ranking uses only GPT and Claude.
 
-## 复现
+## Reproducing
 
 ```bash
 uv sync
@@ -157,26 +167,26 @@ uv run python experiments/exp17_llm_on_structure.py
 uv run python experiments/summarize.py && uv run python experiments/stats.py
 ```
 
-推理走云端：`.env`（不入库）需要 `RELAY_BASE_URL`、`RELAY_API_KEY`、`OPENROUTER_BASE_URL`、`OPENROUTER_API_KEY`。
-训练在本地（Apple MPS）。AnyBURL 需要 Java（`brew install openjdk`）和 `tools/anyburl/AnyBURL-23-1x.jar`。
-GO 版本和 OAEI 数据下载到 `data/`（不入库）。
+Inference runs on hosted endpoints configured in a gitignored `.env` (`RELAY_BASE_URL`, `RELAY_API_KEY`,
+`OPENROUTER_BASE_URL`, `OPENROUTER_API_KEY`); training runs locally (Apple MPS). AnyBURL needs Java
+(`brew install openjdk`) and `tools/anyburl/AnyBURL-23-1x.jar`. GO releases and OAEI data download into `data/` (not committed).
 
-| 实验 | 文件 |
+| Experiment | File |
 |---|---|
-| 1 WN18RR 链接预测与建议核对 | `exp1_link_prediction.py` |
-| 2 查询延迟、训练成本、ANN | `exp2_scaling.py`、`exp2b_ann_realistic.py` |
-| 3 同源切分对齐 | `exp3_alignment.py` |
-| 4 GO 前瞻测试 | `exp4_go_temporal.py` |
-| 5 OAEI 解剖本体 | `exp5_oaei_anatomy.py`、`exp5b_oaei_ablation.py` |
-| 6 无锚点对齐（GW） | `exp6_unsupervised_alignment.py` |
-| 7 模型全家桶 | `exp7_model_zoo.py` |
-| 8 YAGO 规模与训练曲线 | `exp8_scale_accuracy.py`、`exp8b_yago_training_curve.py` |
+| 1 WN18RR link prediction and suggestion checks | `exp1_link_prediction.py` |
+| 2 query latency, training cost, ANN | `exp2_scaling.py`, `exp2b_ann_realistic.py` |
+| 3 alignment of renamed views | `exp3_alignment.py` |
+| 4 GO prospective test | `exp4_go_temporal.py` |
+| 5 OAEI Anatomy | `exp5_oaei_anatomy.py`, `exp5b_oaei_ablation.py` |
+| 6 seed-free alignment (GW) | `exp6_unsupervised_alignment.py` |
+| 7 model zoo | `exp7_model_zoo.py` |
+| 8 YAGO scale and training curves | `exp8_scale_accuracy.py`, `exp8b_yago_training_curve.py` |
 | 9 Poincaré | `exp9_hyperbolic_go.py` |
-| 10 新概念放置 | `exp10_new_terms.py` |
+| 10 new-concept placement | `exp10_new_terms.py` |
 | 11 AnyBURL | `exp11_anyburl.py` |
-| 12 种子稳定性 | `exp12_seed_stability.py` |
-| 13 融合 | `exp13_ensembles.py` |
-| 14 题集导出、本地 LLM | `exp14_llm.py` |
-| 15 前沿 LLM | `exp15_frontier_llm.py` |
-| 16 三评审盲审 | `exp16_llm_blind_rating.py` |
-| 17 LLM 叠加结构 | `exp17_llm_on_structure.py` |
+| 12 seed stability | `exp12_seed_stability.py` |
+| 13 fusion | `exp13_ensembles.py` |
+| 14 question sets, local LLM | `exp14_llm.py` |
+| 15 frontier LLMs | `exp15_frontier_llm.py` |
+| 16 three-judge blind rating | `exp16_llm_blind_rating.py` |
+| 17 LLMs on top of structure | `exp17_llm_on_structure.py` |

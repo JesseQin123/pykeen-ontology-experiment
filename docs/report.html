@@ -1,0 +1,479 @@
+<title>KGE on Ontology Graphs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650&display=swap">
+<style>
+/* Layout: one reading column (~70ch) with full-width evidence tables; verdict chips encode each claim's outcome. */
+:root {
+  --bg: #f5f6f4;
+  --surface: #ffffff;
+  --ink: #17201f;
+  --muted: #5b6765;
+  --rule: #d8dedb;
+  --accent: #0f6b62;
+  --accent-soft: #dcefeb;
+  --warn: #9a5b00;
+  --warn-soft: #fbefd9;
+  --bad: #a3302a;
+  --bad-soft: #f8e1df;
+  --good: #1f6f3a;
+  --good-soft: #def0e3;
+  --bar: #8a9491;
+  --f-display: "Source Serif 4", Georgia, serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111716; --surface: #182120; --ink: #e4ebe9; --muted: #9aa8a5; --rule: #2c3836;
+  --accent: #5cc4b6; --accent-soft: #173a36; --warn: #e3a54a; --warn-soft: #3a2c14;
+  --bad: #ef8a80; --bad-soft: #3d1f1d; --good: #7fd09a; --good-soft: #17331f; --bar: #7d8986; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #111716; --surface: #182120; --ink: #e4ebe9; --muted: #9aa8a5; --rule: #2c3836;
+  --accent: #5cc4b6; --accent-soft: #173a36; --warn: #e3a54a; --warn-soft: #3a2c14;
+  --bad: #ef8a80; --bad-soft: #3d1f1d; --good: #7fd09a; --good-soft: #17331f; --bar: #7d8986; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px; }
+main { max-width: 880px; margin: 0 auto; display: grid; gap: 56px; }
+.prose { max-width: 70ch; display: grid; gap: 12px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.25; margin: 0; }
+h1 { font-size: clamp(30px, 5vw, 42px); font-weight: 650; }
+h2 { font-size: 26px; font-weight: 650; }
+h3 { font-size: 18px; font-weight: 650; font-family: var(--f-body); }
+p { margin: 0; }
+section { display: grid; gap: 18px; min-width: 0; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+code { font-family: var(--f-mono); font-size: .88em; }
+a { color: var(--accent); }
+header { display: grid; gap: 14px; }
+.question { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; color: var(--muted); font-size: 15px; max-width: 74ch; }
+
+.verdicts { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.verdict { background: var(--surface); padding: 18px 20px; display: grid; grid-template-columns: 11.5em 1fr; gap: 8px 18px; align-items: start; }
+.verdict h3 { grid-column: 1 / -1; }
+.verdict > div { min-width: 0; display: grid; gap: 8px; }
+.verdict .how { font-size: 14px; color: var(--muted); }
+.verdict .how b { color: var(--ink); font-weight: 600; }
+@media (max-width: 600px) { .verdict { grid-template-columns: 1fr; } }
+.chip { display: inline-block; font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px; justify-self: start; }
+.chip.warn { background: var(--warn-soft); color: var(--warn); }
+.chip.bad { background: var(--bad-soft); color: var(--bad); }
+
+ul.plain, ol.recs { margin: 0; padding-left: 1.25em; display: grid; gap: 8px; max-width: 74ch; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 9px 14px; text-align: right; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+td.wrap, th.wrap { white-space: normal; text-align: left; min-width: 14em; }
+thead th { font-weight: 600; color: var(--muted); font-size: 12px; letter-spacing: .04em; background: var(--bg); }
+tbody tr:last-child td { border-bottom: 0; }
+tr.hl td { background: var(--accent-soft); }
+tr.sub td { color: var(--muted); font-size: 13px; }
+tr.group td { font-weight: 600; text-align: left; background: var(--bg); }
+.caption { font-size: 13px; color: var(--muted); max-width: 74ch; }
+
+.bars { display: grid; gap: 8px; }
+.bar { display: grid; grid-template-columns: 15em 1fr 3.6em; gap: 12px; align-items: center; font-size: 14px; }
+.bar .track { height: 14px; background: var(--bg); border-radius: 3px; overflow: hidden; border: 1px solid var(--rule); }
+.bar .fill { height: 100%; background: var(--bar); }
+.bar.key .fill { background: var(--accent); }
+.bar .v { font-family: var(--f-mono); font-size: 13px; text-align: right; }
+@media (max-width: 520px) { .bar { grid-template-columns: 9em 1fr 3.2em; } }
+
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; display: grid; gap: 2px; }
+.stat b { font-family: var(--f-mono); font-size: 24px; font-weight: 500; }
+.stat span { font-size: 13px; color: var(--muted); }
+
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.step { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; font-size: 14px; }
+.step .n { font-family: var(--f-mono); font-size: 12px; color: var(--accent); }
+.step b { font-weight: 600; }
+
+.callout { background: var(--warn-soft); border-radius: 10px; padding: 14px 18px; font-size: 15px; max-width: 80ch; }
+.refs { font-size: 14px; color: var(--muted); margin: 0; padding-left: 1.2em; }
+.refs li { margin-bottom: 4px; }
+pre { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-family: var(--f-mono); font-size: 13px; line-height: 1.6; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">KGE validation · final report · 2026-10-17 · 17 experiments · PyKEEN 1.11</div>
+  <h1>Do graph embeddings actually help on semantic ontology graphs?</h1>
+  <p class="question">The question: with PyKEEN-style graph embeddings, (1) can we discover real relationships the graph is missing, (2) do we get useful suggested connections, (3) does it help performance on large graphs, and (4) given two graphs that use different terms for the same entities, will the embeddings find the correspondences and suggest mappings? As the question itself put it, the plural of anecdote is not data. This report turns each claim into a measurable experiment, pairs every experiment with a non-embedding baseline, and converges on a method you can follow.</p>
+</header>
+
+<section aria-labelledby="tldr">
+  <h2 id="tldr">Findings and recommended practice</h2>
+  <div class="verdicts">
+    <div class="verdict">
+      <h3>1. Discovering relationships the graph is missing</h3>
+      <span class="chip warn">True, but much weaker than it looks</span>
+      <div>
+        <p>We trained on the 2020 Gene Ontology and scored predictions against the links curators actually added by 2026. On genuinely new relationships, fusing embeddings with label text reaches Hits@10 of 30–36% (37% on a 2018 → 2020 replication), against 2.5–17% for rule learners. Embeddings do find relationships that graph search cannot reach. But the same methods score MRR ≈ 0.5 on the usual random hold-out and only 0.10–0.19 prospectively, so the standard evaluation overstates real ability 3–5 times. Also, 58% of the links curators added were already implied by the old graph, and a simple reasoner puts 93% of those in its top 10.</p>
+        <p class="how"><b>Practice:</b> run a reasoner first to collect the "free" half; generate candidates by fusing embeddings with text; then filter with an LLM and experts.</p>
+      </div>
+    </div>
+    <div class="verdict">
+      <h3>2. Useful suggested connections</h3>
+      <span class="chip warn">Usable only with filtering</span>
+      <div>
+        <p>Changing only the random seed changes the top suggestion 41% of the time. For random concepts, about 0.3% of suggestions were adopted by curators within six years. Three frontier LLM judges rating blind (pairwise kappa 0.75–0.81) accept about 9% of top suggestions. A pipeline of embedding candidates plus an LLM majority vote does work: suggestions that pass the vote later came true 89 times as often as rejected ones, and the vote kept 87% of the suggestions that came true.</p>
+        <p class="how"><b>Practice:</b> fuse several seeds and models to reduce noise; use an LLM vote as the first filter; send what remains to an expert review queue and track the outcomes to measure real precision.</p>
+      </div>
+    </div>
+    <div class="verdict">
+      <h3>3. Performance on large graphs</h3>
+      <span class="chip warn">Faster queries, not better accuracy</span>
+      <div>
+        <p>On a 3-million-node graph, 3-hop traversal has a p99 of 1.5 s, while an HNSW index over embeddings answers in 0.01 ms with 99.9% recall on real embeddings. Accuracy, however, falls with size. On the same test questions, as YAGO grows from 5k to 123k entities, RotatE MRR under a fixed configuration falls from 0.62 to 0.15. Training to 150 epochs reaches only 0.16, and a lower learning rate only 0.21. Rules degrade from 0.64 to 0.48.</p>
+        <p class="how"><b>Practice:</b> use embeddings plus ANN for approximate "related concept" queries and keep exact structural queries in the graph database; retune at every change of scale; place new concepts through a text-to-embedding mapping instead of retraining each time.</p>
+      </div>
+    </div>
+    <div class="verdict">
+      <h3>4. Naturally crossing semantic taxonomies</h3>
+      <span class="chip bad">Does not happen on its own</span>
+      <div>
+        <p>On two independently built real anatomy ontologies (OAEI, mouse vs. human), every structure-only method without anchors is at chance level, including the strongest one we tried, Gromov-Wasserstein optimal transport (Hits@1 0.07%). Inside a combined pipeline, though, embeddings contribute: with concepts whose labels match exactly used as automatic anchors, text plus graph embeddings raises Hits@1 on the hard pairs from 83.4% to 88.6%. The full pipeline (text + graph embeddings + Claude verification) reaches F1 0.939; AML, the track winner, has 0.941.</p>
+        <p class="how"><b>Practice:</b> exact label matches as anchors → text embeddings with synonyms to generate candidates → graph embeddings trained jointly over the anchors as a structural correction → LLM verification of each pair.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="design">
+  <h2 id="design">How the experiments were designed</h2>
+  <div class="prose">
+    <p>Testing directly on the original ontology was not possible for two reasons. We did not have it, and judging whether a suggested link is correct requires knowing the answer in advance, which a working ontology does not provide. That is why the original observations could only be anecdotal. We used five public datasets with ground truth instead, each assigned to one question.</p>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Dataset</th><th class="wrap">What it is</th><th class="wrap">Why we chose it</th><th>Tests</th></tr></thead>
+    <tbody>
+      <tr><td>WordNet (WN18RR)</td><td class="wrap">An English lexical ontology: 40k concepts, 11 relation types</td><td class="wrap">The closest standard benchmark to a semantic ontology, comparable with the literature</td><td>Q1, Q2 warm-up</td></tr>
+      <tr class="hl"><td>Gene Ontology</td><td class="wrap">A biology ontology of about 45k concepts, curated continuously by experts and released monthly</td><td class="wrap">It has version history: train on the 2020 release, test on the links curators actually added by 2026. This is the only way to test real discovery, and we found no prior study validating PyKEEN-style embeddings on GO this way</td><td>Q1, Q2 key test</td></tr>
+      <tr><td>YAGO3-10</td><td class="wrap">A knowledge graph extracted from Wikipedia: 123k entities, 1.08M edges</td><td class="wrap">Large enough to measure what changes as the graph grows</td><td>Q3</td></tr>
+      <tr class="hl"><td>OAEI Anatomy</td><td class="wrap">Adult mouse anatomy (2,744 concepts) and human anatomy (3,304 concepts), built independently by different teams, with 1,516 expert-curated correspondences</td><td class="wrap">This is exactly the "two graphs, different terms, same entities" scenario, and results compare directly with past competition entries</td><td>Q4</td></tr>
+      <tr><td>FB15k-237</td><td class="wrap">A Freebase subset, much denser than WordNet</td><td class="wrap">A control for how graph density affects alignment</td><td>Q4 support</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p><b>Baselines:</b> popularity (always recommend the most frequent answer); the published AnyBURL rule learner, one of the strongest explainable methods in the literature; a logical reasoner using is_a transitivity only; text embeddings of concept names and definitions (bge-large); and an alignment method that uses no embeddings, only which anchors appear in each concept's neighbourhood.</p>
+    <p><b>LLMs:</b> a local qwen3.5-27B, and Claude Opus 5.5, GPT-6.1 and Gemini 4 through a relay. LLMs were used in three roles: re-ranking candidates, generating answers with no candidates, and acting as blind judges.</p>
+    <p><b>Protocol:</b> every method uses the same filtered ranking, predicts both head and tail, and takes the expected rank on ties. Key comparisons carry paired-bootstrap 95% confidence intervals.</p>
+  </div>
+</section>
+
+<section aria-labelledby="q1">
+  <div class="eyebrow">Question 1 · discovering missing relationships</div>
+  <h2 id="q1">Random hold-out badly overstates real discovery</h2>
+  <div class="bars" role="img" aria-label="MRR of similar methods under random hold-out and prospective evaluation">
+    <div class="bar"><span>WordNet random hold-out · AnyBURL</span><div class="track"><div class="fill" style="width:86%"></div></div><span class="v">0.517</span></div>
+    <div class="bar"><span>WordNet random hold-out · RotatE</span><div class="track"><div class="fill" style="width:81%"></div></div><span class="v">0.487</span></div>
+    <div class="bar key"><span>GO prospective · embedding + text fusion</span><div class="track"><div class="fill" style="width:31%"></div></div><span class="v">0.185</span></div>
+    <div class="bar key"><span>GO prospective · RotatE</span><div class="track"><div class="fill" style="width:16%"></div></div><span class="v">0.093</span></div>
+    <div class="bar key"><span>GO prospective · AnyBURL</span><div class="track"><div class="fill" style="width:15%"></div></div><span class="v">0.092</span></div>
+  </div>
+  <p class="caption">MRR; a full bar is 0.6. GO rows count only the "find the parent of a child concept" direction, over the 6,412 links curators added. Fusion is reciprocal-rank fusion of RotatE, TransE and text.</p>
+
+  <h3>WordNet random hold-out: rules are more accurate than embeddings</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Method</th><th>MRR</th><th>Hits@1</th><th>Hits@10</th></tr></thead>
+    <tbody>
+      <tr><td>Fusion + Claude re-ranking the top 20</td><td>0.580</td><td>0.519</td><td>0.651</td></tr>
+      <tr><td>Fusion + GPT-6.1 re-ranking the top 20</td><td>0.568</td><td>0.499</td><td>0.648</td></tr>
+      <tr><td>AnyBURL first, RotatE for the rest</td><td>0.523</td><td>0.479</td><td>0.609</td></tr>
+      <tr><td>Fusion (AnyBURL + RotatE + TransE)</td><td>0.522</td><td>0.472</td><td>0.619</td></tr>
+      <tr class="hl"><td>AnyBURL (rules, 100 s of learning)</td><td>0.517</td><td>0.475</td><td>0.592</td></tr>
+      <tr><td>RotatE (3 seeds, sd 0.0014)</td><td>0.487</td><td>0.434</td><td>0.587</td></tr>
+      <tr><td>Our own path rules (length ≤ 2)</td><td>0.424</td><td>0.405</td><td>0.459</td></tr>
+      <tr><td>TransE</td><td>0.214</td><td>0.012</td><td>0.541</td></tr>
+      <tr><td>Popularity</td><td>0.026</td><td>0.015</td><td>0.045</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">AnyBURL − RotatE: MRR +0.029, 95% CI [+0.023, +0.035]. Our first report concluded that embeddings beat graph search; that came from a rule baseline that was too weak. Full test set, 5,848 queries.</p>
+
+  <h3>GO prospective test: train on 2020, predict the links added by 2026</h3>
+  <div class="stat-row">
+    <div class="stat"><b>6,412</b><span>links curators added between existing concepts, 2020 to 2026</span></div>
+    <div class="stat"><b>58%</b><span>already implied by transitivity in the old graph ("entailed")</span></div>
+    <div class="stat"><b>2,669</b><span>genuinely new relationships the old graph could not imply</span></div>
+    <div class="stat"><b>6,758</b><span>links curators removed in the same period (used to test error detection)</span></div>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Method (child → parent)</th><th>All MRR</th><th>All Hits@10</th><th>New Hits@1</th><th>New Hits@10</th><th>Entailed Hits@10</th></tr></thead>
+    <tbody>
+      <tr><td>Reasoner (is_a transitivity only)</td><td>0.283</td><td>0.543</td><td>0.000</td><td>0.007</td><td><b>0.926</b></td></tr>
+      <tr><td>Fusion (all methods + reasoner)</td><td><b>0.260</b></td><td>0.473</td><td>0.069</td><td>0.280</td><td>0.611</td></tr>
+      <tr class="hl"><td>Fusion (RotatE + TransE + text)</td><td>0.185</td><td>0.383</td><td><b>0.091</b></td><td><b>0.362</b></td><td>0.398</td></tr>
+      <tr><td>RotatE + text</td><td>0.142</td><td>0.298</td><td>0.081</td><td>0.299</td><td>0.297</td></tr>
+      <tr><td>TransE</td><td>0.113</td><td>0.344</td><td>0.012</td><td>0.273</td><td>0.394</td></tr>
+      <tr><td>Poincaré hyperbolic embedding (50-d, is_a only)</td><td>0.104</td><td>0.218</td><td>–</td><td>–</td><td>–</td></tr>
+      <tr><td>RotatE</td><td>0.093</td><td>0.202</td><td>0.045</td><td>0.208</td><td>0.198</td></tr>
+      <tr><td>AnyBURL</td><td>0.092</td><td>0.177</td><td>0.048</td><td>0.173</td><td>0.180</td></tr>
+      <tr><td>Text (bge-large, name + definition)</td><td>0.084</td><td>0.205</td><td>0.043</td><td>0.219</td><td>0.194</td></tr>
+      <tr><td>Our own path rules (length ≤ 2)</td><td>0.012</td><td>0.025</td><td>0.007</td><td>0.025</td><td>0.025</td></tr>
+      <tr><td>Popularity</td><td>0.009</td><td>0.019</td><td>0.002</td><td>0.013</td><td>0.024</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p>On genuinely new relationships, embeddings combined with text clearly beat either one alone: MRR +0.055 [+0.046, +0.063] over RotatE alone and +0.058 [+0.048, +0.069] over text alone. The 2018 → 2020 replication agrees: RotatE + text reaches MRR 0.183 and Hits@10 36.6% on new relationships. Embeddings add something nothing else here provides, but what they produce is a candidate list, not an answer.</p>
+    <p><b>Error detection:</b> models do score the links curators later removed lower than links they kept. AUC ranges from 0.65 (RotatE) to 0.69 (text), where 0.5 is chance; rules score 0.48. The signal is real but too weak to delete links automatically.</p>
+  </div>
+
+  <h3>How much frontier LLMs help</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Task (Hits@1)</th><th>Structural / text candidates</th><th>+ qwen3.5-27B</th><th>+ Claude Opus 5.5</th><th>+ GPT-6.1</th><th>Claude alone (no candidates)</th></tr></thead>
+    <tbody>
+      <tr><td>GO new is_a links (all 2,386)</td><td>8%</td><td>18%*</td><td><b>23.6%</b></td><td>21.6%</td><td>26%*</td></tr>
+      <tr><td>GO new-concept placement (all 1,465)</td><td>29%*</td><td>40%*</td><td>54.8%</td><td>51.7%</td><td><b>58.7%*</b></td></tr>
+      <tr><td>OAEI hard pairs (580)</td><td>83.8%</td><td>94.3%</td><td><b>96.5%</b></td><td>95.5%</td><td>82.2%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">* 150-question sample (about ±7 points). Candidate lists cap what a re-ranker can do: only 37% of correct answers for new GO is_a links fall in the top 20, against 74% for new concepts and 99% for OAEI.</p>
+  <div class="callout">LLMs are strong on GO by themselves partly because they have memorized it. Claude names the correct ID for 75% of older GO concepts and 11% of concepts created in 2024–2026; GPT manages 46% and 0%. On public ontologies, part of the LLM gain is recall. On OAEI, structural and text candidates plus an LLM beat the LLM alone by 14 points. A private ontology that no LLM has seen should behave more like OAEI than like GO.</div>
+</section>
+
+<section aria-labelledby="q2">
+  <div class="eyebrow">Question 2 · suggested connections</div>
+  <h2 id="q2">Unstable on their own, usable with a filter</h2>
+  <div class="stat-row">
+    <div class="stat"><b>59%</b><span>of top suggestions unchanged when only the random seed changes</span></div>
+    <div class="stat"><b>0.3%</b><span>of suggestions for random GO concepts adopted by curators within six years</span></div>
+    <div class="stat"><b>0.75–0.81</b><span>pairwise agreement (kappa) between the three LLM judges</span></div>
+    <div class="stat"><b>89×</b><span>how much more often vote-approved suggestions came true than rejected ones</span></div>
+  </div>
+
+  <h3>Blind rating by three LLM judges (Claude, GPT, Gemini; sources hidden)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>GO: suggestion source</th><th>N</th><th>Judged correct by majority</th><th>True in the 2026 release</th></tr></thead>
+    <tbody>
+      <tr class="sub"><td>Control: links present in 2020 (true)</td><td>300</td><td>90%</td><td>–</td></tr>
+      <tr class="sub"><td>Control: links curators added 2020–2026 (true)</td><td>1,000</td><td>68%</td><td>100%</td></tr>
+      <tr class="hl"><td>RotatE + text, top suggestion</td><td>1,000</td><td>9%</td><td>0.2%</td></tr>
+      <tr><td>TransE, top suggestion</td><td>1,000</td><td>9%</td><td>0.1%</td></tr>
+      <tr><td>RotatE, top suggestion</td><td>1,000</td><td>7%</td><td>0.1%</td></tr>
+      <tr><td>Text, top suggestion</td><td>1,000</td><td>3%</td><td>0%</td></tr>
+      <tr class="sub"><td>Control: random candidate</td><td>1,000</td><td>0%</td><td>0%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>WordNet: suggestion source</th><th>N</th><th>Judged correct by majority</th><th>Confirmed by WordNet</th><th>Judged correct among unconfirmed</th></tr></thead>
+    <tbody>
+      <tr class="sub"><td>Control: true test-set links</td><td>600</td><td>80%</td><td>100%</td><td>–</td></tr>
+      <tr><td>AnyBURL, top suggestion</td><td>1,498</td><td>43%</td><td>55%</td><td>16%</td></tr>
+      <tr class="hl"><td>RotatE, top suggestion</td><td>1,500</td><td>42%</td><td>51%</td><td>18.5%</td></tr>
+      <tr class="sub"><td>Control: random candidate</td><td>1,500</td><td>0%</td><td>0%</td><td>–</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">Judges accept 68–90% of true links and 0% of random candidates, so they are conservative and do not hand out "correct" freely. Counting the WordNet suggestions that the database cannot confirm but the judges accept, the real precision of RotatE's top suggestion rises from about 51% to about 60%.</p>
+
+  <h3>An end-to-end suggestion pipeline</h3>
+  <div class="flow">
+    <div class="step"><span class="n">Step 1</span><b>Fused candidates</b><span>RotatE + TransE + text, 5 per concept, excluding known and implied links</span></div>
+    <div class="step"><span class="n">Step 2</span><b>Three-LLM vote</b><span>Passes only with a majority</span></div>
+    <div class="step"><span class="n">Step 3</span><b>Expert review queue</b><span>Experts see only what passed</span></div>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>1,000 random GO concepts × 5 suggestions</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Suggestions that came true within six years</td><td>0.3%</td></tr>
+      <tr><td>Share passing the LLM vote</td><td>6.8% (341)</td></tr>
+      <tr class="hl"><td>Passed suggestions that came true</td><td>3.8%</td></tr>
+      <tr><td>Rejected suggestions that came true</td><td>0.04%</td></tr>
+      <tr><td>True suggestions kept by the vote</td><td>87%</td></tr>
+      <tr><td>Concepts with at least one passing suggestion</td><td>258</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p>"Came true within six years" is a strict bar, because curators do not go looking for every omission. Most passed suggestions that have not come true look reasonable, for example "abscisic acid biosynthetic process is a hormone biosynthetic process", "photoreceptor outer segment is a cilium", and "odontogenesis is animal organ development". This is a candidate list worth giving to experts: 5,000 suggestions reduced to 341, keeping 87% of the true ones.</p>
+  </div>
+
+  <h3>Where a new concept belongs</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>1,465 GO concepts created after 2020: find the parent</th><th>Hits@1</th><th>Hits@10</th></tr></thead>
+    <tbody>
+      <tr><td>Text (bge-large)</td><td>16.0%</td><td>40.6%</td></tr>
+      <tr><td>Text + a text → RotatE mapping (no retraining)</td><td>18.5%</td><td>46.8%</td></tr>
+      <tr><td>+ parent popularity prior</td><td>21.1%</td><td>55.0%</td></tr>
+      <tr class="hl"><td>+ Claude re-ranking the top 20 (all)</td><td>54.8%</td><td>–</td></tr>
+      <tr><td>Claude generating alone, no candidates (150 sample)</td><td>58.7%</td><td>Hits@5 86%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">For reference, the best concept-placement method on SNOMED reaches P@1 4.5% and R@10 19.9% (Dong et al. 2023). GO names are strongly compositional ("positive regulation of X" is usually a child of "regulation of X"), so text is a strong signal there.</p>
+</section>
+
+<section aria-labelledby="q3">
+  <div class="eyebrow">Question 3 · large graphs</div>
+  <h2 id="q3">Queries get faster; accuracy does not improve</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Nodes</th><th>Embedding brute-force kNN</th><th>2-hop p99</th><th>3-hop p50</th><th>3-hop p99</th><th>3-hop max coverage</th></tr></thead>
+    <tbody>
+      <tr><td>10k</td><td>0.07 ms</td><td>0.8 ms</td><td>0.6 ms</td><td>1.5 ms</td><td>95%</td></tr>
+      <tr><td>100k</td><td>0.66 ms</td><td>7.2 ms</td><td>5.1 ms</td><td>15 ms</td><td>95%</td></tr>
+      <tr><td>1M</td><td>6.6 ms</td><td>124 ms</td><td>43 ms</td><td>270 ms</td><td>94%</td></tr>
+      <tr class="hl"><td>3M</td><td>19 ms</td><td>704 ms</td><td>268 ms</td><td>1,535 ms</td><td>94%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">Power-law graph (mean degree 10), single-threaded scipy traversal. An HNSW index over real RotatE embeddings answers in 0.009 ms with 99.9% recall. Isotropic Gaussian vectors are the worst case for ANN and give only 10–47% recall; they do not represent real embeddings.</p>
+
+  <h3>What happens to accuracy as the graph grows</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>YAGO subgraph (same 1,000 test triples)</th><th>Edges</th><th>Rules MRR</th><th>RotatE MRR</th><th>RotatE training time</th></tr></thead>
+    <tbody>
+      <tr><td>4,874 entities</td><td>15k</td><td>0.639</td><td>0.619</td><td>30 s</td></tr>
+      <tr><td>14,930</td><td>56k</td><td>0.578</td><td>0.522</td><td>2 min</td></tr>
+      <tr><td>39,979</td><td>208k</td><td>0.526</td><td>0.344</td><td>8 min</td></tr>
+      <tr class="hl"><td>123,143 (full)</td><td>1.08M</td><td>0.478</td><td>0.147</td><td>34 min</td></tr>
+      <tr class="sub"><td>Full graph, same configuration, 150 epochs</td><td></td><td></td><td>0.156</td><td>3.7 h</td></tr>
+      <tr class="sub"><td>Full graph, learning rate lowered to 2e-3</td><td></td><td></td><td>0.21 (flat from 10 to 50 epochs)</td><td>1.2 h</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p>A configuration that works well at 5k nodes stops working at 123k. Training longer does not recover it; lowering the learning rate to 2e-3 helps somewhat (0.15 → 0.21) but stays far below the 0.62 seen on the small graph. Published RotatE results on YAGO3-10 reach about 0.49 with a dedicated configuration and much longer training. Accuracy on large graphs is not free: every step up in scale needs retuning and more compute. Rules pay a different cost: the rule index on full YAGO holds 479 million non-zeros.</p>
+    <p>Training cost is roughly linear, about 48 s per million triples per epoch on an M5 Pro. A 256-dimensional complex embedding of 100 million entities needs about 205 GB of parameters, which calls for a sharded training system such as PyTorch-BigGraph.</p>
+  </div>
+</section>
+
+<section aria-labelledby="q4">
+  <div class="eyebrow">Question 4 · crossing taxonomies</div>
+  <h2 id="q4">No natural alignment, but a real contribution inside a pipeline</h2>
+  <h3>With no anchors, structural alignment works only on graphs from the same source</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Setting</th><th>Independent training + cosine</th><th>Optimal transport (Gromov-Wasserstein)</th><th>Chance</th></tr></thead>
+    <tbody>
+      <tr><td>FB15k-237 split into two views (2,500-node subgraph)</td><td>chance</td><td>13.8%</td><td>0.04%</td></tr>
+      <tr><td>WordNet split into two views</td><td>chance</td><td>1.9%</td><td>0.04%</td></tr>
+      <tr class="hl"><td>OAEI Anatomy (two independently built ontologies)</td><td>0.2%</td><td><b>0.07%</b></td><td>0.03%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">Hits@1. An embedding is defined only up to rotation, reflection and permutation of dimensions, so the coordinate systems of two independent training runs are unrelated and comparing them by cosine gives chance. Optimal transport matches graphs by their shape; it works on two views cut from the same data and fails on independently modelled ontologies.</p>
+
+  <h3>OAEI Anatomy: a fully automatic pipeline</h3>
+  <div class="flow">
+    <div class="step"><span class="n">Step 1</span><b>Exact label matches</b><span>939 pairs, 99% precise, used as automatic anchors</span></div>
+    <div class="step"><span class="n">Step 2</span><b>Text embeddings</b><span>bge-large over labels and synonyms generates candidates</span></div>
+    <div class="step"><span class="n">Step 3</span><b>Joint graph embedding</b><span>Anchors share one vector; acts as a structural correction</span></div>
+    <div class="step"><span class="n">Step 4</span><b>LLM verification</b><span>Judges each pair: same anatomical entity or not</span></div>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>580 hard pairs whose labels differ (about 2,365 candidates each)</th><th>Hits@1</th><th>Hits@10</th></tr></thead>
+    <tbody>
+      <tr><td>Structure only, no anchors</td><td>0.2%</td><td>0.5%</td></tr>
+      <tr><td>Anchor-neighbourhood matching (no embeddings)</td><td>7.6%</td><td>35.9%</td></tr>
+      <tr><td>Structure only, RotatE trained jointly over automatic anchors</td><td>21.7%</td><td>55.7%</td></tr>
+      <tr><td>String similarity</td><td>70.9%</td><td>92.1%</td></tr>
+      <tr><td>Text embeddings, bge-large with synonyms</td><td>83.4%</td><td>97.4%</td></tr>
+      <tr class="hl"><td>Text embeddings + joint RotatE</td><td><b>88.6%</b></td><td>98.4%</td></tr>
+      <tr><td>+ Claude re-ranking the top 10</td><td><b>96.5%</b></td><td>–</td></tr>
+      <tr><td>Claude generating alone, no candidates</td><td>82.2%</td><td>Hits@5 92.9%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Full alignment against the official OAEI reference</th><th>Precision</th><th>Recall</th><th>F1</th><th>Hard-pair recall</th></tr></thead>
+    <tbody>
+      <tr class="group"><td colspan="5">Our pipeline</td></tr>
+      <tr><td>Exact label matches only</td><td>99.0%</td><td>61.3%</td><td>0.758</td><td>0%</td></tr>
+      <tr><td>+ text embeddings, no LLM</td><td>85.5%</td><td>90.8%</td><td>0.881</td><td>76.1%</td></tr>
+      <tr><td>+ text embeddings + Claude verification</td><td>96.5%</td><td>90.2%</td><td>0.932</td><td>74.6%</td></tr>
+      <tr class="hl"><td>+ text embeddings + graph embeddings + Claude verification</td><td>96.4%</td><td>91.6%</td><td><b>0.939</b></td><td><b>78.3%</b></td></tr>
+      <tr><td>+ text embeddings + graph embeddings + GPT verification</td><td>97.5%</td><td>90.2%</td><td>0.937</td><td>74.6%</td></tr>
+      <tr><td>+ text embeddings + graph embeddings + qwen3.5 verification (local)</td><td>96.0%</td><td>87.7%</td><td>0.916</td><td>–</td></tr>
+      <tr class="group"><td colspan="5">Past OAEI systems (literature)</td></tr>
+      <tr><td>AML / Matcha (winners)</td><td>95.6%</td><td>92.7%</td><td>0.941</td><td>81%</td></tr>
+      <tr><td>OLaLa (LLM-based, 2023)</td><td>92.4%</td><td>89.6%</td><td>0.910</td><td>72.6%</td></tr>
+      <tr><td>LogMap</td><td>91.7%</td><td>84.8%</td><td>0.881</td><td>60.2%</td></tr>
+      <tr><td>Exact-label baseline</td><td>99.7%</td><td>62.2%</td><td>0.766</td><td>0%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <p>With the same LLM verifier, adding graph embeddings consistently helps: F1 rises from 0.932 to 0.939 with Claude, with hard-pair recall up 3.7 points, and from 0.929 to 0.937 with GPT. Here the graph embedding works as a structural correction. It knows whether two concepts' parents and parts line up, which fixes some mistakes that labels alone make. It does not work without the text and the anchors.</p>
+    <p>On the renamed WordNet views, joint training over 30% anchors also matched all 11 renamed relation types to their counterparts in the other view. That matters when two ontologies name their properties differently: entity anchors can recover the relation mapping as well.</p>
+  </div>
+</section>
+
+<section aria-labelledby="model">
+  <div class="eyebrow">Appendix · model choice</div>
+  <h2 id="model">With one shared configuration, half the models fail</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>WordNet, shared configuration (40 epochs, better of two learning rates on validation)</th><th>MRR</th><th>Hits@1</th><th>Hits@10</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>RotatE</td><td>0.497</td><td>0.453</td><td>0.579</td></tr>
+      <tr><td>PairRE</td><td>0.483</td><td>0.436</td><td>0.584</td></tr>
+      <tr><td>CrossE</td><td>0.428</td><td>0.409</td><td>0.464</td></tr>
+      <tr><td>ComplEx</td><td>0.385</td><td>0.379</td><td>0.394</td></tr>
+      <tr><td>SimplE</td><td>0.376</td><td>0.371</td><td>0.382</td></tr>
+      <tr><td>TransE</td><td>0.223</td><td>0.018</td><td>0.545</td></tr>
+      <tr><td>TransD, DistMult, TransH, QuatE, MuRE, AutoSF</td><td>≤ 0.06</td><td>–</td><td>–</td></tr>
+      <tr class="sub"><td>TuckER, BoxE</td><td colspan="3">could not run or timed out on Apple MPS</td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption">The failures show that one configuration does not suit every model; they are not the models' ceilings. They also mean a good result seen under one setup may not reproduce with another model or configuration. TransE cannot represent symmetric relations and reaches only 1.8% Hits@1 on WordNet.</p>
+</section>
+
+<section aria-labelledby="recs">
+  <h2 id="recs">The converged method</h2>
+  <ol class="recs">
+    <li><b>Completing an ontology:</b> (1) run a logical reasoner to collect the implied half; (2) fuse RotatE, TransE and text embeddings to generate candidates; (3) use AnyBURL rules to give explainable paths where they exist; (4) filter with an LLM vote; (5) have experts review. On GO, fusion raises the top-10 hit rate on genuinely new relationships from 17–27% for single methods to 36%.</li>
+    <li><b>Suggested connections:</b> do not trust a single suggestion from a single run. Fuse several seeds and models; use an LLM vote as the first filter, which cuts review volume to about 7%; record expert decisions to measure real precision and tune thresholds.</li>
+    <li><b>Large graphs:</b> use embeddings plus HNSW for approximate "semantically related" queries and the graph database for exact paths and constraints. Retune whenever the graph grows. Place new concepts with a linear text-to-embedding mapping and retrain on a schedule.</li>
+    <li><b>Cross-ontology mapping:</b> exact label matches as anchors → text embeddings with synonyms for candidates → joint graph embedding over the anchors as a structural correction → LLM verification of each pair → a final consistency check (for example LogMap's logical repair, which we did not run). On OAEI Anatomy this reaches F1 0.939.</li>
+    <li><b>Evaluation:</b> do not rely on random hold-out. With version history, test prospectively (train on an old release, score on a newer one). Report entailed and genuinely new links separately. Always compare against a strong rule baseline, a reasoner and a text baseline. Evaluate suggestions by blind rating with positive and negative controls mixed in.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="next">
+  <h2 id="next">What it takes to confirm this on the original ontology</h2>
+  <div class="prose">
+    <p>These findings come from public data. A private ontology differs in two ways: no LLM has seen it, and its terms and structure may be less regular than GO's. The last step has to happen on that data.</p>
+  </div>
+  <ol class="recs">
+    <li><b>Three inputs:</b> the ontology itself (or an anonymized sample), the PyKEEN configuration that was used, and the specific examples that looked genuinely useful.</li>
+    <li><b>Reproduce the anecdotes:</b> check whether the rule baseline, the reasoner and the text baseline find the same examples. If they do, those discoveries did not need embeddings.</li>
+    <li><b>If the ontology has version history:</b> apply the GO prospective protocol as is; the code is ready.</li>
+    <li><b>Blind review:</b> sample 50 suggestions each from embeddings, rules and random candidates, shuffle them, and have domain experts and the three LLM judges rate them. Expert ratings are the ground truth; the LLM ratings show how much expert work an LLM could take on.</li>
+    <li><b>If there is a second vocabulary to map:</b> apply the four-step OAEI pipeline as is and have experts review 100–200 of the resulting pairs.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="limits">
+  <h2 id="limits">Limitations</h2>
+  <ul class="plain">
+    <li>Hyperparameter search was limited. RotatE reached published performance on WordNet but not on full YAGO, and many PyKEEN models failed under the shared configuration.</li>
+    <li>"Came true in GO within six years" is a strict lower bound, because curators do not fill every gap. Blind rating offsets this, but the LLM judges are conservative too and accept only 68% of links curators added.</li>
+    <li>LLMs have memorized much of the public ontologies, so their scores on GO and OAEI may be inflated.</li>
+    <li>Only the OAEI Anatomy track was used; larger tracks such as Bio-ML were not run, and the pipeline does no logical repair.</li>
+    <li>Traversal latency used single-threaded scipy rather than a dedicated graph database. Gemini's relay quota ran out during the last experiment, so the full WordNet re-ranking uses only GPT and Claude.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="refs">
+  <h2 id="refs">Related work</h2>
+  <p class="caption">The full survey (about 75 sources) is in research/literature_survey.md in the repository.</p>
+  <ul class="refs">
+    <li>Meilicke et al., AnyBURL (IJCAI 2019 and the later journal version); Ott et al. 2021, SAFRAN; Zhu et al. 2021, NBFNet: rule and path methods match or beat embeddings</li>
+    <li>Sun et al. 2020 (ACL); Ruffinelli et al. 2020 (ICLR); Rossi et al. 2021 (TKDD); Ali et al. 2021 (TPAMI, the PyKEEN team's reproducibility study)</li>
+    <li>Paliwal et al. 2020 (Scientific Reports, Rosalind): prospective validation, recall@200 of 23.9% with a 2005 cutoff</li>
+    <li>Dong et al. 2023 (CIKM): concept placement in SNOMED, P@1 4.5%</li>
+    <li>Chen et al. 2021, OWL2Vec*; Jackermeier et al., Box²EL; Nickel &amp; Kiela 2017, Poincaré embeddings</li>
+    <li>OAEI Anatomy results across years; He et al. 2022, BERTMap; Hertling &amp; Paulheim 2023, OLaLa</li>
+    <li>Sun et al. 2020, OpenEA; Chen et al. 2017, MTransE; FGWEA (structure-only GW ablation: Hits@1 0.004–0.011)</li>
+    <li>Lerer et al. 2019, PyTorch-BigGraph; Galkin et al. 2022, NodePiece, and 2024, ULTRA; Hu et al., OGB and WikiKG90M</li>
+    <li>Wang et al. 2022, SimKGC; Wei et al. 2023, KICGPT: combining LLMs with structural methods</li>
+  </ul>
+</section>
+
+<section aria-labelledby="repro">
+  <h2 id="repro">Reproducing</h2>
+  <p class="prose">The code is in the private repository JesseQin123/pykeen-ontology-experiment. Training ran locally on an M5 Pro. LLM and embedding inference ran on hosted endpoints: a relay for the LLMs, and bge-large on OpenRouter, whose vectors match the local bge-large checkpoint with cosine 1.00000. Every number traces to results/SUMMARY.json, results/STATS.json and each experiment's own JSON file.</p>
+  <pre>uv sync
+uv run python experiments/exp4_go_temporal.py            # GO 2020 → 2026 prospective test
+uv run python experiments/exp11_anyburl.py               # AnyBURL baseline
+uv run python experiments/exp5_oaei_anatomy.py           # OAEI Anatomy alignment
+uv run python experiments/exp15_frontier_llm.py          # frontier LLMs: re-ranking, generation, contamination, verification
+uv run python experiments/exp16_llm_blind_rating.py      # three-judge blind rating
+uv run python experiments/exp17_llm_on_structure.py      # suggestion pipeline, full WordNet re-ranking
+uv run python experiments/summarize.py &amp;&amp; uv run python experiments/stats.py</pre>
+</section>
+</main>
